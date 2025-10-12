@@ -915,6 +915,19 @@
             { "step": "Assign Voice and Data VLANs", "prompt": "Switch(config-if)#", "command": "switchport mode access\nswitchport access vlan 10\nswitchport voice vlan 110", "explanation": "The port is set to access mode for the data VLAN (for the PC connected to the phone), and the 'switchport voice vlan' command tells the switch to use a second VLAN for voice traffic, which it communicates to the phone via CDP." }
         ]
     },
+   "w7": {
+        "title": "Routing for VoIP - Dial-Peering",
+        "description": "Dial peers are the foundation of voice routing in Cisco gateways. They define how calls are made and received, linking a phone number to a specific voice port or IP address.",
+        "commands": [
+            {
+                "step": "Create a POTS Dial Peer",
+                "prompt": "Router(config)#",
+                "command": "dial-peer voice 1 pots\ndestination-pattern 2001\nport 0/0/0",
+                "explanation": "This dial peer routes calls to the number '2001' out of the physical voice port 0/0/0 (e.g., an FXS port connected to an analog phone)."
+            },
+            { "step": "Create a VoIP Dial Peer", "prompt": "Router(config)#", "command": "dial-peer voice 2 voip\ndestination-pattern 3...\nsession target ipv4:10.1.1.2", "explanation": "This dial peer routes any call starting with '3' (e.g., 3001, 3002) to another VoIP gateway at IP address 10.1.1.2." }
+        ]
+    },
     "a1": {
         "title": "Basic Firewall Configs (ASA)",
         "description": "Initial configuration of a Cisco ASA firewall involves setting the hostname, domain name, and passwords.",
@@ -933,6 +946,16 @@
             { "step": "Configure the Outside Interface", "prompt": "ASA-FW-01(config)#", "command": "interface GigabitEthernet0/1\n nameif outside\n security-level 0\n ip address 203.0.113.1 255.255.255.0", "explanation": "The 'outside' interface connects to the untrusted internet and is given the lowest security level (0)." },
             { "step": "Configure a DMZ Interface", "prompt": "ASA-FW-01(config)#", "command": "interface GigabitEthernet0/2\n nameif dmz\n security-level 50\n ip address 172.16.1.1 255.255.255.0", "explanation": "A DMZ (Demilitarized Zone) is for public-facing servers and is given an intermediate security level." }
         ]
+    },
+    "a3": {
+        "title": "Firewall Policies",
+        "description": "Firewall policies on an ASA are primarily controlled by Access Control Lists (ACLs) and the Modular Policy Framework (MPF) for inspection.",
+        "commands": [
+            { "step": "Create an ACL to Permit Traffic", "prompt": "ASA-FW-01(config)#", "command": "access-list OUTSIDE_IN permit tcp any host 172.16.1.10 eq www", "explanation": "Creates an ACL to allow any external user to access the web server (port 80/www) in the DMZ at 172.16.1.10." },
+            { "step": "Apply the ACL to the Outside Interface", "prompt": "ASA-FW-01(config)#", "command": "access-group OUTSIDE_IN in interface outside", "explanation": "Applies the ACL to inbound traffic on the 'outside' interface, effectively opening the port." },
+            { "step": "View the Default Inspection Policy", "prompt": "ASA-FW-01#", "command": "show running-config policy-map", "explanation": "This shows the default 'global_policy' which inspects common protocols like HTTP, DNS, and FTP to allow return traffic for established sessions." }
+        ],
+        "related": ["a5", "a7"]
     },
     "a5": {
         "title": "Firewall ACLs (ASA)",
@@ -956,6 +979,15 @@
         "commands": [
             { "step": "Create a Network Object for the Internal Server", "prompt": "ASA-FW-01(config)#", "command": "object network WEB_SERVER\n host 192.168.1.50", "explanation": "Creates an object representing the internal web server." },
             { "step": "Configure Static NAT", "prompt": "ASA-FW-01(config-network-object)#", "command": "nat (inside,outside) static 203.0.113.10", "explanation": "Inside the server's object configuration, this command creates a static, bidirectional mapping between the server's real IP (192.168.1.50) and a public IP (203.0.113.10)." }
+        ]
+    },
+    "a8": {
+        "title": "IPv6 (ASA)",
+        "description": "Configuring IPv6 on a Cisco ASA is similar to IPv4 but uses IPv6-specific commands.",
+        "commands": [
+            { "step": "Enable IPv6 on an Interface", "prompt": "ASA-FW-01(config-if)#", "command": "ipv6 enable", "explanation": "Enables IPv6 processing on the selected interface." },
+            { "step": "Assign an IPv6 Address", "prompt": "ASA-FW-01(config-if)#", "command": "ipv6 address 2001:db8:1::1/64", "explanation": "Assigns a global unicast IPv6 address to the interface." },
+            { "step": "Configure an IPv6 Default Route", "prompt": "ASA-FW-01(config)#", "command": "ipv6 route outside ::/0 2001:db8:feed::1", "explanation": "Sets the default route for all IPv6 traffic to point to the next-hop router (e.g., an ISP gateway)." }
         ]
     },
     "a7": {

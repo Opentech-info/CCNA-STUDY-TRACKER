@@ -198,12 +198,21 @@ pre:hover .copy-btn {
         color: black !important;
         padding: 1rem;
     }
-    header, footer, button, input, .no-print {
+    header, footer, button, input, .no-print, #progress-bar-container, #back-to-top, aside {
         display: none !important;
     }
-    main, section {
+    main, section, .command-step {
         display: block !important;
         page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    .command-details {
+        max-height: 1000px !important; /* Ensure content is visible */
+    }
+    pre {
+        background-color: #f3f4f6 !important;
+        color: black !important;
     }
 }
 

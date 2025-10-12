@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const relatedTopicsList = document.getElementById('related-topics-list');
     const progressBar = document.getElementById('progress-bar');
     const backToTopBtn = document.getElementById('back-to-top');
+    const printBtn = document.getElementById('print-page-btn');
+    const shareBtn = document.getElementById('share-page-btn');
 
     let commandElements = []; // To store command step elements for filtering
 
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('commands.json');
+            const response = await fetch('/api/commands'); // <-- CHANGE HERE
             if (!response.ok) throw new Error('Could not load command database.');
             
             const commandsDb = await response.json();
@@ -44,13 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             topicData.commands.forEach((cmd, index) => {
                 const commandEl = document.createElement('div');
-                commandEl.className = 'command-step bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden';
+                commandEl.className = 'command-step bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-transparent hover:border-blue-500/50 transition-colors duration-300';
                 commandEl.innerHTML = `
                     <div class="command-header flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                         <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
                         <svg class="expand-arrow w-5 h-5 text-gray-500 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                     </div>
-                    <div class="command-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="command-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-50/50 dark:bg-black/20">
                         <p class="mt-1 mb-3 text-sm opacity-80 px-4">${cmd.explanation}</p>
                         <pre class="rounded-none overflow-hidden">
                             <button class="copy-btn" title="Copy to clipboard">Copy</button>
@@ -88,7 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const relatedTopic = commandsDb[relatedId];
                     if (relatedTopic) {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="command.html?topic=${relatedId}" class="text-blue-500 hover:underline text-sm">${relatedTopic.title}</a>`;
+                        li.innerHTML = `
+                            <a href="command.html?topic=${relatedId}" class="flex items-center gap-3 p-2 -ml-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                                <span>${relatedTopic.title}</span>
+                            </a>
+                        `;
                         relatedTopicsList.appendChild(li);
                     }
                 });
@@ -187,4 +194,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // --- Tools ---
+    if (printBtn) {
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+    }
+
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Page URL copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy URL: ', err);
+            });
+        });
+    }
 });
