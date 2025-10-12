@@ -255,12 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
         article.dataset.taskId = task.id;
         article.dataset.colId = colId;
 
-        article.addEventListener('dragstart', (e) => onDragStart(e, colId, task.id));
-        article.addEventListener('drop', (e) => onDropOnTask(e, colId, task.id));
-        article.addEventListener('dragover', onDragOver);
+        article.addEventListener('dragstart', (e) => onDragStart(e, task.id));
+        article.addEventListener('drop', (e) => onDropOnTask(e, colId, task.id)); // Drop on task needs colId
+        article.addEventListener('dragover', onDragOver); // This is generic
 
         article.innerHTML = `
-            <div class="flex items-start justify-between gap-2">
+            <div class="flex items-start justify-between gap-2 relative">
                 <div class="flex items-start gap-2 flex-1">
                     <input type="checkbox" class="task-done-toggle mt-1 flex-shrink-0" ${task.done ? 'checked' : ''}>
                     <div class="flex-1">
@@ -274,27 +274,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="flex flex-col items-end gap-2 no-print">
-                    <div class="flex gap-1">
+                    <div class="flex gap-2">
                         <button class="edit-notes-btn px-2 py-1 rounded-md border text-xs dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">${t('notes_button')}</button>
-                        <button class="delete-task-btn px-2 py-1 rounded-md border text-xs dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">${t('delete_button')}</button>
+                        <button class="star-task-btn p-1 rounded-full hover:bg-yellow-100 dark:hover:bg-yellow-900/50 transition-colors" title="Star this task">
+                            <svg class="w-4 h-4 ${task.starred ? 'text-yellow-500' : 'text-gray-400 dark:text-gray-500'}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </button>
                     </div>
                 </div>
+                <!-- Star animation container -->
+                <div class="star-animation-container"></div>
             </div>
         `;
 
         // Add event listeners for task actions
         article.querySelector('.task-done-toggle').addEventListener('change', () => toggleDone(colId, task.id));
-        article.querySelector('.delete-task-btn').addEventListener('click', (e) => {
-            if (confirm(`Are you sure you want to delete task: "${task.title}"?`)) {
-                const taskElement = e.currentTarget.closest('.task');
-                if (taskElement) {
-                    taskElement.classList.add('task-fade-out');
-                    taskElement.addEventListener('animationend', () => {
-                        deleteTask(colId, task.id);
-                    }, { once: true });
-                }
-            }
-        });
+        article.querySelector('.star-task-btn').addEventListener('click', (e) => toggleStarred(colId, task.id, e.currentTarget));
         article.querySelector('.edit-notes-btn').addEventListener('click', () => showNotesModal(colId, task.id));
         // Disabling dblclick to edit title to avoid conflict with the link
         // article.querySelector('.editable-title').addEventListener('dblclick', (e) => {
@@ -380,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const addTask = (colId, title) => {
-        const task = { id: uid('t'), title, notes: '', done: false, isNew: true };
+        const task = { id: uid('t'), title, notes: '', done: false, starred: false, isNew: true };
         state.data[colId].unshift(task);
         render();
     };
@@ -401,13 +395,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleDone = (colId, taskId) => {
         const task = state.data[colId].find(t => t.id === taskId);
         if (task) {
+            const wasDone = task.done;
             task.done = !task.done;
-            if (task.done) {
-                alert('Task Completed Successfully!');
+            if (task.done && !wasDone) {
+                const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
+                if (taskEl) {
+                    triggerStarAnimation(taskEl);
+                }
             }
             render();
         }
     };
+
+    const toggleStarred = (colId, taskId, buttonEl) => {
+        const task = state.data[colId].find(t => t.id === taskId);
+        if (task) {
+            task.starred = !task.starred;
+            if (task.starred) {
+                triggerStarAnimation(buttonEl);
+            }
+            render();
+        }
+    };
+
+    const triggerStarAnimation = (element) => {
+        const container = element.closest('.task').querySelector('.star-animation-container');
+        if (!container) return;
+
+        // Create and animate multiple stars
+        for (let i = 0; i < 12; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-particle';
+            // Randomize position, size, and animation delay
+            star.style.setProperty('--tx', `${Math.random() * 160 - 80}px`);
+            star.style.setProperty('--ty', `${Math.random() * 160 - 80}px`);
+            star.style.setProperty('--s', `${Math.random() * 0.7 + 0.3}`);
+            star.style.setProperty('--d', `${Math.random() * 0.2}s`);
+            container.appendChild(star);
+
+            star.addEventListener('animationend', () => star.remove());
+        }
+    }
 
     const clearCompleted = (colId) => {
         state.data[colId] = state.data[colId].filter(t => !t.done);
@@ -421,8 +449,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DRAG & DROP ---
 
-    const onDragStart = (e, fromCol, taskId) => {
-        e.dataTransfer.setData('text/plain', JSON.stringify({ fromCol, taskId }));
+    const onDragStart = (e, taskId) => {
+        e.dataTransfer.setData('text/plain', JSON.stringify({ taskId }));
         e.dataTransfer.effectAllowed = 'move';
         draggedElement = e.target;
         setTimeout(() => {
@@ -461,7 +489,15 @@ document.addEventListener('DOMContentLoaded', () => {
         onDragEnd();
         try {
             const payload = JSON.parse(e.dataTransfer.getData('text/plain'));
-            const { fromCol, taskId } = payload;
+            const { taskId } = payload;
+            if (!taskId) return;
+
+            // Find the 'from' column by searching through the data
+            let fromCol = null;
+            for (const colKey in state.data) {
+                if (state.data[colKey].some(t => t.id === taskId)) fromCol = colKey;
+            }
+
             if (!fromCol || !taskId || fromCol === toCol) return;
 
             const taskIndex = state.data[fromCol].findIndex(t => t.id === taskId);
@@ -486,7 +522,14 @@ document.addEventListener('DOMContentLoaded', () => {
         onDragEnd();
         try {
             const payload = JSON.parse(e.dataTransfer.getData('text/plain'));
-            const { fromCol, taskId } = payload;
+            const { taskId } = payload;
+            if (!taskId) return;
+
+            // Find the 'from' column
+            let fromCol = null;
+            for (const colKey in state.data) {
+                if (state.data[colKey].some(t => t.id === taskId)) fromCol = colKey;
+            }
 
             const fromList = state.data[fromCol];
             const movingIndex = fromList.findIndex(t => t.id === taskId);
@@ -615,10 +658,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('print-btn').addEventListener('click', () => window.print());
 
         // Language Switcher
-        const langSwitcher = document.getElementById('lang-switcher');
-        langSwitcher.innerHTML = ''; // Clear old buttons to prevent duplication
+        const langSwitcherDesktop = document.getElementById('lang-switcher-desktop');
+        const langSwitcherMobile = document.getElementById('lang-switcher-mobile');
+        langSwitcherDesktop.innerHTML = '';
+        langSwitcherMobile.innerHTML = '';
         ['en', 'sw'].forEach(lang => {
-            const btn = document.createElement('button');
+            const btn = document.createElement('button'); // Create button for desktop
             btn.textContent = lang.toUpperCase();
             btn.className = `px-2 py-0.5 rounded text-sm transition-colors`;
             if (state.lang === lang) {
@@ -631,7 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('ccna_lang', lang);
                 init(); // Re-initialize to re-render everything in the new language
             });
-            langSwitcher.appendChild(btn);
+            langSwitcherDesktop.appendChild(btn);
+
+            const mobileBtn = btn.cloneNode(true); // Clone for mobile
+            mobileBtn.addEventListener('click', btn.onclick);
+            langSwitcherMobile.appendChild(mobileBtn);
         });
 
         // Modal Listeners
@@ -640,6 +689,12 @@ document.addEventListener('DOMContentLoaded', () => {
         notesModalOverlay.addEventListener('click', (e) => {
             if (e.target === notesModalOverlay) hideNotesModal();
         });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
 
         // Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {

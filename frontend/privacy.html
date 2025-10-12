@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Opentech-info</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Poppins', 'sans-serif'] } } }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 sm:p-6 md:p-8 text-gray-100 font-sans">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Top Navigation Bar -->
+        <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <a href="index.html" class="flex-shrink-0">
+                        <img class="h-8 w-8 rounded-sm" src="images/opentech.png" alt="Opentech Logo">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="about.html" class="nav-link">About Us</a>
+                        <a href="contact.html" class="nav-link">Contact</a>
+                        <a href="privacy.html" class="nav-link">Privacy</a>
+                    </div>
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="about.html" class="mobile-nav-link">About Us</a>
+                    <a href="contact.html" class="mobile-nav-link">Contact</a>
+                    <a href="privacy.html" class="mobile-nav-link">Privacy Policy</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pt-16">
+            <!-- Main Page Header -->
+            <header class="relative text-center mb-8 py-24 px-4 rounded-lg overflow-hidden bg-gray-800">
+                <div class="absolute inset-0 bg-black opacity-50 z-0"></div> <!-- Overlay -->
+                <div class="relative z-10"> <!-- Content container -->
+                    <div class="w-20 h-20 mx-auto bg-blue-500/20 border-2 border-blue-400 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 1.944c-1.664-1.262-3.636-2.156-5.824-2.156C1.844-.212 0 1.63 0 4.114v5.443c0 1.231.346 2.419.97 3.445l4.04 6.642a.98.98 0 001.69.001l4.04-6.642A6.32 6.32 0 0011.714 9.56V4.114c0-2.484-1.844-4.326-4.176-4.326-2.188 0-4.16.894-5.824 2.156zM10 18.056c1.664 1.262 3.636 2.156 5.824 2.156 2.332 0 4.176-1.844 4.176-4.326V9.557c0-1.231-.346-2.419-.97-3.445l-4.04-6.642a.98.98 0 00-1.69-.001l-4.04 6.642A6.32 6.32 0 008.286 9.56v5.443c0 2.484 1.844 4.326 4.176 4.326 2.188 0 4.16-.894 5.824-2.156z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h1 class="text-4xl font-bold text-white">Privacy Policy</h1>
+                </div>
+            </header>
+
+            <div class="glass-card w-full overflow-hidden p-8 md:p-12 text-gray-200">
+                <div class="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-strong:text-white">
+                    
+                    <p class="lead">Last updated: [Date of last update]</p>
+
+                    <h2>1. Introduction</h2>
+                    <p>Welcome to the CCNA Study Tracker by Opentech-info ("we", "our", "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose information about you when you use our website (the "Service").</p>
+
+                    <h2>2. Information We Collect</h2>
+                    <p>We collect information in the following ways:</p>
+                    <ul>
+                        <li><strong>Data You Provide to Us:</strong> If you choose to subscribe to our newsletter or updates, we collect your email address.</li>
+                        <li><strong>Data Stored Locally on Your Device:</strong> The primary functionality of the CCNA Study Tracker, the Kanban board, saves its state (the position of tasks, notes, and completion status) directly in your web browser's <code>localStorage</code>. This data is stored only on your device and is not transmitted to our servers.</li>
+                        <li><strong>Server Log Data:</strong> Like most websites, our server automatically collects standard log information when you access our Service. This may include your IP address, browser type, operating system, referring URLs, and pages visited. This data is used for security, performance monitoring, and analytics.</li>
+                    </ul>
+
+                    <h2>3. How We Use Your Information</h2>
+                    <p>We use the information we collect for the following purposes:</p>
+                    <ul>
+                        <li><strong>To Provide and Maintain the Service:</strong> The data stored in <code>localStorage</code> is used solely to persist your Kanban board's state between sessions, so your progress is not lost.</li>
+                        <li><strong>To Communicate With You:</strong> If you subscribe, we use your email address to send you updates, newsletters, and other information related to our project. You can opt-out of these communications at any time.</li>
+                        <li><strong>To Improve and Secure Our Service:</strong> Server log data helps us diagnose technical problems, prevent fraud or abuse, and understand how users interact with our site so we can improve it.</li>
+                    </ul>
+
+                    <h2>4. Data Storage and Security</h2>
+                    <p><strong>Kanban Board Data:</strong> Your board progress is stored in your browser's <code>localStorage</code>. You have full control over this data and can clear it at any time through your browser's settings or by using the "Reset" button in the application. We do not have access to this data.</p>
+                    <p><strong>Subscriber Data:</strong> Email addresses for subscriptions are stored securely on our server. We implement a variety of security measures (such as those provided by <code>helmet.js</code>) to maintain the safety of your personal information.</p>
+                    <p><strong>Data Retention:</strong> We retain server logs for a limited period for security and analysis purposes. We retain subscriber emails for as long as you remain subscribed.</p>
+
+                    <h2>5. Third-Party Services</h2>
+                    <p>Our Service relies on a few third-party services to function. These services may collect data under their own privacy policies:</p>
+                    <ul>
+                        <li><strong>Google Fonts:</strong> To provide the custom fonts used on our site.</li>
+                        <li><strong>Tailwind CSS (via CDN):</strong> To provide the styling for our user interface.</li>
+                        <li><strong>Highlight.js (via CDN):</strong> For syntax highlighting of command examples.</li>
+                    </ul>
+                    <p>We encourage you to review the privacy policies of these services to understand how they handle your data.</p>
+
+                    <h2>6. Your Rights and Choices</h2>
+                    <ul>
+                        <li><strong>Access and Deletion of Local Data:</strong> You can access, export (as JSON/CSV), and delete your Kanban board data at any time using the controls provided in the application.</li>
+                        <li><strong>Unsubscribing:</strong> You can unsubscribe from our mailing list at any time by clicking the "unsubscribe" link in any email you receive from us.</li>
+                        <li><strong>Cookies and Local Storage:</strong> You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. You can also clear <code>localStorage</code> through your browser's privacy settings.</li>
+                    </ul>
+
+                    <h2>7. Children's Privacy</h2>
+                    <p>Our Service is not intended for use by children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
+
+                    <h2>8. Changes to This Privacy Policy</h2>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+                    <h2>9. Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please <a href="contact.html">contact us</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                if (localStorage.getItem('ccna_dark_mode') === 'true') {
+                    document.documentElement.classList.add('dark');
+                }
+
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+            } catch (e) {}
+        });
+    </script>
+</body>
+</html>

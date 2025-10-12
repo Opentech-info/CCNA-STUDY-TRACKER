@@ -23,15 +23,34 @@
 <body class="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
 
     <!-- Top Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-20">
+    <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="contact.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-                    Contact
+                <a href="index.html" class="flex-shrink-0">
+                    <img class="h-8 w-8 rounded-sm" src="images/opentech.png" alt="Opentech Logo">
                 </a>
-                <div id="lang-switcher" class="flex items-center gap-1 border p-1 rounded-md dark:border-gray-700">
-                    <!-- Language buttons will be inserted here by JS -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About Us</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="privacy.html" class="nav-link">Privacy</a>
+                    <div id="lang-switcher-desktop" class="flex items-center gap-1 border p-1 rounded-md dark:border-gray-700"></div>
                 </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="about.html" class="mobile-nav-link">About Us</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+                <a href="privacy.html" class="mobile-nav-link">Privacy Policy</a>
+                <div id="lang-switcher-mobile" class="flex justify-center pt-4"></div>
             </div>
         </div>
     </nav>
