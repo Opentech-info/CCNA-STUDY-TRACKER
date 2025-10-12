@@ -1,0 +1,971 @@
+{
+    "b1": {
+        "title": "Navigating User Levels",
+        "description": "Understanding how to move between different command modes is fundamental to configuring a Cisco device.",
+        "commands": [
+            {
+                "step": "Enter Privileged EXEC Mode from User EXEC Mode",
+                "prompt": "Switch>",
+                "command": "enable",
+                "explanation": "Elevates your access level to Privileged EXEC, which is required for most verification commands and to enter configuration mode."
+            },
+            {
+                "step": "Enter Global Configuration Mode from Privileged EXEC Mode",
+                "prompt": "Switch#",
+                "command": "configure terminal",
+                "explanation": "Allows you to make changes to the device's running configuration."
+            },
+            {
+                "step": "Return to Privileged EXEC Mode",
+                "prompt": "Switch(config)#",
+                "command": "exit",
+                "explanation": "Moves you back one level in the command hierarchy."
+            },
+            {
+                "step": "Return to User EXEC Mode",
+                "prompt": "Switch#",
+                "command": "disable",
+                "explanation": "Exits Privileged EXEC mode and returns to the basic User EXEC mode."
+            }
+        ]
+    },
+    "b2": {
+        "title": "Hostname",
+        "description": "Setting a hostname is a basic but crucial step for identifying a device on the network.",
+        "commands": [
+            {
+                "step": "Enter Privileged EXEC Mode",
+                "prompt": "Switch>",
+                "command": "enable",
+                "explanation": "Elevates your access level to make configuration changes."
+            },
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Switch#",
+                "command": "configure terminal",
+                "explanation": "Allows you to modify the running configuration."
+            },
+            {
+                "step": "Set the hostname",
+                "prompt": "Switch(config)#",
+                "command": "hostname SW-CORP-01",
+                "explanation": "Changes the device's name to 'Switch-A'. The prompt will update immediately."
+            }
+        ]
+    },
+    "b3": {
+        "title": "Banner Message of the Day (MOTD)",
+        "description": "Configuring a banner is a security best practice to warn unauthorized users against accessing the device.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Switch#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Set the MOTD banner",
+                "prompt": "Switch(config)#",
+                "command": "banner motd #\n*****************************************************\n*          UNAUTHORIZED ACCESS IS PROHIBITED          *\n*****************************************************\n#",
+                "explanation": "The '#' is a delimiting character. The banner text is entered between two instances of this character. It can be any character not present in the banner text."
+            }
+        ]
+    },
+    "b4": {
+        "title": "Enable Password",
+        "description": "Setting an 'enable password' or 'enable secret' is critical for securing access to privileged EXEC mode.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Set the enable secret (Recommended)",
+                "prompt": "Router(config)#",
+                "command": "enable secret MyStrongSecretP@ss",
+                "explanation": "Sets a strong, encrypted (MD5) password for privileged mode. This is the modern, recommended method."
+            },
+            {
+                "step": "Set the enable password (Older method)",
+                "prompt": "Router(config)#",
+                "command": "enable password MyWeakPassword",
+                "explanation": "Sets a plaintext password. If 'enable secret' is also set, the 'enable secret' will always be used. This is not recommended for production."
+            }
+        ]
+    },
+    "b5": {
+        "title": "Line Console Password",
+        "description": "Securing the console line is the first line of defense, protecting the device from unauthorized physical access.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Switch#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Enter Line Console Configuration Mode",
+                "prompt": "Switch(config)#",
+                "command": "line console 0",
+                "explanation": "Accesses the configuration for the physical console port."
+            },
+            {
+                "step": "Set the console password",
+                "prompt": "Switch(config-line)#",
+                "command": "password ConsolePassword123",
+                "explanation": "Sets the password required for console access."
+            },
+            {
+                "step": "Enable login check",
+                "prompt": "Switch(config-line)#",
+                "command": "login",
+                "explanation": "This command enforces the password check upon connection. Without it, the password is set but not used."
+            }
+        ]
+    },
+    "b6": {
+        "title": "Line VTY Password",
+        "description": "Securing the VTY (Virtual Teletype) lines is essential for protecting remote access (Telnet/SSH) to the device.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Enter Line VTY Configuration Mode",
+                "prompt": "Router(config)#",
+                "command": "line vty 0 4",
+                "explanation": "Accesses the configuration for the first 5 virtual terminal lines for remote access."
+            },
+            {
+                "step": "Set the VTY password",
+                "prompt": "Router(config-line)#",
+                "command": "password RemotePassword456",
+                "explanation": "Sets the password required for Telnet/SSH access if using simple password authentication."
+            },
+            {
+                "step": "Enable login check",
+                "prompt": "Router(config-line)#",
+                "command": "login",
+                "explanation": "Enforces the password check for remote connections. For SSH, 'login local' is typically used instead."
+            }
+        ]
+    },
+    "b9": {
+        "title": "Disabling IP Domain Lookup",
+        "description": "Disabling the default domain lookup feature prevents the router from attempting to resolve mistyped commands as hostnames, which can cause long delays.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Disable IP domain lookup",
+                "prompt": "Router(config)#",
+                "command": "no ip domain-lookup",
+                "explanation": "Prevents the device from trying to translate unknown commands via DNS. You can re-enable it with 'ip domain-lookup'."
+            }
+        ]
+    },
+    "b7": {
+        "title": "Exec Timeout",
+        "description": "Setting an exec-timeout automatically logs out users from console or VTY sessions after a specified period of inactivity, which is a crucial security measure.",
+        "commands": [
+            {
+                "step": "Enter Line Console Configuration Mode",
+                "prompt": "Switch(config)#",
+                "command": "line console 0",
+                "explanation": "Accesses the configuration for the physical console port."
+            },
+            {
+                "step": "Set the Console Timeout",
+                "prompt": "Switch(config-line)#",
+                "command": "exec-timeout 5 30",
+                "explanation": "Sets the timeout to 5 minutes and 30 seconds of inactivity. Setting it to '0 0' disables the timeout completely (not recommended)."
+            },
+            {
+                "step": "Enter Line VTY Configuration Mode",
+                "prompt": "Switch(config)#",
+                "command": "line vty 0 15",
+                "explanation": "Accesses the configuration for all virtual terminal lines for remote access."
+            },
+            {
+                "step": "Set the VTY Timeout",
+                "prompt": "Switch(config-line)#",
+                "command": "exec-timeout 10 0",
+                "explanation": "Sets the timeout for remote sessions to 10 minutes."
+            }
+        ]
+    },
+    "b8": {
+        "title": "Logging Synchronous",
+        "description": "The 'logging synchronous' command prevents console messages (like interface status changes) from interrupting your command-line input, making configuration much less frustrating.",
+        "commands": [
+            {
+                "step": "Enter Line Console Configuration Mode",
+                "prompt": "Switch(config)#",
+                "command": "line console 0",
+                "explanation": "Accesses the configuration for the physical console port."
+            },
+            {
+                "step": "Apply Logging Synchronous",
+                "prompt": "Switch(config-line)#",
+                "command": "logging synchronous",
+                "explanation": "After this command, any console messages will appear on a new line, and your current command prompt and input will be redisplayed, keeping your work clean."
+            }
+        ]
+    },
+    "b10": {
+        "title": "IP Domain Name",
+        "description": "Setting an IP domain name is a prerequisite for generating RSA keys, which are required for enabling SSH.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Set the IP Domain Name",
+                "prompt": "Router(config)#",
+                "command": "ip domain-name opentech.info",
+                "explanation": "Assigns a domain name to the device. This, combined with the hostname, creates a Fully Qualified Domain Name (FQDN) used in the RSA key generation process."
+            }
+        ]
+    },
+    "b11": {
+        "title": "Username and Password",
+        "description": "Creating local user accounts is essential for enabling authentication for services like SSH and for tracking user actions.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Create a user with an encrypted password",
+                "prompt": "Router(config)#",
+                "command": "username admin secret Str0ngP@ssw0rd",
+                "explanation": "The 'secret' keyword ensures the password is stored using a strong MD5 hash."
+            },
+            {
+                "step": "Create a user with a specific privilege level",
+                "prompt": "Router(config)#",
+                "command": "username user-readonly privilege 1 secret Read0nly",
+                "explanation": "Creates a user with a lower privilege level (1), suitable for read-only access."
+            }
+        ]
+    },
+    "b12": {
+        "title": "Encrypting All Passwords",
+        "description": "The 'service password-encryption' command encrypts all plaintext passwords in the running configuration, enhancing security.",
+        "commands": [
+            {
+                "step": "Enter Global Configuration Mode",
+                "prompt": "Router#",
+                "command": "configure terminal",
+                "explanation": "Enter global config to make changes."
+            },
+            {
+                "step": "Enable password encryption",
+                "prompt": "Router(config)#",
+                "command": "service password-encryption",
+                "explanation": "This command applies a weak (Type 7) encryption to all current and future plaintext passwords."
+            },
+            {
+                "step": "Verify encryption",
+                "prompt": "Router(config)#",
+                "command": "do show running-config | include password",
+                "explanation": "Using 'do' allows you to run a privileged exec command from config mode. This will show that passwords are now encrypted."
+            }
+        ]
+    },
+    "s1": {
+        "title": "VLANs",
+        "description": "Virtual LANs (VLANs) are used to segment a physical network into separate broadcast domains.",
+        "commands": [
+            {
+                "step": "Create a VLAN",
+                "prompt": "Switch(config)#",
+                "command": "vlan 10",
+                "explanation": "Creates VLAN 10 and enters VLAN configuration mode."
+            },
+            {
+                "step": "Name the VLAN",
+                "prompt": "Switch(config-vlan)#",
+                "command": "name Sales",
+                "explanation": "Assigns a descriptive name to the VLAN for easier management."
+            },
+            {
+                "step": "Assign a port to a VLAN",
+                "prompt": "Switch(config)#",
+                "command": "interface FastEthernet0/1",
+                "explanation": "Enters interface configuration mode for the specified port."
+            },
+            {
+                "step": "Set port to access mode and assign VLAN",
+                "prompt": "Switch(config-if)#",
+                "command": "switchport mode access\nswitchport access vlan 10",
+                "explanation": "Configures port Fa0/1 as an access port and assigns it to the 'Sales' VLAN (VLAN 10)."
+            },
+            {
+                "step": "Verify VLAN configuration",
+                "prompt": "Switch#",
+                "command": "show vlan brief",
+                "explanation": "Displays a summary of all configured VLANs and the ports assigned to them."
+            }
+        ],
+        "related": ["s3", "s4", "r4"]
+    },
+    "s2": {
+        "title": "VLAN Trunking Protocol (VTP)",
+        "description": "VTP allows a network administrator to manage VLANs on a switch and have those changes propagate to all other switches in the same VTP domain.",
+        "commands": [
+            {
+                "step": "Configure VTP Domain and Password",
+                "prompt": "Switch(config)#",
+                "command": "vtp domain OPENTECH\nvtp password VTPpassword",
+                "explanation": "Sets the VTP domain name and password. All switches that should share VTP information must have the same domain name and password."
+            },
+            {
+                "step": "Configure VTP Server Mode",
+                "prompt": "Switch(config)#",
+                "command": "vtp mode server",
+                "explanation": "In server mode, you can create, modify, and delete VLANs, and these changes will be advertised to other switches in the domain. There must be at least one server."
+            },
+            {
+                "step": "Configure VTP Client Mode",
+                "prompt": "Switch(config)#",
+                "command": "vtp mode client",
+                "explanation": "In client mode, a switch receives VTP updates and synchronizes its VLAN database, but you cannot create, change, or delete VLANs on this switch."
+            },
+            {
+                "step": "Configure VTP Transparent Mode",
+                "prompt": "Switch(config)#",
+                "command": "vtp mode transparent",
+                "explanation": "In transparent mode, a switch does not participate in VTP but will forward VTP advertisements to other switches. You can manage VLANs locally on a transparent switch."
+            },
+            {
+                "step": "Verify VTP Status",
+                "prompt": "Switch#",
+                "command": "show vtp status",
+                "explanation": "Displays the VTP configuration of the switch, including its mode, domain name, and revision number."
+            }
+        ]
+    },
+    "s3": {
+        "title": "Trunk - Allowed/Denied VLANs",
+        "description": "For security and performance, it's best practice to manually specify which VLANs are allowed to traverse a trunk link.",
+        "commands": [
+            {
+                "step": "Enter interface configuration for the trunk port",
+                "prompt": "Switch(config)#",
+                "command": "interface GigabitEthernet0/1",
+                "explanation": "Select the interface that is configured as a trunk."
+            },
+            {
+                "step": "Set the allowed VLANs on the trunk",
+                "prompt": "Switch(config-if)#",
+                "command": "switchport trunk allowed vlan 10,20,30",
+                "explanation": "This command specifies that only traffic from VLANs 10, 20, and 30 can pass through this trunk. All other VLANs will be blocked."
+            },
+            {
+                "step": "Add a VLAN to an existing list",
+                "prompt": "Switch(config-if)#",
+                "command": "switchport trunk allowed vlan add 40",
+                "explanation": "The 'add' keyword allows you to add a VLAN to the list without retyping the entire list."
+            },
+            {
+                "step": "Verify the trunk configuration",
+                "prompt": "Switch#",
+                "command": "show interfaces trunk",
+                "explanation": "This command shows detailed information about all trunking interfaces, including the list of allowed VLANs."
+            }
+        ],
+        "related": ["s1", "s4", "s7"]
+    },
+    "s4": {
+        "title": "Configure Native VLAN",
+        "description": "The native VLAN on a trunk is the one VLAN that does not have its traffic tagged. For security, it's best practice to change it from the default (VLAN 1) to an unused VLAN.",
+        "commands": [
+            {
+                "step": "Enter interface configuration for the trunk port",
+                "prompt": "Switch(config)#",
+                "command": "interface GigabitEthernet0/1",
+                "explanation": "Select the interface that is configured as a trunk."
+            },
+            {
+                "step": "Change the native VLAN",
+                "prompt": "Switch(config-if)#",
+                "command": "switchport trunk native vlan 999",
+                "explanation": "This command sets the native VLAN to 999. Both ends of the trunk link must have the same native VLAN to avoid spanning-tree issues and security vulnerabilities."
+            }
+        ],
+        "related": ["s1", "s3", "s12"]
+    },
+    "s6": {
+        "title": "Remote Access - SSH",
+        "description": "Configuring SSH provides secure, encrypted remote access to the device's command line.",
+        "commands": [
+            {
+                "step": "Set hostname and domain name",
+                "prompt": "Router(config)#",
+                "command": "hostname R1\nip domain-name opentech-info.local",
+                "explanation": "SSH requires a hostname and a domain name to generate RSA keys."
+            },
+            {
+                "step": "Generate RSA crypto keys",
+                "prompt": "Router(config)#",
+                "command": "crypto key generate rsa",
+                "explanation": "Generates the RSA key pair needed for SSH. A modulus of 1024 or 2048 is recommended."
+            },
+            {
+                "step": "Create a local user",
+                "prompt": "Router(config)#",
+                "command": "username admin secret MySecureP@ssw0rd",
+                "explanation": "Creates a user with an encrypted password for SSH authentication."
+            },
+            {
+                "step": "Configure VTY lines for SSH",
+                "prompt": "Router(config)#",
+                "command": "line vty 0 4\ntransport input ssh\nlogin local",
+                "explanation": "Configures the virtual terminal lines to accept only SSH connections and authenticate using the local user database."
+            }
+        ],
+        "related": ["b11", "r12"]
+    },
+    "s5": {
+        "title": "Remote Access - Telnet",
+        "description": "Telnet provides basic, unencrypted remote access. It is not secure and should only be used in controlled lab environments. SSH is the recommended alternative.",
+        "commands": [
+            {
+                "step": "Enter Line VTY Configuration Mode",
+                "prompt": "Router(config)#",
+                "command": "line vty 0 4",
+                "explanation": "Accesses the configuration for the first 5 virtual terminal lines."
+            },
+            {
+                "step": "Set a password and enable login",
+                "prompt": "Router(config-line)#",
+                "command": "password telnetpass\nlogin",
+                "explanation": "Sets a simple password for Telnet access and enforces the login check. Note: This password is sent in clear text."
+            }
+        ]
+    },
+    "s7": {
+        "title": "L2 EtherChannel - LACP",
+        "description": "LACP (Link Aggregation Control Protocol) is an IEEE standard for negotiating and bundling links into an EtherChannel.",
+        "commands": [
+            {
+                "step": "Select interfaces for the channel group",
+                "prompt": "Switch(config)#",
+                "command": "interface range FastEthernet0/1 - 2",
+                "explanation": "Selects a range of interfaces to be bundled together."
+            },
+            {
+                "step": "Create the LACP channel group",
+                "prompt": "Switch(config-if-range)#",
+                "command": "channel-group 1 mode active",
+                "explanation": "'mode active' configures the interfaces to actively negotiate an LACP EtherChannel. The channel-group number is locally significant."
+            },
+            {
+                "step": "Configure the Port-channel interface",
+                "prompt": "Switch(config)#",
+                "command": "interface Port-channel1\nswitchport mode trunk",
+                "explanation": "Once the channel-group is created, a logical Port-channel interface is also created. Configurations like trunking should be applied here."
+            },
+            {
+                "step": "Verify EtherChannel status",
+                "prompt": "Switch#",
+                "command": "show etherchannel summary",
+                "explanation": "This command provides a one-line summary per channel-group, showing the protocol and status of the ports."
+            }
+        ],
+        "related": ["s8", "r1"]
+    },
+    "s8": {
+        "title": "L2 EtherChannel - ON Mode",
+        "description": "Configuring EtherChannel in 'ON' mode forces the link to become a channel without any negotiation protocol (like LACP or PAgP). Both sides must be set to 'ON'.",
+        "commands": [
+            {
+                "step": "Select interfaces for the channel group",
+                "prompt": "Switch(config)#",
+                "command": "interface range FastEthernet0/3 - 4",
+                "explanation": "Selects a range of interfaces to be bundled together."
+            },
+            {
+                "step": "Force the channel group to be 'ON'",
+                "prompt": "Switch(config-if-range)#",
+                "command": "channel-group 2 mode on",
+                "explanation": "This command statically configures the EtherChannel. It's prone to misconfiguration if one side is not configured correctly, which can cause loops."
+            }
+        ]
+    },
+    "s9": {
+        "title": "Secure All Unused Switchports",
+        "description": "Unused ports are a security risk. Best practice is to shut them down and move them to an unused, 'blackhole' VLAN.",
+        "commands": [
+            {
+                "step": "Select a range of unused interfaces",
+                "prompt": "Switch(config)#",
+                "command": "interface range FastEthernet0/5 - 24",
+                "explanation": "Selects all unused ports for configuration."
+            },
+            {
+                "step": "Shutdown and assign to blackhole VLAN",
+                "prompt": "Switch(config-if-range)#",
+                "command": "shutdown\nswitchport mode access\nswitchport access vlan 999",
+                "explanation": "Disables the ports and assigns them to a dedicated, unused VLAN (e.g., 999) that has no SVI and is not trunked anywhere."
+            }
+        ]
+    },
+    "s10": {
+        "title": "STP Attack Prevention",
+        "description": "Features like BPDU Guard and Root Guard are used to protect the Spanning Tree Protocol (STP) topology from manipulation and attacks.",
+        "commands": [
+            {
+                "step": "Enable BPDU Guard on an Access Port",
+                "prompt": "Switch(config-if)#",
+                "command": "spanning-tree bpduguard enable",
+                "explanation": "Apply this to all end-user access ports. If any BPDU is received on this port, it will be put into an 'err-disabled' state, preventing rogue switches from affecting the STP topology."
+            },
+            {
+                "step": "Enable Root Guard on a Designated Port",
+                "prompt": "Switch(config-if)#",
+                "command": "spanning-tree guard root",
+                "explanation": "Apply this on ports that should never become root ports (e.g., ports connecting to other access layer switches). If a superior BPDU is received, the port will be put into a 'root-inconsistent' state, ignoring the BPDU."
+            }
+        ]
+    },
+    "s11": {
+        "title": "Disable CDP on the Devices",
+        "description": "Cisco Discovery Protocol (CDP) is useful for network discovery but can leak sensitive device information. It should be disabled on untrusted or public-facing interfaces.",
+        "commands": [
+            {
+                "step": "Disable CDP globally",
+                "prompt": "Switch(config)#",
+                "command": "no cdp run",
+                "explanation": "Disables CDP for the entire device."
+            },
+            {
+                "step": "Disable CDP on a specific interface",
+                "prompt": "Switch(config-if)#",
+                "command": "no cdp enable",
+                "explanation": "Disables CDP only on the selected interface, which is a more targeted approach."
+            }
+        ]
+    },
+    "s13": {
+        "title": "DHCP Snooping",
+        "description": "DHCP Snooping is a security feature that filters DHCP messages from untrusted sources, preventing rogue DHCP servers.",
+        "commands": [
+            {
+                "step": "Enable DHCP Snooping globally",
+                "prompt": "Switch(config)#",
+                "command": "ip dhcp snooping",
+                "explanation": "Activates the DHCP snooping feature on the switch."
+            },
+            {
+                "step": "Enable DHCP Snooping for specific VLANs",
+                "prompt": "Switch(config)#",
+                "command": "ip dhcp snooping vlan 10,20",
+                "explanation": "Specifies which VLANs should be monitored by DHCP snooping."
+            },
+            {
+                "step": "Configure the trusted interface",
+                "prompt": "Switch(config)#",
+                "command": "interface GigabitEthernet0/1\nip dhcp snooping trust",
+                "explanation": "The interface connected to the legitimate DHCP server must be configured as trusted. All other ports are untrusted by default."
+            },
+            {
+                "step": "Limit the rate of DHCP packets (optional)",
+                "prompt": "Switch(config)#",
+                "command": "interface FastEthernet0/1\nip dhcp snooping limit rate 100",
+                "explanation": "On untrusted ports, you can limit the number of DHCP packets per second to prevent DHCP starvation attacks."
+            },
+            {
+                "step": "Verify DHCP Snooping configuration",
+                "prompt": "Switch#",
+                "command": "show ip dhcp snooping",
+                "explanation": "Displays the DHCP snooping configuration, including trusted interfaces and monitored VLANs."
+            }
+        ]
+    },
+    "s14": {
+        "title": "Dynamic ARP Inspection (DAI)",
+        "description": "DAI intercepts and validates ARP packets to prevent ARP spoofing and poisoning attacks. It relies on the DHCP Snooping binding database.",
+        "commands": [
+            {
+                "step": "Enable DAI for specific VLANs",
+                "prompt": "Switch(config)#",
+                "command": "ip arp inspection vlan 10,20",
+                "explanation": "Activates DAI on the specified VLANs. DHCP Snooping must be enabled and working for these VLANs first."
+            },
+            {
+                "step": "Configure the trusted interface for DAI",
+                "prompt": "Switch(config)#",
+                "command": "interface GigabitEthernet0/1\nip arp inspection trust",
+                "explanation": "The interface connected to another switch or router (uplink) must be configured as trusted. ARP packets on trusted ports bypass inspection."
+            },
+            {
+                "step": "Verify DAI Configuration",
+                "prompt": "Switch#",
+                "command": "show ip arp inspection",
+                "explanation": "Displays the operational state of DAI for each VLAN."
+            }
+        ],
+        "related": ["s13", "s15"]
+    },
+    "s15": {
+        "title": "IP Source Guard",
+        "description": "IP Source Guard prevents IP spoofing attacks by filtering traffic based on the DHCP Snooping binding database. It only allows traffic from an IP address if it matches the IP-to-MAC binding.",
+        "commands": [
+            {
+                "step": "Enable IP Source Guard on an interface",
+                "prompt": "Switch(config-if)#",
+                "command": "ip verify source",
+                "explanation": "Activates IP Source Guard on an untrusted access port. This feature requires DHCP Snooping to be enabled."
+            },
+            {
+                "step": "Verify IP Source Guard",
+                "prompt": "Switch#",
+                "command": "show ip verify source",
+                "explanation": "Displays the interfaces where IP Source Guard is enabled and the filtering restrictions in place."
+            }
+        ],
+        "related": ["s13", "s14"]
+    },
+    "r1": {
+        "title": "Multilayer Switch + L3 EtherChannel",
+        "description": "A Layer 3 EtherChannel bundles multiple physical links between multilayer switches into a single logical routed interface, providing redundancy and increased bandwidth.",
+        "commands": [
+            { "step": "Create the L3 EtherChannel", "prompt": "SW1(config-if-range)#", "command": "channel-group 1 mode on\nno switchport", "explanation": "On the physical interfaces, bundle them into a channel-group and then convert them to routed ports with 'no switchport'." },
+            { "step": "Configure the Logical Port-channel Interface", "prompt": "SW1(config)#", "command": "interface Port-channel1\nip address 10.1.1.1 255.255.255.252", "explanation": "Assign an IP address directly to the logical Port-channel interface. This interface can now be used for routing." },
+            { "step": "Enable Routing", "prompt": "SW1(config)#", "command": "ip routing", "explanation": "This global command must be enabled on a multilayer switch to perform Layer 3 routing functions." }
+        ],
+        "related": ["s7", "s8"]
+    },
+    "r9": {
+        "title": "Static, Floating & Default Routing",
+        "description": "Static routes are manually configured paths for traffic. A default route is a special static route for all traffic with no specific match, and a floating static route provides a backup path.",
+        "commands": [
+            { "step": "Configure a Standard Static Route", "prompt": "Router(config)#", "command": "ip route 172.16.1.0 255.255.255.0 10.0.0.2", "explanation": "Tells the router to send all traffic destined for the 172.16.1.0/24 network to the next-hop router at 10.0.0.2." },
+            { "step": "Configure a Default Route", "prompt": "Router(config)#", "command": "ip route 0.0.0.0 0.0.0.0 203.0.113.1", "explanation": "The 'route of last resort'. All traffic that doesn't match a more specific route in the table will be sent to 203.0.113.1 (typically an ISP gateway)." },
+            { "step": "Configure a Floating Static Route", "prompt": "Router(config)#", "command": "ip route 172.16.1.0 255.255.255.0 10.0.0.3 250", "explanation": "This is a backup route. The '250' is the administrative distance (AD). Since it's higher than the default AD of a primary static route (1), this route will only be used if the primary route fails." }
+        ],
+        "related": ["r10", "r16"]
+    },
+    "r4": {
+        "title": "Inter-VLAN Routing - Router-on-a-Stick",
+        "description": "Router-on-a-Stick (ROAS) uses a single physical router interface to route traffic between multiple VLANs by creating logical subinterfaces.",
+        "commands": [
+            {
+                "step": "Configure the switch trunk port",
+                "prompt": "Switch(config)#",
+                "command": "interface FastEthernet0/1\nswitchport mode trunk",
+                "explanation": "The switch port connecting to the router must be configured as a trunk to carry traffic for all VLANs."
+            },
+            {
+                "step": "Create subinterface for VLAN 10",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/0.10",
+                "explanation": "Creates a logical subinterface. The number (10) is arbitrary but is best practice to match the VLAN ID."
+            },
+            {
+                "step": "Configure encapsulation and IP address for VLAN 10",
+                "prompt": "Router(config-subif)#",
+                "command": "encapsulation dot1Q 10\nip address 192.168.10.1 255.255.255.0",
+                "explanation": "Tells the subinterface to tag traffic for VLAN 10 and assigns it an IP address to act as the default gateway for that VLAN."
+            },
+            {
+                "step": "Create subinterface for VLAN 20",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/0.20\nencapsulation dot1Q 20\nip address 192.168.20.1 255.255.255.0",
+                "explanation": "Repeat the process for all other VLANs that need to be routed."
+            },
+            {
+                "step": "Enable the physical interface",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/0\nno shutdown",
+                "explanation": "The physical interface must be brought up for the subinterfaces to function."
+            }
+        ],
+        "related": ["s1", "s3"]
+    },
+    "r5": {
+        "title": "DHCP Server - Router",
+        "description": "A Cisco router can be configured to act as a DHCP server to automatically assign IP addresses to clients.",
+        "commands": [
+            {
+                "step": "Exclude addresses from the pool",
+                "prompt": "Router(config)#",
+                "command": "ip dhcp excluded-address 192.168.1.1 192.168.1.10",
+                "explanation": "Reserves a range of IP addresses that the DHCP server will not assign. This is typically used for static assignments like servers and gateways."
+            },
+            {
+                "step": "Create the DHCP pool",
+                "prompt": "Router(config)#",
+                "command": "ip dhcp pool LAN-POOL-1",
+                "explanation": "Creates a DHCP pool with a specified name."
+            },
+            {
+                "step": "Define the network and default gateway",
+                "prompt": "Router(dhcp-config)#",
+                "command": "network 192.168.1.0 255.255.255.0\ndefault-router 192.168.1.1",
+                "explanation": "Specifies the subnet of addresses the pool will assign from and the default gateway address that will be given to clients."
+            },
+            {
+                "step": "Define the DNS server",
+                "prompt": "Router(dhcp-config)#",
+                "command": "dns-server 8.8.8.8 8.8.4.4",
+                "explanation": "Specifies the DNS server addresses to be given to clients."
+            },
+            {
+                "step": "Verify DHCP configuration",
+                "prompt": "Router#",
+                "command": "show ip dhcp binding",
+                "explanation": "Shows the list of IP addresses that have been leased to clients."
+            }
+        ],
+        "related": ["r8", "s13"]
+    },
+    "r16": {
+        "title": "Static Routing for IPv6",
+        "description": "Configuring static routes for IPv6 is similar to IPv4 but uses IPv6 addresses and syntax.",
+        "commands": [
+            {
+                "step": "Enable IPv6 Unicast Routing",
+                "prompt": "Router(config)#",
+                "command": "ipv6 unicast-routing",
+                "explanation": "This global command is required to enable the router to forward IPv6 packets."
+            },
+            {
+                "step": "Configure an IPv6 Static Route",
+                "prompt": "Router(config)#",
+                "command": "ipv6 route 2001:DB8:ACAD:1::/64 2001:DB8:FEED:1::2",
+                "explanation": "Configures a static route for the destination network 2001:DB8:ACAD:1::/64 via the next-hop address 2001:DB8:FEED:1::2."
+            }
+        ],
+        "related": ["r9", "r19"]
+    },
+    "r10": {
+        "title": "OSPF Routing",
+        "description": "Open Shortest Path First (OSPF) is a link-state routing protocol that uses cost as its metric to find the best path.",
+        "commands": [
+            {
+                "step": "Start the OSPF process",
+                "prompt": "Router(config)#",
+                "command": "router ospf 1",
+                "explanation": "Enables OSPF with a process ID of 1. The process ID is locally significant."
+            },
+            {
+                "step": "Define networks to be advertised",
+                "prompt": "Router(config-router)#",
+                "command": "network 10.0.1.0 0.0.0.255 area 0\nnetwork 10.0.2.0 0.0.0.255 area 0",
+                "explanation": "The 'network' command tells OSPF which interfaces to run on and which networks to advertise. It uses a wildcard mask. 'area 0' is the backbone area."
+            },
+            {
+                "step": "Verify OSPF neighbors and routes",
+                "prompt": "Router#",
+                "command": "show ip ospf neighbor\nshow ip route ospf",
+                "explanation": "These commands are used to verify that OSPF adjacencies have formed with other routers and that OSPF routes are present in the routing table."
+            }
+        ],
+        "related": ["r19"]
+    },
+    "r11": {
+        "title": "ACLs - Standard & Extended",
+        "description": "Access Control Lists (ACLs) are used to filter traffic based on source/destination IP addresses, port numbers, and protocols.",
+        "commands": [
+            {
+                "step": "Create a Standard Numbered ACL",
+                "prompt": "Router(config)#",
+                "command": "access-list 10 permit 192.168.1.0 0.0.0.255",
+                "explanation": "Creates a standard ACL (1-99) that permits traffic from the entire 192.168.1.0/24 subnet. Uses a wildcard mask."
+            },
+            {
+                "step": "Apply the Standard ACL to an interface",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/1\nip access-group 10 out",
+                "explanation": "Applies the ACL to filter traffic leaving the Gi0/1 interface. Standard ACLs should be applied as close to the destination as possible."
+            },
+            {
+                "step": "Create an Extended Named ACL",
+                "prompt": "Router(config)#",
+                "command": "ip access-list extended WEB_TRAFFIC_ONLY",
+                "explanation": "Creates a named extended ACL, which is more descriptive and flexible than numbered ACLs."
+            },
+            {
+                "step": "Add rules to the Extended ACL",
+                "prompt": "Router(config-ext-nacl)#",
+                "command": "permit tcp any host 10.10.10.50 eq 80\npermit tcp any host 10.10.10.50 eq 443",
+                "explanation": "Permits any source to access the web server at 10.10.10.50 on ports 80 (HTTP) and 443 (HTTPS). An implicit 'deny all' is at the end."
+            },
+            {
+                "step": "Apply the Extended ACL to an interface",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/0\nip access-group WEB_TRAFFIC_ONLY in",
+                "explanation": "Applies the ACL to filter traffic entering the Gi0/0 interface. Extended ACLs should be applied as close to the source as possible."
+            }
+        ],
+        "related": ["r12", "r13", "a5"]
+    },
+    "r13": {
+        "title": "NAT - Static, Dynamic & PAT",
+        "description": "Network Address Translation (NAT) translates private IP addresses to public IP addresses, enabling private hosts to communicate on the internet.",
+        "commands": [
+            {
+                "step": "Define Inside and Outside Interfaces",
+                "prompt": "Router(config)#",
+                "command": "interface GigabitEthernet0/1\nip nat inside\n!\ninterface GigabitEthernet0/0\nip nat outside",
+                "explanation": "Identifies which interface is connected to the internal (private) network and which is connected to the external (public) network."
+            },
+            {
+                "step": "Configure Static NAT (One-to-One)",
+                "prompt": "Router(config)#",
+                "command": "ip nat inside source static 192.168.1.10 203.0.113.5",
+                "explanation": "Creates a permanent, one-to-one mapping between the inside local address (192.168.1.10) and an inside global address (203.0.113.5)."
+            },
+            {
+                "step": "Configure PAT (Overload) using an ACL",
+                "prompt": "Router(config)#",
+                "command": "ip nat inside source list 1 interface GigabitEthernet0/0 overload",
+                "explanation": "This is the most common form of NAT. It translates all traffic permitted by ACL 1 to the IP address of the Gi0/0 interface, using port numbers to track sessions."
+            },
+            {
+                "step": "Define the ACL for PAT",
+                "prompt": "Router(config)#",
+                "command": "access-list 1 permit 192.168.1.0 0.0.0.255",
+                "explanation": "This standard ACL specifies which source IP addresses are allowed to be translated."
+            },
+            {
+                "step": "Verify NAT translations",
+                "prompt": "Router#",
+                "command": "show ip nat translations",
+                "explanation": "Displays the active NAT translation table."
+            }
+        ],
+        "related": ["r11", "a4", "a6"]
+    },
+    "r19": {
+        "title": "OSPF for IPv6 Routing (OSPFv3)",
+        "description": "OSPFv3 is the version of OSPF used for IPv6. It is configured on a per-interface basis rather than using the 'network' command.",
+        "commands": [
+            {
+                "step": "Enable IPv6 Routing and Start OSPFv3 Process",
+                "prompt": "Router(config)#",
+                "command": "ipv6 unicast-routing\nipv6 router ospf 1",
+                "explanation": "Enables IPv6 routing globally and creates an OSPFv3 process with a locally significant ID of 1."
+            },
+            {
+                "step": "Enable OSPFv3 on an Interface",
+                "prompt": "Router(config-if)#",
+                "command": "ipv6 ospf 1 area 0",
+                "explanation": "Activates the OSPFv3 process 1 on this interface and assigns it to Area 0. This is done on all interfaces that should participate in OSPFv3."
+            }
+        ],
+        "related": ["r10", "r16"]
+    },
+    "r14": {
+        "title": "HSRP (Hot Standby Router Protocol)",
+        "description": "HSRP provides first-hop redundancy for IP hosts on an Ethernet network by creating a virtual router with a floating IP address that is shared between two or more physical routers.",
+        "commands": [
+            { "step": "Enter Interface Configuration", "prompt": "R1(config)#", "command": "interface GigabitEthernet0/1", "explanation": "Configuration is applied on the interface facing the local LAN." },
+            { "step": "Configure HSRP Version and Virtual IP", "prompt": "R1(config-if)#", "command": "standby version 2\nstandby 1 ip 192.168.1.254", "explanation": "Sets HSRP to version 2 and defines the virtual IP address for HSRP group 1. This virtual IP will be the default gateway for clients." },
+            { "step": "Set Priority (Elects the Active Router)", "prompt": "R1(config-if)#", "command": "standby 1 priority 150", "explanation": "The router with the highest priority becomes the active router. The default is 100." },
+            { "step": "Enable Preemption", "prompt": "R1(config-if)#", "command": "standby 1 preempt", "explanation": "Allows a router with a higher priority to take over the active role if it comes online after a lower-priority router has already become active." },
+            { "step": "Verify HSRP State", "prompt": "R1#", "command": "show standby brief", "explanation": "Provides a summary of the HSRP status, showing the virtual IP, active router, standby router, and state." }
+        ],
+        "related": ["r9"]
+    },
+    "w2": {
+        "title": "Wireless LAN Controller (WLC) - Basic Setup",
+        "description": "A WLC is used to centrally manage, configure, and monitor multiple lightweight access points (LAPs).",
+        "commands": [
+            { "step": "Initial Setup Wizard", "prompt": "(Cisco Controller) >", "command": "System Name [Cisco_3a:4b:c1]: WLC-CORP\n... (and so on)", "explanation": "The initial setup is done via a command-line wizard on first boot, configuring management IP, admin user, network settings, and a basic WLAN." },
+            { "step": "Create a new WLAN (via GUI)", "prompt": "GUI: WLANs > Create New > Go", "command": "Profile Name: Corp-WiFi\nSSID: Opentech-Corporate", "explanation": "In the WLC's web GUI, you create a new WLAN, giving it a profile name and the SSID that will be broadcast to users." },
+            { "step": "Configure WLAN Security (via GUI)", "prompt": "GUI: WLANs > (Select WLAN) > Security > Layer 2", "command": "Layer 2 Security: WPA+WPA2\nWPA2 Policy: Enabled\nAuthentication: PSK (or 802.1x)", "explanation": "Under the security tab for the WLAN, you configure the security method, such as WPA2 with a Pre-Shared Key (PSK) or enterprise authentication." },
+            { "step": "Verify AP Association (via GUI)", "prompt": "GUI: WIRELESS > Access Points > All APs", "command": "N/A", "explanation": "This page in the GUI shows all lightweight access points that have successfully discovered and joined the controller." }
+        ]
+    }
+,
+    "w1": {
+        "title": "Wireless APs Configs (Autonomous)",
+        "description": "An autonomous AP is a self-contained device that is managed individually. This is common in small-scale deployments.",
+        "commands": [
+            { "step": "Enter Privileged EXEC Mode", "prompt": "ap>", "command": "enable", "explanation": "Access privileged mode on the access point." },
+            { "step": "Enter Global Configuration Mode", "prompt": "ap#", "command": "configure terminal", "explanation": "Enter global config to make changes." },
+            { "step": "Configure the SSID", "prompt": "ap(config)#", "command": "dot11 ssid Opentech-Guest\n   authentication open\n   guest-mode", "explanation": "Creates an SSID named 'Opentech-Guest', sets it to open authentication, and enables it as a guest network." },
+            { "step": "Configure the Radio Interface", "prompt": "ap(config)#", "command": "interface Dot11Radio0\n ssid Opentech-Guest\n no shutdown", "explanation": "Associates the created SSID with the 2.4GHz radio interface (Dot11Radio0) and enables the radio." }
+        ]
+    },
+    "w6": {
+        "title": "VoIP - Data & Voice VLANs",
+        "description": "Separating voice and data traffic into different VLANs is critical for Quality of Service (QoS) and security. A switch port connected to an IP phone is configured as a trunk that carries both.",
+        "commands": [
+            { "step": "Create Data and Voice VLANs", "prompt": "Switch(config)#", "command": "vlan 10\n name DATA\nvlan 110\n name VOICE", "explanation": "Create separate VLANs for data and voice traffic." },
+            { "step": "Configure the Interface for Phone and PC", "prompt": "Switch(config)#", "command": "interface FastEthernet0/1", "explanation": "Enter configuration mode for the port where the IP phone is connected." },
+            { "step": "Assign Voice and Data VLANs", "prompt": "Switch(config-if)#", "command": "switchport mode access\nswitchport access vlan 10\nswitchport voice vlan 110", "explanation": "The port is set to access mode for the data VLAN (for the PC connected to the phone), and the 'switchport voice vlan' command tells the switch to use a second VLAN for voice traffic, which it communicates to the phone via CDP." }
+        ]
+    },
+    "a1": {
+        "title": "Basic Firewall Configs (ASA)",
+        "description": "Initial configuration of a Cisco ASA firewall involves setting the hostname, domain name, and passwords.",
+        "commands": [
+            { "step": "Set the Hostname", "prompt": "ciscoasa(config)#", "command": "hostname ASA-FW-01", "explanation": "Assigns a unique hostname to the firewall." },
+            { "step": "Set the Domain Name", "prompt": "ASA-FW-01(config)#", "command": "domain-name opentech.local", "explanation": "Sets the domain name, which is required for generating crypto keys." },
+            { "step": "Set the Enable Password", "prompt": "ASA-FW-01(config)#", "command": "enable password StrongEnablePass", "explanation": "Secures access to privileged mode." },
+            { "step": "Create a Local Admin User", "prompt": "ASA-FW-01(config)#", "command": "username admin password StrongAdminPass privilege 15", "explanation": "Creates a local user with the highest privilege level (15) for management." }
+        ]
+    },
+    "a2": {
+        "title": "Interface Security Levels (ASA)",
+        "description": "On an ASA, traffic is permitted to flow from a higher security level interface to a lower security level interface by default. Traffic from lower to higher is denied.",
+        "commands": [
+            { "step": "Configure the Inside Interface", "prompt": "ASA-FW-01(config)#", "command": "interface GigabitEthernet0/0\n nameif inside\n security-level 100\n ip address 192.168.1.1 255.255.255.0", "explanation": "The 'inside' interface is the most trusted network and is given the highest security level (100)." },
+            { "step": "Configure the Outside Interface", "prompt": "ASA-FW-01(config)#", "command": "interface GigabitEthernet0/1\n nameif outside\n security-level 0\n ip address 203.0.113.1 255.255.255.0", "explanation": "The 'outside' interface connects to the untrusted internet and is given the lowest security level (0)." },
+            { "step": "Configure a DMZ Interface", "prompt": "ASA-FW-01(config)#", "command": "interface GigabitEthernet0/2\n nameif dmz\n security-level 50\n ip address 172.16.1.1 255.255.255.0", "explanation": "A DMZ (Demilitarized Zone) is for public-facing servers and is given an intermediate security level." }
+        ]
+    },
+    "a5": {
+        "title": "Firewall ACLs (ASA)",
+        "description": "Access Control Lists on an ASA are used to permit traffic that would normally be denied (e.g., allowing specific traffic from the outside to the inside).",
+        "commands": [
+            { "step": "Create an Access List", "prompt": "ASA-FW-01(config)#", "command": "access-list OUTSIDE_IN permit tcp any host 192.168.1.100 eq 80", "explanation": "Creates an ACL named 'OUTSIDE_IN' that permits any source on the internet to access the internal web server at 192.168.1.100 on port 80 (HTTP)." },
+            { "step": "Apply the Access List to an Interface", "prompt": "ASA-FW-01(config)#", "command": "access-group OUTSIDE_IN in interface outside", "explanation": "Applies the ACL to traffic entering the 'outside' interface. This is how you allow external traffic to reach internal resources." }
+        ]
+    },
+    "a4": {
+        "title": "Firewall NAT Configs (ASA)",
+        "description": "NAT on an ASA is configured using 'object' NAT, which is more powerful and flexible than on IOS routers. This example shows a common PAT (overload) configuration.",
+        "commands": [
+            { "step": "Create a Network Object for Inside Network", "prompt": "ASA-FW-01(config)#", "command": "object network INSIDE_NET\n subnet 192.168.1.0 255.255.255.0", "explanation": "Creates a named object to represent the internal subnet. This makes configurations cleaner and easier to manage." },
+            { "step": "Configure Dynamic PAT (NAT Overload)", "prompt": "ASA-FW-01(config-network-object)#", "command": "nat (inside,outside) dynamic interface", "explanation": "Within the network object, this single command configures NAT. It translates traffic from the 'inside' zone going to the 'outside' zone, using the IP address of the 'outside' interface for the translation." }
+        ]
+    },
+    "a6": {
+        "title": "NAT + Network Objects (ASA Static NAT)",
+        "description": "This shows how to configure Static NAT on an ASA to map a public IP address to an internal server, making it accessible from the internet.",
+        "commands": [
+            { "step": "Create a Network Object for the Internal Server", "prompt": "ASA-FW-01(config)#", "command": "object network WEB_SERVER\n host 192.168.1.50", "explanation": "Creates an object representing the internal web server." },
+            { "step": "Configure Static NAT", "prompt": "ASA-FW-01(config-network-object)#", "command": "nat (inside,outside) static 203.0.113.10", "explanation": "Inside the server's object configuration, this command creates a static, bidirectional mapping between the server's real IP (192.168.1.50) and a public IP (203.0.113.10)." }
+        ]
+    },
+    "a7": {
+        "title": "Inspection Policies (ASA)",
+        "description": "The ASA uses the Modular Policy Framework (MPF) for deep packet inspection. By default, it inspects common protocols, but you can customize it.",
+        "commands": [
+            { "step": "View the Default Inspection Policy", "prompt": "ASA-FW-01#", "command": "show running-config policy-map", "explanation": "This will show the 'global_policy' which is applied globally by default. You will see 'inspect dns', 'inspect ftp', etc." },
+            { "step": "Create a new Class Map (Optional)", "prompt": "ASA-FW-01(config)#", "command": "class-map custom_traffic\n match port tcp eq 1521", "explanation": "Creates a class-map to identify specific traffic, in this case, Oracle SQL traffic on port 1521." },
+            { "step": "Create a new Policy Map", "prompt": "ASA-FW-01(config)#", "command": "policy-map custom_policy\n class custom_traffic\n  inspect sqlnet", "explanation": "Creates a new policy that tells the ASA to perform deep packet inspection for SQL*Net on the traffic identified by 'custom_traffic'." },
+            { "step": "Apply the new Policy Globally", "prompt": "ASA-FW-01(config)#", "command": "service-policy custom_policy global", "explanation": "Applies the new inspection policy to all traffic passing through the firewall." }
+        ]
+    }
+}

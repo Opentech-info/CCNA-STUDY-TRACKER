@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>GURUTECH CCNA Project Tracker</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Add dark mode support to Tailwind
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Poppins', 'sans-serif'] } } }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="contact.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                    Contact
+                </a>
+                <div id="lang-switcher" class="flex items-center gap-1 border p-1 rounded-md dark:border-gray-700">
+                    <!-- Language buttons will be inserted here by JS -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="app-container" class="pt-16"> <!-- Add padding-top to account for fixed nav -->
+        <!-- Main Page Header -->
+        <header id="main-header" class="relative text-center my-8 py-24 px-4 rounded-lg overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-50 z-0"></div> <!-- Overlay -->
+            <div class="relative z-10"> <!-- Content container -->
+                <img src="images/opentech.png" alt="Opentech Logo" class="h-20 w-20 rounded-md mx-auto mb-4">
+                <h1 id="app-title" class="text-3xl font-bold text-white">Opentech-info CCNA Project Tracker</h1>
+                <p id="app-subtitle" class="text-md text-white/80 mt-2">Columns: Basic, Switching, Routing, WLAN & VoIP, Cisco ASA — mark tasks done and save.</p>
+            </div>
+            <!-- Navigation Arrows -->
+            <button id="prev-image-btn" class="header-nav-arrow left-4">&lt;</button>
+            <button id="next-image-btn" class="header-nav-arrow right-4">&gt;</button>
+        </header>
+
+        <!-- Controls Bar -->
+        <div class="mb-8 p-4 bg-gray-200/50 dark:bg-gray-800/50 rounded-lg flex flex-wrap items-center justify-center gap-4">
+            <input id="search-input" placeholder="Search tasks (Ctrl+F)" class="px-3 py-2 rounded-md border bg-gray-50 dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <div class="flex items-center gap-2">
+                <button id="export-json-btn" title="Export to JSON file" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                </button>
+                <button id="export-csv-btn" title="Export to CSV file" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
+                </button>
+                <button id="copy-json-btn" title="Copy data to clipboard" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+            </div>
+            <div class="flex items-center gap-2">
+                 <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button id="reset-btn" title="Reset all data" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                </button>
+                <button id="print-btn" title="Print view" class="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                </button>
+            </div>
+        </header>
+
+        <main id="main-content" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <!-- Columns will be rendered here by JavaScript -->
+        </main>
+
+        <!-- Advanced Footer -->
+        <footer id="page-footer" class="relative mt-16 py-16 text-white overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <img src="images/opentech.png" alt="Opentech Logo" class="h-16 w-16 rounded-md mx-auto mb-4">
+                <p class="max-w-2xl mx-auto mb-6 opacity-80">Autosaves locally. Use Export to backup. Tip: Ctrl+S to force save, Ctrl+F to focus search.</p>
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="https://github.com/opentech.info" target="_blank" class="footer-social-link"><svg viewBox="0 0 24 24" class="social-icon"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                    <a href="http://www.youtube.com/@Opentech-info" target="_blank" class="footer-social-link"><svg viewBox="0 0 24 24" class="social-icon"><path d="M21.582 7.64s-.18-1.273-.734-1.826c-.695-.69-1.47-.69-1.83-.734-2.56-.18-6.42-.18-6.42-.18s-3.86 0-6.42.18c-.36.043-1.135.043-1.83.734-.554.553-.734 1.826-.734 1.826S2 9.13 2 12s0 4.36.264 5.86c.057.317.18.98.734 1.826.695.69 1.65.65 2.094.752 1.56.146 6.156.18 6.156.18s3.86 0 6.42-.18c.36-.043 1.135-.043 1.83-.734.554-.553.734-1.826.734-1.826S22 14.87 22 12s0-4.36-.418-5.86zM9.75 15.5V8.5l6.5 3.5-6.5 3.5z"/></svg></a>
+                    <a href="https://tiktok.com/@opentechx" target="_blank" class="footer-social-link"><svg viewBox="0 0 24 24" class="social-icon"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.59 3.01 1.62 4.27 1.09 1.34 2.48 2.32 4.02 2.87.17 3.45-.54 6.93-2.32 9.8-1.6 2.59-3.9 4.33-6.68 5.15-1.21.36-2.45.5-3.7.53-.04-1.56-.52-3.05-1.5-4.3-1.07-1.33-2.44-2.3-3.95-2.85-.17-3.44.55-6.9 2.34-9.78 1.6-2.59 3.9-4.33 6.68-5.15 1.21-.36 2.45-.5 3.7-.53z"/></svg></a>
+                    <a href="https://instagram.com/opentechx" target="_blank" class="footer-social-link"><svg viewBox="0 0 24 24" class="social-icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.802c-3.143 0-3.499.012-4.71.068-2.857.129-4.004 1.277-4.134 4.134-.056 1.21-.067 1.566-.067 4.71s.011 3.499.067 4.71c.13 2.857 1.277 4.004 4.134 4.134 1.21.056 1.566.067 4.71.067s3.499-.011 4.71-.067c2.857-.13 4.004-1.277 4.134-4.134.056-1.21.067-1.566.067-4.71s-.011-3.499-.067-4.71c-.13-2.857-1.277-4.004-4.134-4.134-1.21-.056-1.566-.067-4.71-.067zm0 3.091c-2.711 0-4.909 2.198-4.909 4.909s2.198 4.909 4.909 4.909 4.909-2.198 4.909-4.909-2.198-4.909-4.909-4.909zm0 7.952c-1.682 0-3.043-1.361-3.043-3.043s1.361-3.043 3.043-3.043 3.043 1.361 3.043 3.043-1.361 3.043-3.043 3.043zm4.908-7.952c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg></a>
+                </div>
+                <p class="text-sm opacity-60">&copy; 2024 Opentech-info. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notes Edit Modal -->
+    <div id="notes-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4">
+        <div id="notes-modal" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md p-6">
+            <h3 class="text-lg font-semibold mb-4">Edit Notes</h3>
+            <textarea id="notes-modal-textarea" class="w-full h-40 p-2 border rounded-md bg-gray-50 dark:bg-gray-900 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            <div class="mt-4 flex justify-end gap-2">
+                <button id="notes-modal-cancel" class="px-4 py-2 rounded-md border dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">Cancel</button>
+                <button id="notes-modal-save" class="px-4 py-2 rounded-md border-transparent bg-blue-600 text-white hover:bg-blue-700 transition-colors">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Dynamic background for homepage header
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const prevBtn = document.getElementById('prev-image-btn');
+            const nextBtn = document.getElementById('next-image-btn');
+            if (!header || !prevBtn || !nextBtn) return;
+            
+            const images = [
+                'images/net1.avif', 'images/net22.jpg', 'images/net3.jpg',
+                'images/net4.avif', 'images/net5.avif', 'images/net6.avif',
+                'images/net13.jpg', 'images/net6.webp'
+            ];
+            let currentIndex = 0;
+            let intervalId;
+
+            const showImage = (index) => {
+                header.style.backgroundImage = `url('${images[index]}')`;
+            };
+
+            const nextImage = () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            };
+
+            const prevImage = () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            };
+
+            const startSlideshow = () => intervalId = setInterval(nextImage, 7000); // Change image every 7 seconds
+            const resetSlideshow = () => { clearInterval(intervalId); startSlideshow(); };
+
+            prevBtn.addEventListener('click', () => { prevImage(); resetSlideshow(); });
+            nextBtn.addEventListener('click', () => { nextImage(); resetSlideshow(); });
+
+            showImage(currentIndex); // Show first image immediately
+            startSlideshow();
+        });
+    </script>
+</body>
+</html>

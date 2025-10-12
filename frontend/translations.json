@@ -1,0 +1,30 @@
+{
+    "app_title": {
+        "en": "Opentech-info CCNA Project Tracker",
+        "sw": "Kifuatiliaji cha Mradi wa CCNA cha Opentech-info"
+    },
+    "app_subtitle": {
+        "en": "Columns: Basic, Switching, Routing, WLAN & VoIP, Cisco ASA — mark tasks done and save.",
+        "sw": "Safu: Mipangilio ya Msingi, Kubadilisha, Kuelekeza, WLAN & VoIP, Cisco ASA — weka alama kwenye kazi zilizokamilika na uhifadhi."
+    },
+    "search_placeholder": {
+        "en": "Search tasks (Ctrl+F)",
+        "sw": "Tafuta kazi (Ctrl+F)"
+    },
+    "add_new_task_placeholder": {
+        "en": "Add new task...",
+        "sw": "Ongeza kazi mpya..."
+    },
+    "add_button": {
+        "en": "Add",
+        "sw": "Ongeza"
+    },
+    "notes_button": {
+        "en": "Notes",
+        "sw": "Vidokezo"
+    },
+    "delete_button": {
+        "en": "Delete",
+        "sw": "Futa"
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Command Details</title>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Poppins', 'sans-serif'] } } }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        /* Simple syntax highlighting for commands */
+        pre { position: relative; /* Let highlight.js control the background */ }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+    <div id="command-container" class="max-w-7xl mx-auto">
+        <header class="mb-8 col-span-1 md:col-span-2 lg:col-span-3">
+            <a href="index.html" class="text-blue-500 hover:underline">&larr; Back to Tracker</a>
+            <h1 id="topic-title" class="text-3xl font-bold mt-2">Loading...</h1>
+            <p id="topic-description" class="text-lg opacity-80 mt-2"></p>
+            <div class="mt-6">
+                <input id="command-search-input" type="text" placeholder="Filter steps by keyword..." class="w-full max-w-sm px-4 py-2 rounded-md border bg-white dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+        </header>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <main id="command-list" class="space-y-6 lg:col-span-2">
+                <!-- Command steps will be rendered here by JavaScript -->
+                <div id="no-results" class="hidden text-center py-8 text-gray-500">No steps found matching your search.</div>
+            </main>
+            <aside id="related-topics-container" class="lg:col-span-1">
+                <div class="sticky top-8 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h3 class="font-semibold mb-3">Related Topics</h3>
+                    <ul id="related-topics-list" class="space-y-2">
+                        <!-- Related topics will be rendered here -->
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="command.js"></script>
+</body>
+</html>

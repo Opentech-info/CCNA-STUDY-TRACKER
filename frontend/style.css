@@ -1,0 +1,180 @@
+/* Basic body font for better cross-platform consistency */
+body {
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Styles for the Notes Modal */
+#notes-modal-overlay {
+    display: none; /* Hidden by default */
+    transition: opacity 0.2s ease-in-out;
+}
+
+#notes-modal-overlay.visible {
+    display: flex; /* Show when .visible class is added */
+}
+
+#notes-modal {
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+.social-link:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+.dark .social-link:hover { background-color: rgba(255,255,255,0.05); }
+.social-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+}
+
+/* Drag and Drop styles */
+.task-ghost {
+    background: rgba(0, 0, 0, 0.1);
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.task.dragging {
+    opacity: 0.5;
+    transform: rotate(3deg) scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    cursor: grabbing;
+}
+
+/* Command Page Copy Button - designed to work with highlight.js */
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.copy-btn:hover {
+    background-color: #4a5568;
+}
+.copy-btn.copied {
+    background-color: #2f855a; /* Green */
+    cursor: default;
+}
+
+/* Header Background Image */
+#main-header {
+    background-size: cover;
+    transition: background-image 1s ease-in-out;
+    position: relative; /* Ensure z-index works */
+    animation: kenburns 20s ease-in-out infinite alternate;
+}
+
+.header-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+#main-header:hover .header-nav-arrow {
+    opacity: 1;
+}
+
+/* Animation styles for adding/removing tasks */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes kenburns {
+    from {
+        background-position: 50% 50%;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Advanced Footer */
+#page-footer {
+    background-image: url('images/net1.avif');
+    background-size: cover;
+    animation: slow-pan 40s linear infinite alternate;
+}
+
+.footer-social-link {
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+.footer-social-link:hover {
+    transform: scale(1.1);
+}
+
+@keyframes slow-pan {
+    from { background-position: 0% 0%; }
+    to { background-position: 100% 100%; }
+}
+
+.task-fade-in {
+    animation: fadeInDown 0.3s ease-out forwards;
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+        transform: scaleY(1);
+        max-height: 100px; /* Approximate height */
+    }
+    to {
+        opacity: 0;
+        transform: scaleY(0);
+        max-height: 0;
+        padding: 0; margin: 0; border: 0;
+    }
+}
+
+.task-fade-out {
+    animation: fadeOutUp 0.3s ease-out forwards;
+}
+
+/* Print-specific styles */
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+        padding: 1rem;
+    }
+    header, footer, button, input, .no-print {
+        display: none !important;
+    }
+    main, section {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+}
