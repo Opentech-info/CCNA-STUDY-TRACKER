@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const noResultsEl = document.getElementById('no-results');
     const relatedTopicsContainer = document.getElementById('related-topics-container');
     const relatedTopicsList = document.getElementById('related-topics-list');
+    const progressBar = document.getElementById('progress-bar');
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    let commandElements = []; // To store command step elements for filtering
 
     const loadCommandDetails = async () => {
         // Get the topic ID from the URL (e.g., ?topic=s1)
@@ -36,22 +40,32 @@ document.addEventListener('DOMContentLoaded', () => {
             topicDescriptionEl.textContent = topicData.description;
 
             commandListEl.innerHTML = ''; // Clear loading state
+            commandElements = []; // Reset the array
+
             topicData.commands.forEach((cmd, index) => {
                 const commandEl = document.createElement('div');
-                commandEl.className = 'command-step bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md';
+                commandEl.className = 'command-step bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden';
                 commandEl.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
-                            <p class="mt-1 mb-3 text-sm opacity-80">${cmd.explanation}</p>
-                        </div>
+                    <div class="command-header flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
+                        <svg class="expand-arrow w-5 h-5 text-gray-500 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                     </div>
-                    <pre class="rounded-lg overflow-hidden">
-                        <button class="copy-btn" title="Copy to clipboard">Copy</button>
-                        <code class="language-cisco"><span class="hljs-meta">${cmd.prompt}</span> ${cmd.command}</code>
-                    </pre>
+                    <div class="command-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="mt-1 mb-3 text-sm opacity-80 px-4">${cmd.explanation}</p>
+                        <pre class="rounded-none overflow-hidden">
+                            <button class="copy-btn" title="Copy to clipboard">Copy</button>
+                            <code class="language-cisco hljs"><span class="hljs-meta">${cmd.prompt}</span> <span class="typewriter"></span></code>
+                        </pre>
+                    </div>
                 `;
                 commandListEl.appendChild(commandEl);
+                commandElements.push(commandEl);
+
+                // Accordion logic
+                const header = commandEl.querySelector('.command-header');
+                header.addEventListener('click', () => {
+                    toggleAccordion(commandEl, cmd.command);
+                });
 
                 // Add event listener for the copy button
                 const copyBtn = commandEl.querySelector('.copy-btn');
@@ -66,9 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
             });
-
-            // Apply syntax highlighting
-            hljs.highlightAll();
 
             // Populate Related Topics
             if (topicData.related && topicData.related.length > 0) {
@@ -96,15 +107,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const toggleAccordion = (element, commandText) => {
+        const details = element.querySelector('.command-details');
+        const arrow = element.querySelector('.expand-arrow');
+        const codeEl = element.querySelector('.typewriter');
+
+        if (details.style.maxHeight && details.style.maxHeight !== '0px') {
+            details.style.maxHeight = '0px';
+            arrow.classList.remove('rotate-180');
+        } else {
+            details.style.maxHeight = details.scrollHeight + 'px';
+            arrow.classList.add('rotate-180');
+            typewriterEffect(codeEl, commandText);
+            // Re-highlight after typewriter effect
+            setTimeout(() => hljs.highlightElement(element.querySelector('code')), commandText.length * 50 + 200);
+        }
+    };
+
+    const typewriterEffect = (element, text) => {
+        element.innerHTML = ''; // Clear previous text
+        let i = 0;
+        const speed = 40; // milliseconds
+        function type() {
+            if (i < text.length) {
+                // Handle newlines correctly
+                if (text.charAt(i) === '\n') {
+                    element.innerHTML += '<br>';
+                } else {
+                    element.innerHTML += text.charAt(i);
+                }
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    };
+
     loadCommandDetails();
 
     // Search/Filter functionality
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
-        const allSteps = document.querySelectorAll('.command-step');
         let visibleCount = 0;
 
-        allSteps.forEach(step => {
+        commandElements.forEach(step => {
             const stepText = step.textContent.toLowerCase();
             if (stepText.includes(searchTerm)) {
                 step.style.display = 'block';
@@ -120,4 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
             noResultsEl.style.display = 'none';
         }
     });
+
+    // Progress bar and Back to Top button on scroll
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        if (progressBar) {
+            progressBar.style.width = scrollPercent + '%';
+        }
+
+        if (backToTopBtn) {
+            if (scrollTop > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
