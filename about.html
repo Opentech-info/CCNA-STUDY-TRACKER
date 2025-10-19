@@ -20,7 +20,7 @@
 
     <div class="max-w-5xl mx-auto">
         <!-- Top Navigation Bar -->
-        <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-30">
+        <nav class="main-nav fixed top-0 left-0 right-0 shadow-md z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <a href="index.html" class="flex-shrink-0">
@@ -37,15 +37,6 @@
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                         </button>
                     </div>
-                </div>
-            </div>
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="md:hidden hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="index.html" class="mobile-nav-link">Home</a>
-                    <a href="about.html" class="mobile-nav-link">About Us</a>
-                    <a href="contact.html" class="mobile-nav-link">Contact</a>
-                    <a href="privacy.html" class="mobile-nav-link">Privacy Policy</a>
                 </div>
             </div>
         </nav>
@@ -91,6 +82,25 @@
         </div>
     </div>
 
+    <!-- Mobile Sidebar Menu -->
+    <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden md:hidden"></div>
+    <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden">
+        <div class="p-4 flex justify-between items-center border-b border-white/10">
+            <a href="index.html" class="flex-shrink-0">
+                <img class="h-8 w-8 rounded-sm" src="images/opentech.png" alt="Opentech Logo">
+            </a>
+            <button id="close-sidebar-btn" class="p-2 rounded-full hover:bg-white/10 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+        <nav class="p-4 space-y-2">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="privacy.html" class="sidebar-link">Privacy Policy</a>
+        </nav>
+    </div>
+
     <!-- Advanced Footer -->
     <footer id="contact-page-footer" class="relative mt-16 py-16 text-white overflow-hidden rounded-lg">
         <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
@@ -115,10 +125,22 @@
                 }
 
                 // Mobile Menu Toggle
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const mobileMenu = document.getElementById('mobile-menu');
-                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                const openBtn = document.getElementById('mobile-menu-button');
+                const closeBtn = document.getElementById('close-sidebar-btn');
+                const sidebar = document.getElementById('mobile-sidebar');
+                const overlay = document.getElementById('mobile-sidebar-overlay');
 
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                };
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                };
+                openBtn.addEventListener('click', openSidebar);
+                closeBtn.addEventListener('click', closeSidebar);
+                overlay.addEventListener('click', closeSidebar);
             } catch (e) {}
         });
     </script>

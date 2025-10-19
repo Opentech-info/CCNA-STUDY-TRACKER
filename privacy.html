@@ -20,7 +20,7 @@
 
     <div class="max-w-4xl mx-auto">
         <!-- Top Navigation Bar -->
-        <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md z-30">
+        <nav class="main-nav fixed top-0 left-0 right-0 shadow-md z-30">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <a href="index.html" class="flex-shrink-0">
@@ -37,15 +37,6 @@
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                         </button>
                     </div>
-                </div>
-            </div>
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="md:hidden hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="index.html" class="mobile-nav-link">Home</a>
-                    <a href="about.html" class="mobile-nav-link">About Us</a>
-                    <a href="contact.html" class="mobile-nav-link">Contact</a>
-                    <a href="privacy.html" class="mobile-nav-link">Privacy Policy</a>
                 </div>
             </div>
         </nav>
@@ -65,62 +56,122 @@
             </header>
 
             <div class="glass-card w-full overflow-hidden p-8 md:p-12 text-gray-200">
-                <div class="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-strong:text-white">
-                    
-                    <p class="lead">Last updated: [Date of last update]</p>
-
-                    <h2>1. Introduction</h2>
-                    <p>Welcome to the CCNA Study Tracker by Opentech-info ("we", "our", "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose information about you when you use our website (the "Service").</p>
-
-                    <h2>2. Information We Collect</h2>
-                    <p>We collect information in the following ways:</p>
-                    <ul>
-                        <li><strong>Data You Provide to Us:</strong> If you choose to subscribe to our newsletter or updates, we collect your email address.</li>
-                        <li><strong>Data Stored Locally on Your Device:</strong> The primary functionality of the CCNA Study Tracker, the Kanban board, saves its state (the position of tasks, notes, and completion status) directly in your web browser's <code>localStorage</code>. This data is stored only on your device and is not transmitted to our servers.</li>
-                        <li><strong>Server Log Data:</strong> Like most websites, our server automatically collects standard log information when you access our Service. This may include your IP address, browser type, operating system, referring URLs, and pages visited. This data is used for security, performance monitoring, and analytics.</li>
-                    </ul>
-
-                    <h2>3. How We Use Your Information</h2>
-                    <p>We use the information we collect for the following purposes:</p>
-                    <ul>
-                        <li><strong>To Provide and Maintain the Service:</strong> The data stored in <code>localStorage</code> is used solely to persist your Kanban board's state between sessions, so your progress is not lost.</li>
-                        <li><strong>To Communicate With You:</strong> If you subscribe, we use your email address to send you updates, newsletters, and other information related to our project. You can opt-out of these communications at any time.</li>
-                        <li><strong>To Improve and Secure Our Service:</strong> Server log data helps us diagnose technical problems, prevent fraud or abuse, and understand how users interact with our site so we can improve it.</li>
-                    </ul>
-
-                    <h2>4. Data Storage and Security</h2>
-                    <p><strong>Kanban Board Data:</strong> Your board progress is stored in your browser's <code>localStorage</code>. You have full control over this data and can clear it at any time through your browser's settings or by using the "Reset" button in the application. We do not have access to this data.</p>
-                    <p><strong>Subscriber Data:</strong> Email addresses for subscriptions are stored securely on our server. We implement a variety of security measures (such as those provided by <code>helmet.js</code>) to maintain the safety of your personal information.</p>
-                    <p><strong>Data Retention:</strong> We retain server logs for a limited period for security and analysis purposes. We retain subscriber emails for as long as you remain subscribed.</p>
-
-                    <h2>5. Third-Party Services</h2>
-                    <p>Our Service relies on a few third-party services to function. These services may collect data under their own privacy policies:</p>
-                    <ul>
-                        <li><strong>Google Fonts:</strong> To provide the custom fonts used on our site.</li>
-                        <li><strong>Tailwind CSS (via CDN):</strong> To provide the styling for our user interface.</li>
-                        <li><strong>Highlight.js (via CDN):</strong> For syntax highlighting of command examples.</li>
-                    </ul>
-                    <p>We encourage you to review the privacy policies of these services to understand how they handle your data.</p>
-
-                    <h2>6. Your Rights and Choices</h2>
-                    <ul>
-                        <li><strong>Access and Deletion of Local Data:</strong> You can access, export (as JSON/CSV), and delete your Kanban board data at any time using the controls provided in the application.</li>
-                        <li><strong>Unsubscribing:</strong> You can unsubscribe from our mailing list at any time by clicking the "unsubscribe" link in any email you receive from us.</li>
-                        <li><strong>Cookies and Local Storage:</strong> You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. You can also clear <code>localStorage</code> through your browser's privacy settings.</li>
-                    </ul>
-
-                    <h2>7. Children's Privacy</h2>
-                    <p>Our Service is not intended for use by children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
-
-                    <h2>8. Changes to This Privacy Policy</h2>
-                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
-
-                    <h2>9. Contact Us</h2>
-                    <p>If you have any questions about this Privacy Policy, please <a href="contact.html">contact us</a>.</p>
+                <p class="text-center text-gray-400 mb-8">Last updated: October 4, 2024</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Introduction Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">1. Introduction</h2>
+                        <p class="text-gray-300">Welcome to the CCNA Study Tracker by Opentech-info. We are committed to protecting your privacy. This policy explains how we collect, use, and disclose information when you use our website (the "Service").</p>
+                    </div>
+                    <!-- Information We Collect Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">2. Information We Collect</h2>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li><strong>Subscription Data:</strong> Your email address if you subscribe.</li>
+                            <li><strong>Local Data:</strong> Your Kanban board progress is saved in your browser's <code>localStorage</code>. We do not see this data.</li>
+                            <li><strong>Log Data:</strong> Standard server logs (IP address, browser type) for security and analytics.</li>
+                        </ul>
+                    </div>
+                    <!-- How We Use Information Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">3. How We Use Your Information</h2>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li><strong>To Provide the Service:</strong> Local data persists your board state.</li>
+                            <li><strong>To Communicate:</strong> Your email is used for newsletters and updates.</li>
+                            <li><strong>To Improve:</strong> Log data helps us diagnose issues and enhance the service.</li>
+                        </ul>
+                    </div>
+                    <!-- Data Storage & Security Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">4. Data Storage & Security</h2>
+                        <p class="text-gray-300">Your board data is only on your device. Subscriber emails are stored securely on our server. We use security measures like <code>helmet.js</code> to protect server-side data.</p>
+                    </div>
+                    <!-- Third-Party Services Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">5. Third-Party Services</h2>
+                        <p class="text-gray-300">We use Google Fonts, Tailwind CSS (CDN), and Highlight.js (CDN) to provide a better user experience. These services operate under their own privacy policies.</p>
+                    </div>
+                    <!-- Your Rights Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">6. Your Rights & Choices</h2>
+                        <p class="text-gray-300">You can export or reset your local data at any time. You can unsubscribe from emails via the link in the email. You can clear <code>localStorage</code> in your browser settings.</p>
+                    </div>
+                    <!-- Children's Privacy Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">7. Children's Privacy</h2>
+                        <p class="text-gray-300">Our Service is not intended for children under 13. We do not knowingly collect data from children.</p>
+                    </div>
+                    <!-- Changes to Policy Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold text-white mb-3">8. Changes to This Policy</h2>
+                        <p class="text-gray-300">We may update this policy. We will notify you of changes by posting the new policy on this page and updating the "Last updated" date.</p>
+                    </div>
+                    <!-- Contact Us Card -->
+                    <div class="policy-card glass-card p-6 rounded-lg md:col-span-2">
+                        <h2 class="text-xl font-semibold text-white mb-3">9. Contact Us</h2>
+                        <p class="text-gray-300">If you have any questions about this Privacy Policy, please <a href="contact.html" class="text-blue-400 hover:underline">contact us</a>.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Technology Marquee -->
+    <div class="py-12 my-16">
+        <div class="marquee">
+            <div class="marquee-track flex gap-16 items-center">
+                <!-- Icons are duplicated for a seamless loop -->
+                <svg class="h-12 w-12 marquee-icon icon-cisco" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Cisco</title><path fill="currentColor" d="M12 24a12 12 0 1 0 0-24 12 12 0 0 0 0 24zM4.2 12a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v4.2a.6.6 0 0 1-.6.6H4.8a.6.6 0 0 1-.6-.6zm4.2 3a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm4.2 7.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm4.2 8.4a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-js" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>JavaScript</title><path fill="currentColor" d="M0 0h24v24H0V0zm22.034 18.276c-.185.52-.58.924-1.144 1.143-.56.22-1.24.33-2.04.33-1.42 0-2.62-.45-3.5-1.22-.92-.8-1.38-1.84-1.38-3.13 0-.6.12-1.16.37-1.68.25-.52.6-1.04 1.04-1.43.48-.43.96-.76 1.5-.98.56-.22 1.13-.33 1.7-.33.86 0 1.5.15 2.03.45.5.3.86.73 1.04 1.2.18.5.27.98.27 1.53 0 .28-.02.53-.06.77-.04.22-.1.4-.18.52h-5.4c.08.84.4 1.5.98 1.94.58.43 1.28.65 2.1.65.58 0 1.1-.08 1.54-.24.4-.16.7-.42.88-.75.18-.3.27-.6.27-.9v-1.1H22c.04.3.06.6.06.92 0 .6-.13 1.18-.38 1.72zM18.1 13.53c-.1-.3-.3-.54-.58-.7-.28-.16-.6-.24-.96-.24-.52 0-.95.1-1.3.3-.34.2-.6.48-.78.8-.18.33-.27.7-.27 1.1h3.9c0-.2-.02-.4-.06-.56zM10.2 11.4V24h-2.4V11.4h2.4zM9 9c0-.66.24-1.23.72-1.71C10.2 6.81 10.77 6.57 11.4 6.57c.66 0 1.23.24 1.71.72.48.48.72 1.05.72 1.71 0 .66-.24 1.23-.72 1.71-.48.48-1.05.72-1.71.72-.66 0-1.23-.24-1.71-.72C9.24 10.23 9 9.66 9 9z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-html" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622-13.23.002.626 7.022h8.982l-.34 3.838-2.637.73-2.637-.73-.17-1.928H5.99l.325 3.426 5.662 1.564 5.66-1.564.698-7.81-8.984.001z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-tailwind" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tailwind CSS</title><path fill="currentColor" d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.334 6.182 14.973 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.334 13.382 14.973 12 12.001 12c-1.725 0-3.031.57-4.2 1.2z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-node" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Node.js</title><path fill="currentColor" d="M11.36 23.087c-2.08 0-3.45-.5-4.44-1.48-1-1-1.5-2.37-1.5-4.12s.5-3.12 1.5-4.12c1-.98 2.36-1.48 4.44-1.48h.28v2.24h-.28c-1.2 0-2.02.3-2.64.9-.6.6-.9 1.4-.9 2.48s.3 1.88.9 2.48c.62.6 1.44.9 2.64.9h.28v2.24h-.28zM21.12 9.727v11.52h-2.28V9.727h2.28zM12.12 0c-2.32 1.32-5.05 2.05-7.84 2.05-1.2 0-2.3-.13-3.3-.38L0 3.247c1.28.32 2.6.48 3.96.48 2.6 0 5.12-.63 7.28-1.93L12.12 0z"/></svg>
+                <svg class="h-12 w-12 marquee-icon icon-github" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                <!-- Duplicate set -->
+                <svg class="h-12 w-12 marquee-icon icon-cisco" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Cisco</title><path fill="currentColor" d="M12 24a12 12 0 1 0 0-24 12 12 0 0 0 0 24zM4.2 12a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v4.2a.6.6 0 0 1-.6.6H4.8a.6.6 0 0 1-.6-.6zm4.2 3a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6H9a.6.6 0 0 1-.6-.6zm4.2 7.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm0-4.2a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6zm4.2 8.4a.6.6 0 0 1 .6-.6h1.2a.6.6 0 0 1 .6.6v1.2a.6.6 0 0 1-.6.6h-1.2a.6.6 0 0 1-.6-.6z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-js" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>JavaScript</title><path fill="currentColor" d="M0 0h24v24H0V0zm22.034 18.276c-.185.52-.58.924-1.144 1.143-.56.22-1.24.33-2.04.33-1.42 0-2.62-.45-3.5-1.22-.92-.8-1.38-1.84-1.38-3.13 0-.6.12-1.16.37-1.68.25-.52.6-1.04 1.04-1.43.48-.43.96-.76 1.5-.98.56-.22 1.13-.33 1.7-.33.86 0 1.5.15 2.03.45.5.3.86.73 1.04 1.2.18.5.27.98.27 1.53 0 .28-.02.53-.06.77-.04.22-.1.4-.18.52h-5.4c.08.84.4 1.5.98 1.94.58.43 1.28.65 2.1.65.58 0 1.1-.08 1.54-.24.4-.16.7-.42.88-.75.18-.3.27-.6.27-.9v-1.1H22c.04.3.06.6.06.92 0 .6-.13 1.18-.38 1.72zM18.1 13.53c-.1-.3-.3-.54-.58-.7-.28-.16-.6-.24-.96-.24-.52 0-.95.1-1.3.3-.34.2-.6.48-.78.8-.18.33-.27.7-.27 1.1h3.9c0-.2-.02-.4-.06-.56zM10.2 11.4V24h-2.4V11.4h2.4zM9 9c0-.66.24-1.23.72-1.71C10.2 6.81 10.77 6.57 11.4 6.57c.66 0 1.23.24 1.71.72.48.48.72 1.05.72 1.71 0 .66-.24 1.23-.72 1.71-.48.48-1.05.72-1.71.72-.66 0-1.23-.24-1.71-.72C9.24 10.23 9 9.66 9 9z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-html" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622-13.23.002.626 7.022h8.982l-.34 3.838-2.637.73-2.637-.73-.17-1.928H5.99l.325 3.426 5.662 1.564 5.66-1.564.698-7.81-8.984.001z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-tailwind" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tailwind CSS</title><path fill="currentColor" d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.334 6.182 14.973 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.334 13.382 14.973 12 12.001 12c-1.725 0-3.031.57-4.2 1.2z"/></svg>
+                <svg class="h-10 w-10 marquee-icon icon-node" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Node.js</title><path fill="currentColor" d="M11.36 23.087c-2.08 0-3.45-.5-4.44-1.48-1-1-1.5-2.37-1.5-4.12s.5-3.12 1.5-4.12c1-.98 2.36-1.48 4.44-1.48h.28v2.24h-.28c-1.2 0-2.02.3-2.64.9-.6.6-.9 1.4-.9 2.48s.3 1.88.9 2.48c.62.6 1.44.9 2.64.9h.28v2.24h-.28zM21.12 9.727v11.52h-2.28V9.727h2.28zM12.12 0c-2.32 1.32-5.05 2.05-7.84 2.05-1.2 0-2.3-.13-3.3-.38L0 3.247c1.28.32 2.6.48 3.96.48 2.6 0 5.12-.63 7.28-1.93L12.12 0z"/></svg>
+                <svg class="h-12 w-12 marquee-icon icon-github" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden md:hidden"></div>
+    <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden">
+        <div class="p-4 flex justify-between items-center border-b border-white/10">
+            <a href="index.html" class="flex-shrink-0">
+                <img class="h-8 w-8 rounded-sm" src="images/opentech.png" alt="Opentech Logo">
+            </a>
+            <button id="close-sidebar-btn" class="p-2 rounded-full hover:bg-white/10 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+        <nav class="p-4 space-y-2">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="privacy.html" class="sidebar-link">Privacy Policy</a>
+        </nav>
+    </div>
+
+    <!-- Advanced Footer -->
+    <footer id="contact-page-footer" class="relative mt-16 py-16 text-white overflow-hidden rounded-lg">
+        <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img src="images/opentech.png" alt="Opentech Logo" class="h-16 w-16 rounded-md mx-auto mb-4">
+            <p class="max-w-2xl mx-auto mb-6 opacity-80">Your privacy is important to us. We are committed to transparency and protecting your data.</p>
+            <div class="flex justify-center gap-x-6 gap-y-2 flex-wrap mb-8">
+                <a href="index.html" class="text-sm text-gray-300 hover:text-white">Home</a>
+                <a href="about.html" class="text-sm text-gray-300 hover:text-white">About Us</a>
+                <a href="contact.html" class="text-sm text-gray-300 hover:text-white">Contact</a>
+                <a href="privacy.html" class="text-sm text-gray-300 hover:text-white">Privacy Policy</a>
+            </div>
+            <p class="text-sm opacity-60">&copy; 2024 Opentech-info. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -130,11 +181,48 @@
                 }
 
                 // Mobile Menu Toggle
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const mobileMenu = document.getElementById('mobile-menu');
-                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                const openBtn = document.getElementById('mobile-menu-button');
+                const closeBtn = document.getElementById('close-sidebar-btn');
+                const sidebar = document.getElementById('mobile-sidebar');
+                const overlay = document.getElementById('mobile-sidebar-overlay');
 
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                };
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                };
+                openBtn.addEventListener('click', openSidebar);
+                closeBtn.addEventListener('click', closeSidebar);
+                overlay.addEventListener('click', closeSidebar);
             } catch (e) {}
+
+            // 3D Card Hover Effect
+            const cards = document.querySelectorAll('.policy-card');
+            cards.forEach(card => {
+                const glow = card.querySelector('::before');
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const rotateX = (y / rect.height - 0.5) * -15; // -7.5 to 7.5 deg
+                    const rotateY = (x / rect.width - 0.5) * 15; // -7.5 to 7.5 deg
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    
+                    // Move the glow effect
+                    card.style.setProperty('--glow-x', `${x}px`);
+                    card.style.setProperty('--glow-y', `${y}px`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
         });
     </script>
 </body>

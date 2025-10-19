@@ -46,13 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             topicData.commands.forEach((cmd, index) => {
                 const commandEl = document.createElement('div');
-                commandEl.className = 'command-step bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-transparent hover:border-blue-500/50 transition-colors duration-300';
+                commandEl.className = 'command-step glass-card rounded-lg overflow-hidden';
                 commandEl.innerHTML = `
-                    <div class="command-header flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
+                    <div class="command-header flex justify-between items-center p-4 cursor-pointer hover:bg-white/10 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
                         <svg class="expand-arrow w-5 h-5 text-gray-500 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                     </div>
-                    <div class="command-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-50/50 dark:bg-black/20">
+                    <div class="command-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-black/20">
                         <p class="mt-1 mb-3 text-sm opacity-80 px-4">${cmd.explanation}</p>
                         <pre class="rounded-none overflow-hidden">
                             <button class="copy-btn" title="Copy to clipboard">Copy</button>

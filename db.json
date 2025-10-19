@@ -134,54 +134,476 @@
             { "step": "Enable Login Failure Logging", "prompt": "Router(config)#", "command": "login on-failure log", "explanation": "Logs failed login attempts." }
         ]
     },
-    "s1": { "title": "VLANs", "description": "Segmenting a physical network into multiple logical networks.", "related": ["s2", "s3", "r4"], "commands": [] },
-    "s2": { "title": "VLAN Trunking Protocol (VTP)", "description": "A Cisco proprietary protocol to distribute VLAN information.", "related": ["s1", "s3"], "commands": [] },
-    "s3": { "title": "Trunk - Allowed/Denied VLANs", "description": "Controlling which VLANs are allowed to traverse a trunk link.", "related": ["s1", "s2"], "commands": [] },
-    "s4": { "title": "Configure Native VLAN", "description": "Setting the untagged VLAN on a trunk port.", "related": ["s1", "s3"], "commands": [] },
-    "s5": { "title": "Remote Access - Telnet", "description": "Configuring insecure remote access.", "related": ["b6", "b14"], "commands": [] },
-    "s6": { "title": "Remote Access - SSH", "description": "Configuring secure remote access.", "related": ["b10", "b11"], "commands": [] },
-    "s7": { "title": "L2 EtherChannel - PAGP/LACP", "description": "Bundling multiple physical links into a single logical link using dynamic protocols.", "related": ["s8"], "commands": [] },
-    "s8": { "title": "L2 EtherChannel - ON Mode", "description": "Statically bundling multiple physical links into a single logical link.", "related": ["s7"], "commands": [] },
-    "s9": { "title": "Secure All Unused Switchports", "description": "Best practices for securing switchports that are not in use.", "related": [], "commands": [] },
-    "s10": { "title": "STP Attack Prevention", "description": "Mitigating Spanning Tree Protocol manipulation attacks.", "related": [], "commands": [] },
-    "s11": { "title": "Disable CDP on the Devices", "description": "Disabling Cisco Discovery Protocol to reduce information leakage.", "related": [], "commands": [] },
-    "s12": { "title": "VLAN Hopping Attack Prevention", "description": "Techniques to prevent an attacker from hopping between VLANs.", "related": ["s1", "s4"], "commands": [] },
-    "s13": { "title": "DHCP Snooping", "description": "A security feature that filters untrusted DHCP messages.", "related": ["s14", "s15"], "commands": [] },
-    "s14": { "title": "Dynamic ARP Inspection", "description": "Validates ARP packets in a network.", "related": ["s13"], "commands": [] },
-    "s15": { "title": "IP Source Guard", "description": "Prevents IP spoofing attacks.", "related": ["s13"], "commands": [] },
-    "r1": { "title": "Multilayer Switch + L3 EtherChannel", "description": "Configuring routed ports and Layer 3 EtherChannel on a multilayer switch.", "related": ["s7"], "commands": [] },
-    "r2": { "title": "Connecting Multiple Networks", "description": "Basic routing between two or more distinct networks.", "related": ["r9"], "commands": [] },
-    "r3": { "title": "Remote Access - Telnet & SSH", "description": "Configuring remote access on a router.", "related": ["s5", "s6"], "commands": [] },
-    "r4": { "title": "Inter-VLAN Routing - Router & L3 Switch", "description": "Enabling communication between different VLANs.", "related": ["s1"], "commands": [] },
-    "r5": { "title": "DHCP Server - Router & L3 Switch", "description": "Configuring a Cisco device to act as a DHCP server.", "related": ["r8"], "commands": [] },
-    "r6": { "title": "Inter-VLAN + DHCP - Router & L3 Switch", "description": "Combining Inter-VLAN routing with DHCP services.", "related": ["r4", "r5"], "commands": [] },
-    "r7": { "title": "DHCP, DNS, Web, Email, FTP Servers", "description": "Integrating various network services in a topology.", "related": [], "commands": [] },
-    "r8": { "title": "DHCP Relay Agent - Router & L3 Switch", "description": "Forwarding DHCP requests to a server in a different broadcast domain.", "related": ["r5"], "commands": [] },
-    "r9": { "title": "Static, Floating & Default Routing", "description": "Manually configuring routes in a network.", "related": ["r10"], "commands": [] },
-    "r10": { "title": "RIP, EIGRP, OSPF & BGP Routing", "description": "Configuring various dynamic routing protocols.", "related": ["r9"], "commands": [] },
-    "r11": { "title": "ACLs - Standard & Extended", "description": "Filtering traffic using Access Control Lists.", "related": ["r12"], "commands": [] },
-    "r12": { "title": "ACLs for VTY - Remote Access", "description": "Applying ACLs to VTY lines to restrict remote access.", "related": ["r11", "b6"], "commands": [] },
-    "r13": { "title": "NAT - Static, Dynamic & PAT", "description": "Translating private IP addresses to public IP addresses.", "related": [], "commands": [] },
-    "r14": { "title": "Normal HSRP, HSRP with VLANs", "description": "Providing first-hop redundancy for IP hosts.", "related": [], "commands": [] },
-    "r15": { "title": "IPv6 Configs + SLAAC", "description": "Basic IPv6 addressing and Stateless Address Autoconfiguration.", "related": ["r16"], "commands": [] },
-    "r16": { "title": "Static Routing for IPv6", "description": "Manually configuring IPv6 routes.", "related": ["r15", "r17"], "commands": [] },
-    "r17": { "title": "RIPng for IPv6 Routing", "description": "Configuring RIP Next Generation for IPv6.", "related": ["r16", "r18"], "commands": [] },
-    "r18": { "title": "EIGRP for IPv6 Routing", "description": "Configuring EIGRP for IPv6.", "related": ["r17", "r19"], "commands": [] },
-    "r19": { "title": "OSPF for IPv6 Routing", "description": "Configuring OSPFv3 for IPv6.", "related": ["r18"], "commands": [] },
-    "r20": { "title": "WAN PPP - CHAP", "description": "Configuring Point-to-Point Protocol with CHAP authentication on WAN links.", "related": [], "commands": [] },
-    "w1": { "title": "Wireless APs Configs", "description": "Basic configuration of standalone wireless access points.", "related": ["w2"], "commands": [] },
-    "w2": { "title": "Wireless LAN Controller (WLC)", "description": "Centralized management of multiple access points.", "related": ["w1"], "commands": [] },
-    "w3": { "title": "VoIP Device Selection", "description": "Understanding and selecting devices for a Voice over IP network.", "related": ["w4"], "commands": [] },
-    "w4": { "title": "VoIP DHCP Configs", "description": "Configuring DHCP to support VoIP phones, including option 150.", "related": ["w3", "w5"], "commands": [] },
-    "w5": { "title": "VoIP Phones Configs", "description": "Configuring Cisco IP Phones and call manager express (CME).", "related": ["w4", "w6"], "commands": [] },
-    "w6": { "title": "VoIP - Data & Voice VLANs", "description": "Separating voice and data traffic using VLANs.", "related": ["w5"], "commands": [] },
-    "w7": { "title": "Routing for VoIP - Dial-Peering", "description": "Configuring dial peers for voice routing.", "related": ["w5"], "commands": [] },
-    "a1": { "title": "Basic Firewall Configs", "description": "Initial setup of a Cisco ASA firewall.", "related": ["a2"], "commands": [] },
-    "a2": { "title": "Interface Security Levels", "description": "Understanding and configuring security levels on ASA interfaces.", "related": ["a1", "a3"], "commands": [] },
-    "a3": { "title": "Firewall Policies", "description": "Creating and applying security policies on the ASA.", "related": ["a2", "a5"], "commands": [] },
-    "a4": { "title": "Firewall NAT Configs", "description": "Configuring Network Address Translation on the ASA.", "related": ["a6"], "commands": [] },
-    "a5": { "title": "Firewall ACLs", "description": "Using Access Control Lists to filter traffic on the ASA.", "related": ["a3"], "commands": [] },
-    "a6": { "title": "NAT + Network Objects", "description": "Using network objects to simplify NAT and ACL configurations.", "related": ["a4"], "commands": [] },
-    "a7": { "title": "Inspection Policies", "description": "Configuring stateful inspection using the Modular Policy Framework (MPF).", "related": ["a3"], "commands": [] },
-    "a8": { "title": "IPv6", "description": "Basic IPv6 configuration on a Cisco ASA.", "related": [], "commands": [] }
+    "s1": {
+        "title": "VLANs",
+        "description": "Segmenting a physical network into multiple logical networks.",
+        "related": ["s2", "s3", "r4"],
+        "commands": [
+            { "step": "Create a VLAN", "prompt": "Switch(config)#", "command": "vlan 10", "explanation": "Creates VLAN 10 and enters VLAN configuration mode." },
+            { "step": "Name the VLAN", "prompt": "Switch(config-vlan)#", "command": "name SALES", "explanation": "Assigns a descriptive name to the VLAN." },
+            { "step": "Assign a port to a VLAN", "prompt": "Switch(config)#", "command": "interface fa0/5", "explanation": "Enters interface configuration mode for FastEthernet 0/5." },
+            { "step": "Set port to access mode", "prompt": "Switch(config-if)#", "command": "switchport mode access", "explanation": "Configures the port to carry traffic for a single VLAN." },
+            { "step": "Assign the port to the VLAN", "prompt": "Switch(config-if)#", "command": "switchport access vlan 10", "explanation": "Assigns the access port to VLAN 10." }
+        ]
+    },
+    "s2": {
+        "title": "VLAN Trunking Protocol (VTP)",
+        "description": "A Cisco proprietary protocol to distribute VLAN information.",
+        "related": ["s1", "s3"],
+        "commands": [
+            { "step": "Set VTP Domain", "prompt": "Switch(config)#", "command": "vtp domain MYLAB", "explanation": "Sets the VTP domain name. Must be the same on all switches." },
+            { "step": "Set VTP Mode to Server", "prompt": "Switch(config)#", "command": "vtp mode server", "explanation": "Allows this switch to create, modify, and delete VLANs for the domain." },
+            { "step": "Set VTP Mode to Client", "prompt": "Switch(config)#", "command": "vtp mode client", "explanation": "This switch will learn VLANs from the VTP server but cannot make changes." },
+            { "step": "Verify VTP Status", "prompt": "Switch#", "command": "show vtp status", "explanation": "Displays the VTP configuration and status." }
+        ]
+    },
+    "s3": {
+        "title": "Trunk - Allowed/Denied VLANs",
+        "description": "Controlling which VLANs are allowed to traverse a trunk link.",
+        "related": ["s1", "s2"],
+        "commands": [
+            { "step": "Configure Interface as Trunk", "prompt": "Switch(config-if)#", "command": "switchport mode trunk", "explanation": "Sets the interface to trunking mode to carry multiple VLANs." },
+            { "step": "Set Allowed VLANs", "prompt": "Switch(config-if)#", "command": "switchport trunk allowed vlan 10,20,30", "explanation": "Only allows VLANs 10, 20, and 30 to cross this trunk." },
+            { "step": "Add a VLAN to the allowed list", "prompt": "Switch(config-if)#", "command": "switchport trunk allowed vlan add 40", "explanation": "Adds VLAN 40 to the existing list of allowed VLANs." },
+            { "step": "Verify Trunking", "prompt": "Switch#", "command": "show interfaces trunk", "explanation": "Displays information about all trunk ports." }
+        ]
+    },
+    "s4": {
+        "title": "Configure Native VLAN",
+        "description": "Setting the untagged VLAN on a trunk port.",
+        "related": ["s1", "s3"],
+        "commands": [
+            { "step": "Enter Interface Config", "prompt": "Switch(config)#", "command": "interface g0/1", "explanation": "Select the trunk interface." },
+            { "step": "Set the Native VLAN", "prompt": "Switch(config-if)#", "command": "switchport trunk native vlan 999", "explanation": "Changes the native (untagged) VLAN to 999. Must match on both ends of the trunk." }
+        ]
+    },
+    "s5": {
+        "title": "Remote Access - Telnet",
+        "description": "Configuring insecure remote access. SSH is strongly recommended instead.",
+        "related": ["b6", "b14"],
+        "commands": [
+            { "step": "Enter VTY Line Config", "prompt": "Router(config)#", "command": "line vty 0 4", "explanation": "Configure virtual terminal lines for remote access." },
+            { "step": "Set Telnet Password", "prompt": "Router(config-line)#", "command": "password telnetpass", "explanation": "Sets the password for Telnet access." },
+            { "step": "Enable Login Check", "prompt": "Router(config-line)#", "command": "login", "explanation": "Enforces the password check on connection." }
+        ]
+    },
+    "s6": {
+        "title": "Remote Access - SSH",
+        "description": "Configuring secure remote access.",
+        "related": ["b10", "b11"],
+        "commands": [
+            { "step": "Set Hostname and Domain", "prompt": "Router(config)#", "command": "hostname R1\nip domain-name mylab.local", "explanation": "A hostname and domain name are required to generate RSA keys." },
+            { "step": "Generate RSA Keys", "prompt": "Router(config)#", "command": "crypto key generate rsa", "explanation": "Generates the keys needed for SSH. Choose a key size of 1024 or higher." },
+            { "step": "Create a Local User", "prompt": "Router(config)#", "command": "username admin secret MyPass123", "explanation": "Creates a local user for authentication." },
+            { "step": "Configure VTY for SSH", "prompt": "Router(config-line)#", "command": "line vty 0 4\nlogin local\ntransport input ssh", "explanation": "Tells VTY lines to use the local user database for login and to only accept SSH connections." }
+        ]
+    },
+    "s7": {
+        "title": "L2 EtherChannel - PAGP/LACP",
+        "description": "Bundling multiple physical links into a single logical link using dynamic protocols.",
+        "related": ["s8"],
+        "commands": [
+            { "step": "Select Interface Range", "prompt": "Switch(config)#", "command": "interface range g0/1-2", "explanation": "Select the physical interfaces to bundle." },
+            { "step": "Configure LACP", "prompt": "Switch(config-if-range)#", "command": "channel-group 1 mode active", "explanation": "'active' unconditionally enables LACP. 'passive' waits to hear from an active partner." },
+            { "step": "Configure PAgP", "prompt": "Switch(config-if-range)#", "command": "channel-group 1 mode desirable", "explanation": "'desirable' unconditionally enables PAgP. 'auto' waits to hear from a desirable partner." }
+        ]
+    },
+    "s8": {
+        "title": "L2 EtherChannel - ON Mode",
+        "description": "Statically bundling multiple physical links into a single logical link.",
+        "related": ["s7"],
+        "commands": [
+            { "step": "Select Interface Range", "prompt": "Switch(config)#", "command": "interface range g0/1-2", "explanation": "Select the physical interfaces to bundle." },
+            { "step": "Force Channel ON", "prompt": "Switch(config-if-range)#", "command": "channel-group 1 mode on", "explanation": "Statically enables the EtherChannel without negotiation. Both sides must be set to 'on'." }
+        ]
+    },
+    "s9": {
+        "title": "Secure All Unused Switchports",
+        "description": "Best practices for securing switchports that are not in use.",
+        "related": [],
+        "commands": [
+            { "step": "Select Unused Ports", "prompt": "Switch(config)#", "command": "interface range fa0/10-24", "explanation": "Select all ports that are not currently in use." },
+            { "step": "Shutdown the Ports", "prompt": "Switch(config-if-range)#", "command": "shutdown", "explanation": "Disables the ports, preventing any device from connecting." },
+            { "step": "Assign to a Blackhole VLAN", "prompt": "Switch(config-if-range)#", "command": "switchport access vlan 999", "explanation": "Moves the ports to an unused, isolated VLAN as an extra security measure." }
+        ]
+    },
+    "s10": {
+        "title": "STP Attack Prevention",
+        "description": "Mitigating Spanning Tree Protocol manipulation attacks.",
+        "related": [],
+        "commands": [
+            { "step": "Enable BPDU Guard on Access Ports", "prompt": "Switch(config-if)#", "command": "spanning-tree bpduguard enable", "explanation": "On an access port, this command will err-disable the port if it receives a BPDU, preventing rogue switches." },
+            { "step": "Enable Root Guard on Uplinks", "prompt": "Switch(config-if)#", "command": "spanning-tree guard root", "explanation": "On a port that should never be the root port, this prevents it from becoming the root bridge for the network." }
+        ]
+    },
+    "s11": {
+        "title": "Disable CDP on the Devices",
+        "description": "Disabling Cisco Discovery Protocol to reduce information leakage.",
+        "related": [],
+        "commands": [
+            { "step": "Disable CDP Globally", "prompt": "Router(config)#", "command": "no cdp run", "explanation": "Disables CDP on the entire device." },
+            { "step": "Disable CDP on an Interface", "prompt": "Router(config-if)#", "command": "no cdp enable", "explanation": "Disables CDP on a specific interface, useful for public-facing ports." }
+        ]
+    },
+    "s12": {
+        "title": "VLAN Hopping Attack Prevention",
+        "description": "Techniques to prevent an attacker from hopping between VLANs.",
+        "related": ["s1", "s4"],
+        "commands": [
+            { "step": "Set Native VLAN to Unused VLAN", "prompt": "Switch(config-if)#", "command": "switchport trunk native vlan 999", "explanation": "Change the native VLAN on all trunks to an unused VLAN that is not used for any access port." },
+            { "step": "Prune Unused VLANs from Trunks", "prompt": "Switch(config-if)#", "command": "switchport trunk allowed vlan 10,20,30", "explanation": "Explicitly define which VLANs are allowed on a trunk, instead of allowing all." }
+        ]
+    },
+    "s13": {
+        "title": "DHCP Snooping",
+        "description": "A security feature that filters untrusted DHCP messages.",
+        "related": ["s14", "s15"],
+        "commands": [
+            { "step": "Enable DHCP Snooping Globally", "prompt": "Switch(config)#", "command": "ip dhcp snooping", "explanation": "Turns on the feature." },
+            { "step": "Enable on Specific VLANs", "prompt": "Switch(config)#", "command": "ip dhcp snooping vlan 10,20", "explanation": "Applies snooping to the specified VLANs." },
+            { "step": "Trust the Uplink Port", "prompt": "Switch(config-if)#", "command": "ip dhcp snooping trust", "explanation": "On the interface connected to the real DHCP server, mark it as trusted." }
+        ]
+    },
+    "s14": {
+        "title": "Dynamic ARP Inspection",
+        "description": "Validates ARP packets in a network.",
+        "related": ["s13"],
+        "commands": [
+            { "step": "Enable DAI on VLANs", "prompt": "Switch(config)#", "command": "ip arp inspection vlan 10,20", "explanation": "Enables DAI for the specified VLANs. Requires DHCP Snooping." },
+            { "step": "Trust the Uplink Port", "prompt": "Switch(config-if)#", "command": "ip arp inspection trust", "explanation": "On the interface connected to other switches/routers, mark it as trusted." }
+        ]
+    },
+    "s15": {
+        "title": "IP Source Guard",
+        "description": "Prevents IP spoofing attacks.",
+        "related": ["s13"],
+        "commands": [
+            { "step": "Enable on an Access Port", "prompt": "Switch(config-if)#", "command": "ip verify source", "explanation": "On an access port, this filters traffic to only allow IPs learned via DHCP snooping." }
+        ]
+    },
+    "r1": {
+        "title": "Multilayer Switch + L3 EtherChannel",
+        "description": "Configuring routed ports and Layer 3 EtherChannel on a multilayer switch.",
+        "related": ["s7"],
+        "commands": [
+            { "step": "Enable IP Routing", "prompt": "Switch(config)#", "command": "ip routing", "explanation": "Enables Layer 3 routing capabilities on the multilayer switch." },
+            { "step": "Create L3 EtherChannel", "prompt": "Switch(config-if-range)#", "command": "no switchport\nchannel-group 1 mode on", "explanation": "On the physical interfaces, convert them to routed ports and bundle them." },
+            { "step": "Configure Port-channel Interface", "prompt": "Switch(config)#", "command": "interface port-channel 1\nip address 10.1.1.1 255.255.255.252", "explanation": "Assign an IP address to the logical EtherChannel interface." }
+        ]
+    },
+    "r2": {
+        "title": "Connecting Multiple Networks",
+        "description": "Basic routing between two or more distinct networks.",
+        "related": ["r9"],
+        "commands": [
+            { "step": "Configure Interface 1", "prompt": "Router(config-if)#", "command": "ip address 192.168.1.1 255.255.255.0\nno shutdown", "explanation": "Assign an IP address to the first network interface." },
+            { "step": "Configure Interface 2", "prompt": "Router(config-if)#", "command": "ip address 192.168.2.1 255.255.255.0\nno shutdown", "explanation": "Assign an IP address to the second network interface." },
+            { "step": "Verify Connectivity", "prompt": "Router#", "command": "ping 192.168.2.100", "explanation": "The router can now route packets between the 192.168.1.0/24 and 192.168.2.0/24 networks." }
+        ]
+    },
+    "r3": {
+        "title": "Remote Access - Telnet & SSH",
+        "description": "Configuring remote access on a router.",
+        "related": ["s5", "s6"],
+        "commands": [
+            { "step": "See SSH Configuration", "prompt": "Router#", "command": "show running-config | section line vty", "explanation": "Refer to topic s6 for detailed SSH setup." },
+            { "step": "See Telnet Configuration", "prompt": "Router#", "command": "show running-config | section line vty", "explanation": "Refer to topic s5 for detailed Telnet setup." }
+        ]
+    },
+    "r4": {
+        "title": "Inter-VLAN Routing - Router & L3 Switch",
+        "description": "Enabling communication between different VLANs.",
+        "related": ["s1"],
+        "commands": [
+            { "step": "Router-on-a-Stick: Create Subinterface", "prompt": "Router(config)#", "command": "interface g0/0.10\nencapsulation dot1q 10\nip address 192.168.10.1 255.255.255.0", "explanation": "On a router, create a subinterface for each VLAN, tag it, and assign an IP to act as the gateway." },
+            { "step": "L3 Switch: Create SVI", "prompt": "Switch(config)#", "command": "interface vlan 10\nip address 192.168.10.1 255.255.255.0", "explanation": "On a multilayer switch, create a Switched Virtual Interface (SVI) for each VLAN and assign an IP. Requires 'ip routing' to be enabled." }
+        ]
+    },
+    "r5": {
+        "title": "DHCP Server - Router & L3 Switch",
+        "description": "Configuring a Cisco device to act as a DHCP server.",
+        "related": ["r8"],
+        "commands": [
+            { "step": "Exclude Addresses", "prompt": "Router(config)#", "command": "ip dhcp excluded-address 192.168.1.1 192.168.1.10", "explanation": "Reserve addresses for static assignment." },
+            { "step": "Create DHCP Pool", "prompt": "Router(config)#", "command": "ip dhcp pool MY-POOL", "explanation": "Create a named DHCP pool." },
+            { "step": "Configure Pool Options", "prompt": "Router(dhcp-config)#", "command": "network 192.168.1.0 255.255.255.0\ndefault-router 192.168.1.1\ndns-server 8.8.8.8", "explanation": "Define the network, gateway, and DNS server for clients." }
+        ]
+    },
+    "r6": {
+        "title": "Inter-VLAN + DHCP - Router & L3 Switch",
+        "description": "Combining Inter-VLAN routing with DHCP services.",
+        "related": ["r4", "r5"],
+        "commands": [
+            { "step": "Configure Inter-VLAN Routing", "prompt": "Router(config)#", "command": "interface g0/0.10\nencapsulation dot1q 10\nip address 192.168.10.1 255.255.255.0", "explanation": "First, ensure routing between VLANs is working (see topic r4)." },
+            { "step": "Create DHCP Pool for each VLAN", "prompt": "Router(config)#", "command": "ip dhcp pool VLAN10-POOL\nnetwork 192.168.10.0 255.255.255.0\ndefault-router 192.168.10.1", "explanation": "Create a separate DHCP pool for each subnet/VLAN." }
+        ]
+    },
+    "r7": {
+        "title": "DHCP, DNS, Web, Email, FTP Servers",
+        "description": "Integrating various network services in a topology.",
+        "related": [],
+        "commands": [
+            { "step": "Example: Point to DNS Server", "prompt": "Router(dhcp-config)#", "command": "dns-server 192.168.100.10", "explanation": "In your DHCP pool configuration, point clients to the IP address of your DNS server." },
+            { "step": "Example: Access Web Server", "prompt": "PC>", "command": "ping 192.168.100.20", "explanation": "From a client PC, ensure you can reach the web server's IP address." }
+        ]
+    },
+    "r8": {
+        "title": "DHCP Relay Agent - Router & L3 Switch",
+        "description": "Forwarding DHCP requests to a server in a different broadcast domain.",
+        "related": ["r5"],
+        "commands": [
+            { "step": "Configure Helper Address", "prompt": "Router(config-if)#", "command": "ip helper-address 10.10.10.5", "explanation": "On the gateway interface for the client VLAN, this command forwards DHCP broadcast requests as unicast packets to the specified DHCP server (10.10.10.5)." }
+        ]
+    },
+    "r9": {
+        "title": "Static, Floating & Default Routing",
+        "description": "Manually configuring routes in a network.",
+        "related": ["r10"],
+        "commands": [
+            { "step": "Configure Static Route", "prompt": "Router(config)#", "command": "ip route 10.0.2.0 255.255.255.0 10.0.1.2", "explanation": "Route to network 10.0.2.0/24 via next-hop 10.0.1.2." },
+            { "step": "Configure Default Route", "prompt": "Router(config)#", "command": "ip route 0.0.0.0 0.0.0.0 203.0.113.1", "explanation": "Route of last resort, typically pointing to an ISP." },
+            { "step": "Configure Floating Static Route", "prompt": "Router(config)#", "command": "ip route 10.0.2.0 255.255.255.0 10.0.3.2 250", "explanation": "A backup route with a higher administrative distance (250)." }
+        ]
+    },
+    "r10": {
+        "title": "RIP, EIGRP, OSPF & BGP Routing",
+        "description": "Configuring various dynamic routing protocols.",
+        "related": ["r9"],
+        "commands": [
+            { "step": "Configure OSPF", "prompt": "Router(config)#", "command": "router ospf 1\nnetwork 10.0.0.0 0.255.255.255 area 0", "explanation": "Enable OSPF process 1 and advertise all networks starting with 10 into Area 0." },
+            { "step": "Configure EIGRP", "prompt": "Router(config)#", "command": "router eigrp 100\nnetwork 10.0.0.0", "explanation": "Enable EIGRP autonomous system 100 and advertise all networks starting with 10." }
+        ]
+    },
+    "r11": {
+        "title": "ACLs - Standard & Extended",
+        "description": "Filtering traffic using Access Control Lists.",
+        "related": ["r12"],
+        "commands": [
+            { "step": "Standard ACL", "prompt": "Router(config)#", "command": "access-list 10 permit 192.168.1.0 0.0.0.255", "explanation": "Permits traffic from a source network. Apply close to destination." },
+            { "step": "Extended ACL", "prompt": "Router(config)#", "command": "ip access-list extended WEB_ACCESS\npermit tcp any host 10.0.0.1 eq 80", "explanation": "Permits any source to access host 10.0.0.1 on port 80 (HTTP). Apply close to source." }
+        ]
+    },
+    "r12": {
+        "title": "ACLs for VTY - Remote Access",
+        "description": "Applying ACLs to VTY lines to restrict remote access.",
+        "related": ["r11", "b6"],
+        "commands": [
+            { "step": "Create ACL for Admins", "prompt": "Router(config)#", "command": "access-list 20 permit host 192.168.1.10", "explanation": "Create a standard ACL that permits only the admin's IP." },
+            { "step": "Apply ACL to VTY Lines", "prompt": "Router(config)#", "command": "line vty 0 4\naccess-class 20 in", "explanation": "Apply the ACL to incoming traffic on the VTY lines, restricting access." }
+        ]
+    },
+    "r13": {
+        "title": "NAT - Static, Dynamic & PAT",
+        "description": "Translating private IP addresses to public IP addresses.",
+        "related": [],
+        "commands": [
+            { "step": "Define Inside/Outside Interfaces", "prompt": "Router(config-if)#", "command": "ip nat inside\nip nat outside", "explanation": "Define which interfaces are on the internal and external networks." },
+            { "step": "Configure PAT (Overload)", "prompt": "Router(config)#", "command": "ip nat inside source list 1 interface g0/0 overload", "explanation": "Translate IPs from ACL 1 to the IP of interface g0/0." },
+            { "step": "Define ACL for PAT", "prompt": "Router(config)#", "command": "access-list 1 permit 192.168.0.0 0.0.255.255", "explanation": "Define which internal IPs are allowed to be translated." }
+        ]
+    },
+    "r14": {
+        "title": "Normal HSRP, HSRP with VLANs",
+        "description": "Providing first-hop redundancy for IP hosts.",
+        "related": [],
+        "commands": [
+            { "step": "Configure HSRP on an Interface", "prompt": "Router(config-if)#", "command": "standby 1 ip 192.168.1.254", "explanation": "Sets the virtual IP for HSRP group 1. This is the gateway for clients." },
+            { "step": "Set Priority", "prompt": "Router(config-if)#", "command": "standby 1 priority 110", "explanation": "The router with the highest priority becomes active. Default is 100." },
+            { "step": "Enable Preemption", "prompt": "Router(config-if)#", "command": "standby 1 preempt", "explanation": "Allows a higher priority router to take over the active role." }
+        ]
+    },
+    "r15": {
+        "title": "IPv6 Configs + SLAAC",
+        "description": "Basic IPv6 addressing and Stateless Address Autoconfiguration.",
+        "related": ["r16"],
+        "commands": [
+            { "step": "Enable IPv6 Routing", "prompt": "Router(config)#", "command": "ipv6 unicast-routing", "explanation": "Globally enables IPv6 packet forwarding." },
+            { "step": "Configure Manual Address", "prompt": "Router(config-if)#", "command": "ipv6 address 2001:db8:acad::1/64", "explanation": "Manually assigns a global unicast address." },
+            { "step": "Enable SLAAC", "prompt": "Router(config-if)#", "command": "ipv6 address autoconfig", "explanation": "Allows the interface to automatically configure an address using SLAAC from router advertisements." }
+        ]
+    },
+    "r16": {
+        "title": "Static Routing for IPv6",
+        "description": "Manually configuring IPv6 routes.",
+        "related": ["r15", "r17"],
+        "commands": [
+            { "step": "Enable IPv6 Routing", "prompt": "Router(config)#", "command": "ipv6 unicast-routing", "explanation": "Globally enables IPv6 packet forwarding." },
+            { "step": "Configure Static Route", "prompt": "Router(config)#", "command": "ipv6 route 2001:db8:2::/64 2001:db8:1::2", "explanation": "Route to a destination network via a next-hop IPv6 address." }
+        ]
+    },
+    "r17": {
+        "title": "RIPng for IPv6 Routing",
+        "description": "Configuring RIP Next Generation for IPv6.",
+        "related": ["r16", "r18"],
+        "commands": [
+            { "step": "Enable IPv6 Routing", "prompt": "Router(config)#", "command": "ipv6 unicast-routing", "explanation": "Globally enables IPv6 packet forwarding." },
+            { "step": "Enable RIPng on an Interface", "prompt": "Router(config-if)#", "command": "ipv6 rip MYRIP enable", "explanation": "Enables the RIPng process named 'MYRIP' on this interface." }
+        ]
+    },
+    "r18": {
+        "title": "EIGRP for IPv6 Routing",
+        "description": "Configuring EIGRP for IPv6.",
+        "related": ["r17", "r19"],
+        "commands": [
+            { "step": "Enable IPv6 Routing", "prompt": "Router(config)#", "command": "ipv6 unicast-routing", "explanation": "Globally enables IPv6 packet forwarding." },
+            { "step": "Start EIGRP Process", "prompt": "Router(config)#", "command": "ipv6 router eigrp 100", "explanation": "Starts the EIGRP for IPv6 process for AS 100." },
+            { "step": "Enable EIGRP on an Interface", "prompt": "Router(config-if)#", "command": "ipv6 eigrp 100", "explanation": "Enables EIGRP AS 100 on this interface." }
+        ]
+    },
+    "r19": {
+        "title": "OSPF for IPv6 Routing",
+        "description": "Configuring OSPFv3 for IPv6.",
+        "related": ["r18"],
+        "commands": [
+            { "step": "Enable IPv6 Routing", "prompt": "Router(config)#", "command": "ipv6 unicast-routing", "explanation": "Globally enables IPv6 packet forwarding." },
+            { "step": "Start OSPFv3 Process", "prompt": "Router(config)#", "command": "ipv6 router ospf 1", "explanation": "Starts the OSPFv3 process with ID 1." },
+            { "step": "Enable OSPFv3 on an Interface", "prompt": "Router(config-if)#", "command": "ipv6 ospf 1 area 0", "explanation": "Enables OSPFv3 process 1 in Area 0 on this interface." }
+        ]
+    },
+    "r20": {
+        "title": "WAN PPP - CHAP",
+        "description": "Configuring Point-to-Point Protocol with CHAP authentication on WAN links.",
+        "related": [],
+        "commands": [
+            { "step": "Set Hostname and User", "prompt": "R1(config)#", "command": "hostname R1\nusername R2 password cisco", "explanation": "Define the hostname of the local router and create a user for the remote router (R2)." },
+            { "step": "Configure Serial Interface", "prompt": "R1(config-if)#", "command": "encapsulation ppp\nppp authentication chap", "explanation": "On the serial interface, set encapsulation to PPP and specify CHAP for authentication." }
+        ]
+    },
+    "w1": {
+        "title": "Wireless APs Configs",
+        "description": "Basic configuration of standalone wireless access points.",
+        "related": ["w2"],
+        "commands": [
+            { "step": "Configure SSID", "prompt": "AP(config)#", "command": "dot11 ssid MY-WIFI\nauthentication open", "explanation": "Creates an SSID and sets it to open authentication." },
+            { "step": "Apply to Radio Interface", "prompt": "AP(config-if)#", "command": "interface dot11radio 0\nssid MY-WIFI", "explanation": "Applies the SSID to the 2.4GHz radio." }
+        ]
+    },
+    "w2": {
+        "title": "Wireless LAN Controller (WLC)",
+        "description": "Centralized management of multiple access points.",
+        "related": ["w1"],
+        "commands": [
+            { "step": "Create WLAN via GUI", "prompt": "GUI: WLANs > Create New", "command": "Profile Name: Corp-WiFi, SSID: Corp-WiFi", "explanation": "WLCs are primarily configured via a web GUI. This creates a new wireless network." },
+            { "step": "Configure Security", "prompt": "GUI: WLANs > Security", "command": "Layer 2 Security: WPA+WPA2, Authentication: PSK", "explanation": "Configure WPA2 with a Pre-Shared Key for the WLAN." }
+        ]
+    },
+    "w3": {
+        "title": "VoIP Device Selection",
+        "description": "Understanding and selecting devices for a Voice over IP network.",
+        "related": ["w4"],
+        "commands": [
+            { "step": "Device Roles", "prompt": "Info", "command": "N/A", "explanation": "A VoIP network includes IP Phones, Call Control (like CME or CUCM), Voicemail, and Gateways to connect to the PSTN." }
+        ]
+    },
+    "w4": {
+        "title": "VoIP DHCP Configs",
+        "description": "Configuring DHCP to support VoIP phones, including option 150.",
+        "related": ["w3", "w5"],
+        "commands": [
+            { "step": "Configure DHCP Option 150", "prompt": "Router(dhcp-config)#", "command": "option 150 ip 192.168.10.1", "explanation": "In the DHCP pool, Option 150 tells IP phones the IP address of the TFTP server (the Call Manager) to download their configuration." }
+        ]
+    },
+    "w5": {
+        "title": "VoIP Phones Configs",
+        "description": "Configuring Cisco IP Phones and call manager express (CME).",
+        "related": ["w4", "w6"],
+        "commands": [
+            { "step": "Enable Telephony Service", "prompt": "Router(config)#", "command": "telephony-service", "explanation": "Enters CME configuration mode." },
+            { "step": "Define Max Phones and Directory Numbers", "prompt": "Router(config-telephony)#", "command": "max-ephones 5\nmax-dn 5", "explanation": "Sets the maximum number of phones and lines supported." },
+            { "step": "Configure a Directory Number (Line)", "prompt": "Router(config-telephony)#", "command": "ephone-dn 1\nnumber 1001", "explanation": "Creates a directory number (line) and assigns it the extension 1001." },
+            { "step": "Configure a Phone", "prompt": "Router(config-telephony)#", "command": "ephone 1\nmac-address 0001.0002.0003\nbutton 1:1", "explanation": "Associates a physical phone (by MAC address) with the CME and assigns line 1 (ephone-dn 1) to its first button." }
+        ]
+    },
+    "w6": {
+        "title": "VoIP - Data & Voice VLANs",
+        "description": "Separating voice and data traffic using VLANs.",
+        "related": ["w5"],
+        "commands": [
+            { "step": "Create VLANs", "prompt": "Switch(config)#", "command": "vlan 10\nname DATA\nvlan 110\nname VOICE", "explanation": "Create separate VLANs for data and voice." },
+            { "step": "Configure Port for Phone", "prompt": "Switch(config-if)#", "command": "switchport mode access\nswitchport access vlan 10\nswitchport voice vlan 110", "explanation": "Sets the data VLAN and tells the switch to tag voice traffic for VLAN 110." }
+        ]
+    },
+    "w7": {
+        "title": "Routing for VoIP - Dial-Peering",
+        "description": "Configuring dial peers for voice routing.",
+        "related": ["w5"],
+        "commands": [
+            { "step": "POTS Dial Peer", "prompt": "Router(config)#", "command": "dial-peer voice 1 pots\ndestination-pattern 1001\nport 0/0/0", "explanation": "Routes calls for extension 1001 to an analog phone on port 0/0/0." },
+            { "step": "VoIP Dial Peer", "prompt": "Router(config)#", "command": "dial-peer voice 2 voip\ndestination-pattern 2...\nsession target ipv4:10.1.1.2", "explanation": "Routes calls for any number starting with 2 to another VoIP gateway at 10.1.1.2." }
+        ]
+    },
+    "a1": {
+        "title": "Basic Firewall Configs",
+        "description": "Initial setup of a Cisco ASA firewall.",
+        "related": ["a2"],
+        "commands": [
+            { "step": "Set Hostname", "prompt": "ciscoasa(config)#", "command": "hostname ASA-FW1", "explanation": "Sets the device hostname." },
+            { "step": "Set Enable Password", "prompt": "ciscoasa(config)#", "command": "enable password MySecret", "explanation": "Sets the password for privileged mode." },
+            { "step": "Create Admin User", "prompt": "ciscoasa(config)#", "command": "username admin password MyAdminPass privilege 15", "explanation": "Creates a local user with full admin rights." }
+        ]
+    },
+    "a2": {
+        "title": "Interface Security Levels",
+        "description": "Understanding and configuring security levels on ASA interfaces.",
+        "related": ["a1", "a3"],
+        "commands": [
+            { "step": "Configure Inside Interface", "prompt": "ASA(config-if)#", "command": "nameif inside\nsecurity-level 100\nip address 192.168.1.1 255.255.255.0", "explanation": "The inside network is most trusted, level 100." },
+            { "step": "Configure Outside Interface", "prompt": "ASA(config-if)#", "command": "nameif outside\nsecurity-level 0\nip address 203.0.113.1 255.255.255.0", "explanation": "The outside network is least trusted, level 0." },
+            { "step": "Configure DMZ Interface", "prompt": "ASA(config-if)#", "command": "nameif dmz\nsecurity-level 50\nip address 172.16.1.1 255.255.255.0", "explanation": "A DMZ has an intermediate trust level." }
+        ]
+    },
+    "a3": {
+        "title": "Firewall Policies",
+        "description": "Creating and applying security policies on the ASA.",
+        "related": ["a2", "a5"],
+        "commands": [
+            { "step": "Create ACL", "prompt": "ASA(config)#", "command": "access-list OUTSIDE-IN permit tcp any host 172.16.1.10 eq www", "explanation": "Create an ACL to permit web traffic to a server in the DMZ." },
+            { "step": "Apply ACL to Interface", "prompt": "ASA(config)#", "command": "access-group OUTSIDE-IN in interface outside", "explanation": "Apply the ACL to inbound traffic on the outside interface." }
+        ]
+    },
+    "a4": {
+        "title": "Firewall NAT Configs",
+        "description": "Configuring Network Address Translation on the ASA.",
+        "related": ["a6"],
+        "commands": [
+            { "step": "Create Object for Inside Network", "prompt": "ASA(config)#", "command": "object network INSIDE-NET\nsubnet 192.168.1.0 255.255.255.0", "explanation": "Define the internal network as an object." },
+            { "step": "Configure Dynamic PAT", "prompt": "ASA(config-network-object)#", "command": "nat (inside,outside) dynamic interface", "explanation": "Translate the INSIDE-NET object to the IP of the outside interface when going from inside to outside." }
+        ]
+    },
+    "a5": {
+        "title": "Firewall ACLs",
+        "description": "Using Access Control Lists to filter traffic on the ASA.",
+        "related": ["a3"],
+        "commands": [
+            { "step": "Create ACL", "prompt": "ASA(config)#", "command": "access-list OUTSIDE-IN permit tcp any host 172.16.1.10 eq www", "explanation": "Create an ACL to permit web traffic to a server in the DMZ." },
+            { "step": "Apply ACL to Interface", "prompt": "ASA(config)#", "command": "access-group OUTSIDE-IN in interface outside", "explanation": "Apply the ACL to inbound traffic on the outside interface." }
+        ]
+    },
+    "a6": {
+        "title": "NAT + Network Objects",
+        "description": "Using network objects to simplify NAT and ACL configurations.",
+        "related": ["a4"],
+        "commands": [
+            { "step": "Create Object for Server", "prompt": "ASA(config)#", "command": "object network WEB-SERVER\nhost 192.168.1.50", "explanation": "Create an object for the internal server." },
+            { "step": "Configure Static NAT", "prompt": "ASA(config-network-object)#", "command": "nat (inside,outside) static 203.0.113.10", "explanation": "Statically map the internal server to a public IP address." }
+        ]
+    },
+    "a7": {
+        "title": "Inspection Policies",
+        "description": "Configuring stateful inspection using the Modular Policy Framework (MPF).",
+        "related": ["a3"],
+        "commands": [
+            { "step": "View Default Policy", "prompt": "ASA#", "command": "show running-config policy-map", "explanation": "The default global policy inspects many common protocols, allowing return traffic for established sessions." }
+        ]
+    },
+    "a8": {
+        "title": "IPv6",
+        "description": "Basic IPv6 configuration on a Cisco ASA.",
+        "related": [],
+        "commands": [
+            { "step": "Enable IPv6 on Interface", "prompt": "ASA(config-if)#", "command": "ipv6 enable", "explanation": "Enables IPv6 on the interface." },
+            { "step": "Assign IPv6 Address", "prompt": "ASA(config-if)#", "command": "ipv6 address 2001:db8:1::1/64", "explanation": "Assigns a global unicast IPv6 address." },
+            { "step": "Configure IPv6 Default Route", "prompt": "ASA(config)#", "command": "ipv6 route outside ::/0 2001:db8:acad::1", "explanation": "Sets the default route for all IPv6 traffic." }
+        ]
+    }
 }
