@@ -260,17 +260,6 @@ pre:hover .copy-btn {
     50% { opacity: 0; }
 }
 
-.command-step.glass-card {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.command-step.glass-card:hover {
-    border-color: rgba(59, 130, 246, 0.5); /* blue-500/50 */
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-}
-
-
 /* --- Mobile Sidebar Styles --- */
 #mobile-sidebar {
     background: linear-gradient(160deg, #0b2742, #1a3a60, #facc15);

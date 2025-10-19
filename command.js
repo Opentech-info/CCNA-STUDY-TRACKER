@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             topicData.commands.forEach((cmd, index) => {
                 const commandEl = document.createElement('div');
-                commandEl.className = 'command-step glass-card rounded-lg overflow-hidden';
+                commandEl.className = 'command-step bg-gray-800/50 border border-gray-700/50 rounded-lg overflow-hidden';
                 commandEl.innerHTML = `
                     <div class="command-header flex justify-between items-center p-4 cursor-pointer hover:bg-white/10 transition-colors">
                         <h3 class="text-lg font-semibold text-gray-200">Step ${index + 1}: ${cmd.step}</h3>
