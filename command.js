@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search/Filter functionality
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
+        const clearBtn = document.getElementById('clear-search-btn');
         let visibleCount = 0;
 
         commandElements.forEach(step => {
@@ -172,6 +173,19 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             noResultsEl.style.display = 'none';
         }
+
+        // Show or hide the clear button
+        if (searchTerm) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+    });
+
+    // Add functionality to the clear button
+    document.getElementById('clear-search-btn').addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input')); // Trigger the input event to re-filter
     });
 
     // Progress bar and Back to Top button on scroll

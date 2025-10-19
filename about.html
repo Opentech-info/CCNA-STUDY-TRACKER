@@ -6,7 +6,8 @@
     <title>About Us - Opentech-info</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Added new artistic fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Lobster&family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,41 +44,74 @@
 
         <div class="pt-16">
             <!-- Main Page Header -->
-            <header class="relative text-center mb-8 py-24 px-4 rounded-lg overflow-hidden bg-gray-800">
-                <div class="absolute inset-0 bg-black opacity-50 z-0"></div> <!-- Overlay -->
-                <div class="relative z-10"> <!-- Content container -->
+            <header class="relative text-center mb-8 py-24 px-4 rounded-lg overflow-hidden">
+                <!-- Video Background -->
+                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+                    <source src="videos/about.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-black opacity-60 z-10"></div> <!-- Darker Overlay -->
+                <div class="relative z-20"> <!-- Content container -->
                     <h1 class="text-4xl font-bold text-white">About Opentech-info</h1>
                     <p class="text-lg text-white/80 mt-2">Connecting the world, one packet at a time.</p>
                 </div>
             </header>
 
-            <div class="glass-card w-full overflow-hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                    <div class="lg:col-span-2 p-8 flex justify-center">
-                        <!-- Placeholder for a cartoon/illustration image -->
-                        <img src="https://img.freepik.com/free-vector/programmers-using-javascript-programming-language-computer-tiny-people-javascript-language-javascript-engine-js-web-development-concept_335657-166.jpg" alt="Networking Education Illustration" class="rounded-lg w-full max-w-sm drop-shadow-lg">
+            <!-- Vertically Arranged Content -->
+            <div class="space-y-24 md:space-y-32">
+
+                <!-- Section 1: Mission (Content Left, Image Right) -->
+                <section class="scroll-animate grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="p-4 text-gray-200">
+                        <h2 class="heading-mission text-3xl font-bold mb-4">Democratizing Networking Education</h2>
+                        <p class="text-gray-300 leading-relaxed">At Opentech-info, our mission is to make networking education accessible to everyone. We believe that high-quality, practical resources are the key to building a successful career in technology, and we're dedicated to creating tools that are both engaging and effective.</p>
                     </div>
-                    <div class="lg:col-span-3 p-8 bg-black/10 text-gray-200">
-                        <div class="prose prose-invert max-w-none prose-h2:font-semibold prose-h2:text-2xl prose-h2:text-white prose-p:text-gray-300 prose-a:text-blue-400 hover:prose-a:text-blue-300">
-                            <h2>Our Mission</h2>
-                            <p>At Opentech-info, our mission is to democratize networking education. We believe that everyone, regardless of their background, should have access to high-quality, practical, and engaging resources to build a successful career in technology. The CCNA Study Tracker is our first major step towards achieving this goal.</p>
-                            
-                            <h2>What is the CCNA Study Tracker?</h2>
-                            <p>This tool was born from a simple idea: studying for the CCNA should be organized, interactive, and efficient. We wanted a single, dynamic platform where students could:</p>
-                            <ul class="interactive-list">
-                                <li>Visually track their study progress across all CCNA topics using an intuitive Kanban board.</li>
-                                <li>Instantly access a comprehensive and accurate database of Cisco IOS commands, complete with explanations and context.</li>
-                                <li>Stay motivated with a clean, modern, and interactive user interface that makes studying less of a chore.</li>
+                    <div class="p-4 flex justify-center md:justify-start">
+                        <img src="images/contact/1.jpg" alt="Illustration of a person reaching for a star" class="about-image rounded-lg w-full max-w-sm md:ml-8 md:mt-12">
+                    </div>
+                </section>
+
+                <!-- Section 2: The Tool (Image Left, Content Right) -->
+                <section class="scroll-animate grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="p-4 flex justify-center md:justify-end md:order-last">
+                        <div class="p-4 text-gray-200">
+                            <h2 class="heading-tool text-3xl font-bold mb-4">An Interactive Study Platform</h2>
+                            <p class="text-gray-300 mb-4 leading-relaxed">This tool was born from a simple idea: studying for the CCNA should be organized and efficient. We wanted a dynamic platform where students could:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                <li>Visually track progress with an intuitive Kanban board.</li>
+                                <li>Instantly access a comprehensive command database.</li>
+                                <li>Stay motivated with a clean, modern interface.</li>
                             </ul>
-
-                            <h2>Who We Are</h2>
-                            <p>We are a small team of networking professionals and enthusiasts passionate about open-source technology and education. With real-world experience in enterprise networking, we understand the challenges and opportunities that come with a career in this field. This project is our way of giving back to the community that has given us so much.</p>
-
-                            <h2>Our Commitment to You</h2>
-                            <p>This project is built for you, the student. It is, and always will be, free to use. We are committed to keeping the command database up-to-date and continuously improving the tool based on your feedback. If you have any suggestions or find a bug, please don't hesitate to visit our <a href="https://github.com/Opentech-info" target="_blank">GitHub repository</a> or <a href="contact.html">contact us</a>.</p>
                         </div>
                     </div>
+                    <div class="p-4 flex justify-center md:justify-end">
+                        <img src="images/contact/2.jpg" alt="Illustration of a person working on a computer dashboard" class="about-image rounded-lg w-full max-w-sm md:mr-8 md:mt-12">
+                    </div>
+                </section>
+
+                <!-- Section 3: The Team (Content Top, Image Bottom) -->
+                <section class="scroll-animate text-center">
+                    <div class="max-w-3xl mx-auto px-4">
+                        <h2 class="heading-team text-4xl font-bold mb-4">Passionate Professionals</h2>
+                        <p class="text-gray-300 leading-relaxed">We are a small team of networking professionals and enthusiasts passionate about open-source technology and education. With real-world experience, we understand the challenges of this field and built this project to give back to the community.</p>
+                    </div>
+                    <div class="mt-8 flex justify-center">
+                        <img src="images/contact/3.jpg" alt="Illustration of a team collaborating" class="about-image rounded-lg w-full max-w-2xl">
+                    </div>
                 </div>
+                </section>
+
+                <!-- Section 4: Commitment (Content Left, Image Right) -->
+                <section class="scroll-animate grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="p-4 text-gray-200">
+                        <h2 class="heading-commitment text-4xl font-bold mb-4 tracking-wider">Built For You</h2>
+                        <p class="text-gray-300 leading-relaxed">This project is, and always will be, free. We are committed to keeping the command database up-to-date and improving the tool based on your feedback. Have a suggestion? <a href="contact.html" class="text-blue-400 hover:underline">Contact us</a> or visit our <a href="https://github.com/Opentech-info" target="_blank" class="text-blue-400 hover:underline">GitHub</a>.</p>
+                    </div>
+                    <div class="p-4 flex justify-center md:justify-start">
+                        <img src="images/contact/4.jpg" alt="Illustration of a person holding a heart" class="about-image rounded-lg w-full max-w-sm md:ml-8 md:mt-12">
+                    </div>
+                </section>
+
             </div>
         </div>
     </div>
@@ -142,6 +176,24 @@
                 closeBtn.addEventListener('click', closeSidebar);
                 overlay.addEventListener('click', closeSidebar);
             } catch (e) {}
+
+            // Scroll Animation Logic
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Optional: stop observing once visible
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>

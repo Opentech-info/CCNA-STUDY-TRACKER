@@ -43,9 +43,14 @@
 
         <div class="pt-16">
             <!-- Main Page Header -->
-            <header class="relative text-center mb-8 py-24 px-4 rounded-lg overflow-hidden bg-gray-800">
-                <div class="absolute inset-0 bg-black opacity-50 z-0"></div> <!-- Overlay -->
-                <div class="relative z-10"> <!-- Content container -->
+            <header class="relative text-center mb-8 py-24 px-4 rounded-lg overflow-hidden">
+                <!-- Video Background -->
+                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+                    <source src="videos/privacy.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-black opacity-60 z-10"></div> <!-- Darker Overlay -->
+                <div class="relative z-20"> <!-- Content container -->
                     <div class="w-20 h-20 mx-auto bg-blue-500/20 border-2 border-blue-400 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-300" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1.944c-1.664-1.262-3.636-2.156-5.824-2.156C1.844-.212 0 1.63 0 4.114v5.443c0 1.231.346 2.419.97 3.445l4.04 6.642a.98.98 0 001.69.001l4.04-6.642A6.32 6.32 0 0011.714 9.56V4.114c0-2.484-1.844-4.326-4.176-4.326-2.188 0-4.16.894-5.824 2.156zM10 18.056c1.664 1.262 3.636 2.156 5.824 2.156 2.332 0 4.176-1.844 4.176-4.326V9.557c0-1.231-.346-2.419-.97-3.445l-4.04-6.642a.98.98 0 00-1.69-.001l-4.04 6.642A6.32 6.32 0 008.286 9.56v5.443c0 2.484 1.844 4.326 4.176 4.326 2.188 0 4.16-.894 5.824-2.156z" clip-rule="evenodd" />
@@ -59,13 +64,13 @@
                 <p class="text-center text-gray-400 mb-8">Last updated: October 4, 2024</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Introduction Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">1. Introduction</h2>
+                    <div class="policy-card glass-card card-blue p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">1. Introduction</h2>
                         <p class="text-gray-300">Welcome to the CCNA Study Tracker by Opentech-info. We are committed to protecting your privacy. This policy explains how we collect, use, and disclose information when you use our website (the "Service").</p>
                     </div>
                     <!-- Information We Collect Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">2. Information We Collect</h2>
+                    <div class="policy-card glass-card card-yellow p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">2. Information We Collect</h2>
                         <ul class="list-disc list-inside space-y-2 text-gray-300">
                             <li><strong>Subscription Data:</strong> Your email address if you subscribe.</li>
                             <li><strong>Local Data:</strong> Your Kanban board progress is saved in your browser's <code>localStorage</code>. We do not see this data.</li>
@@ -73,8 +78,8 @@
                         </ul>
                     </div>
                     <!-- How We Use Information Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">3. How We Use Your Information</h2>
+                    <div class="policy-card glass-card card-red p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">3. How We Use Your Information</h2>
                         <ul class="list-disc list-inside space-y-2 text-gray-300">
                             <li><strong>To Provide the Service:</strong> Local data persists your board state.</li>
                             <li><strong>To Communicate:</strong> Your email is used for newsletters and updates.</li>
@@ -82,33 +87,33 @@
                         </ul>
                     </div>
                     <!-- Data Storage & Security Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">4. Data Storage & Security</h2>
+                    <div class="policy-card glass-card card-blue p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">4. Data Storage & Security</h2>
                         <p class="text-gray-300">Your board data is only on your device. Subscriber emails are stored securely on our server. We use security measures like <code>helmet.js</code> to protect server-side data.</p>
                     </div>
                     <!-- Third-Party Services Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">5. Third-Party Services</h2>
+                    <div class="policy-card glass-card card-yellow p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">5. Third-Party Services</h2>
                         <p class="text-gray-300">We use Google Fonts, Tailwind CSS (CDN), and Highlight.js (CDN) to provide a better user experience. These services operate under their own privacy policies.</p>
                     </div>
                     <!-- Your Rights Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">6. Your Rights & Choices</h2>
+                    <div class="policy-card glass-card card-red p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">6. Your Rights & Choices</h2>
                         <p class="text-gray-300">You can export or reset your local data at any time. You can unsubscribe from emails via the link in the email. You can clear <code>localStorage</code> in your browser settings.</p>
                     </div>
                     <!-- Children's Privacy Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">7. Children's Privacy</h2>
+                    <div class="policy-card glass-card card-blue p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">7. Children's Privacy</h2>
                         <p class="text-gray-300">Our Service is not intended for children under 13. We do not knowingly collect data from children.</p>
                     </div>
                     <!-- Changes to Policy Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg">
-                        <h2 class="text-xl font-semibold text-white mb-3">8. Changes to This Policy</h2>
+                    <div class="policy-card glass-card card-yellow p-6 rounded-lg">
+                        <h2 class="card-title text-xl font-semibold mb-3">8. Changes to This Policy</h2>
                         <p class="text-gray-300">We may update this policy. We will notify you of changes by posting the new policy on this page and updating the "Last updated" date.</p>
                     </div>
                     <!-- Contact Us Card -->
-                    <div class="policy-card glass-card p-6 rounded-lg md:col-span-2">
-                        <h2 class="text-xl font-semibold text-white mb-3">9. Contact Us</h2>
+                    <div class="policy-card glass-card card-red p-6 rounded-lg md:col-span-2">
+                        <h2 class="card-title text-xl font-semibold mb-3">9. Contact Us</h2>
                         <p class="text-gray-300">If you have any questions about this Privacy Policy, please <a href="contact.html" class="text-blue-400 hover:underline">contact us</a>.</p>
                     </div>
                 </div>

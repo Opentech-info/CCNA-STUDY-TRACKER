@@ -295,6 +295,39 @@ document.addEventListener('DOMContentLoaded', () => {
         hideNotesModal();
     };
 
+    // --- RESET MODAL LOGIC ---
+    const resetModalOverlay = document.getElementById('reset-modal-overlay');
+    const resetModal = document.getElementById('reset-modal');
+    const resetInput = document.getElementById('reset-modal-input');
+    const resetConfirmBtn = document.getElementById('reset-modal-confirm');
+    const resetCancelBtn = document.getElementById('reset-modal-cancel');
+    const resetPhraseEl = document.getElementById('reset-confirmation-phrase');
+    const resetErrorEl = document.getElementById('reset-modal-error'); // This element is no longer in the HTML but we keep the var to avoid errors.
+    const SECURITY_CODE = 'tech2024'; // This is your secret password.
+
+    const showResetModal = () => {
+        resetInput.value = '';
+        resetErrorEl.textContent = '';
+        resetConfirmBtn.disabled = true;
+        resetModalOverlay.classList.add('visible');
+        resetInput.focus();
+    };
+
+    const hideResetModal = () => {
+        resetModalOverlay.classList.remove('visible');
+    };
+
+    const handleResetConfirmation = () => {
+        if (resetInput.value.trim() === SECURITY_CODE) {
+            hideResetModal();
+            setTimeout(() => {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }, 300); // Wait for modal to finish animating out
+        }
+    };
+
+
     // --- BUSINESS LOGIC & STATE MANAGEMENT ---
 
     const getProgress = (colId) => {
@@ -585,12 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('export-csv-btn').addEventListener('click', exportCsv);
         document.getElementById('copy-json-btn').addEventListener('click', exportToClipboard);
         document.getElementById('reset-btn').addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
-                localStorage.removeItem(STORAGE_KEY);
-                state.data = {}; // Clear data, it will be reloaded from db.json on next load
-                render();
-                alert('Reset to sample data');
-            }
+            showResetModal();
         });
         document.getElementById('print-btn').addEventListener('click', () => window.print());
 
@@ -627,6 +655,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === notesModalOverlay) hideNotesModal();
         });
 
+        // Reset Modal Listeners
+        resetCancelBtn.addEventListener('click', hideResetModal);
+        resetConfirmBtn.addEventListener('click', handleResetConfirmation);
+        resetModalOverlay.addEventListener('click', (e) => {
+            if (e.target === resetModalOverlay) hideResetModal();
+        });
+        resetInput.addEventListener('input', () => {
+            if (resetInput.value.trim() === SECURITY_CODE) {
+                resetConfirmBtn.disabled = false;
+                resetErrorEl.textContent = '';
+            } else {
+                resetConfirmBtn.disabled = true;
+            }
+        });
+
         // Mobile Menu Toggle
         const openBtn = document.getElementById('mobile-menu-button');
         const closeBtn = document.getElementById('close-sidebar-btn');
@@ -658,6 +701,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (e.key === 'Escape' && notesModalOverlay.classList.contains('visible')) {
                 hideNotesModal();
+            }
+            if (e.key === 'Escape' && resetModalOverlay.classList.contains('visible')) {
+                hideResetModal();
             }
         });
 
