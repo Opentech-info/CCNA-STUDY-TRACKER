@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000; // Use port from .env file
 // Read commands.json once at startup to avoid reading from disk on every request.
 let commandsData = {};
 try {
-    const commandsPath = path.join(__dirname, '..', 'frontend', 'commands.json');
+    const commandsPath = path.join(__dirname, '..', 'db.json'); // Updated path
     const rawData = fs.readFileSync(commandsPath, 'utf8');
     commandsData = JSON.parse(rawData);
     console.log('✅ Commands data loaded and cached successfully.');
@@ -87,7 +87,7 @@ app.all('/api/*', (req, res) => {
 // --- Serve Frontend ---
 // This serves all the static files (HTML, CSS, JS) from the 'frontend' directory
 // It will also automatically serve index.html for the root '/' route.
-app.use(express.static(path.join(__dirname, '..', 'frontend')));
+app.use(express.static(path.join(__dirname, '..'))); // Serve from the project root
 
 app.listen(PORT, () => {
     console.log(`🚀 Server is running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`);

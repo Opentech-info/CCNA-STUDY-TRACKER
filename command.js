@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('db.json'); // <-- CHANGE HERE
+            const response = await fetch('/db.json');
             if (!response.ok) throw new Error('Could not load command database.');
             
             const commandsDb = await response.json();

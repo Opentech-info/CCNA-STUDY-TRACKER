@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let translations = {};
     const loadTranslations = async () => {
         try {
-            const response = await fetch('translations.json');
+            const response = await fetch('/translations.json');
             translations = await response.json();
         } catch (e) {
             console.error("Could not load translations.", e);
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 state.data = JSON.parse(raw);
             } else {
                 // Fetch initial data from db.json
-                const response = await fetch('db.json');
+                const response = await fetch('/db.json');
                 const db = await response.json();
                 const initialData = {};
                 DEFAULT_COLUMNS.forEach(col => initialData[col.id] = []);
