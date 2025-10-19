@@ -1,0 +1,26 @@
+{
+    "c1664582400000": {
+        "id": "c1664582400000",
+        "videoId": "v3",
+        "author": "@network_guru",
+        "text": "This was the clearest explanation of OSPF I've ever seen. Thank you!",
+        "timestamp": "2024-09-20T10:00:00.000Z",
+        "likes": 16
+    },
+    "c1664582500000": {
+        "id": "c1664582500000",
+        "videoId": "v3",
+        "author": "@cyber_student",
+        "text": "Great video! Can you do one on BGP next?",
+        "timestamp": "2024-09-15T14:30:00.000Z",
+        "likes": 8
+    },
+    "c1760900459953": {
+        "id": "c1760900459953",
+        "videoId": "v5",
+        "author": "@CurrentUser",
+        "text": "juma",
+        "timestamp": "2025-10-19T19:00:59.953Z",
+        "likes": 0
+    }
+}

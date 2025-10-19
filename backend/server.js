@@ -1,94 +1,163 @@
-require('dotenv').config(); // Load environment variables from .env file
-
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
-const fs = require('fs');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
+const fs = require('fs').promises;
+const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use port from .env file
+const PORT = process.env.PORT || 3000;
 
-// --- Data Caching ---
-// Read commands.json once at startup to avoid reading from disk on every request.
-let commandsData = {};
-try {
-    const commandsPath = path.join(__dirname, '..', 'db.json'); // Updated path
-    const rawData = fs.readFileSync(commandsPath, 'utf8');
-    commandsData = JSON.parse(rawData);
-    console.log('✅ Commands data loaded and cached successfully.');
-} catch (err) {
-    console.error('❌ Failed to load commands.json:', err);
-    // Exit if the core data can't be loaded.
-    process.exit(1);
-}
+const videosDbPath = path.join(__dirname, 'videos.json');
+const commentsDbPath = path.join(__dirname, 'comments.json');
 
-// --- Middleware ---
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '..'))); // Serve static files from the root
 
-// Security: Set various HTTP headers for security
-app.use(helmet());
+// --- Helper Functions ---
+const readDb = async (filePath) => JSON.parse(await fs.readFile(filePath, 'utf-8'));
+const writeDb = async (filePath, data) => fs.writeFile(filePath, JSON.stringify(data, null, 4));
 
-// CORS: Only allow requests from your frontend URL in production
-const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : '*',
-};
-app.use(cors(corsOptions));
+// --- API Endpoints ---
 
-// Logging: Log HTTP requests in a developer-friendly format
-app.use(morgan('dev'));
-
-// Rate Limiting: Protect against brute-force attacks
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-app.use('/api/', limiter); // Apply to all API routes
-
-app.use(express.json()); // To parse JSON bodies in POST/PUT requests
-
-// --- API Routes ---
-
-// API endpoint to serve the commands data
-app.get('/api/commands', (req, res) => {
-    // Serve the cached data
-    res.status(200).json(commandsData);
-});
-
-// API endpoint to handle new subscribers
-app.post('/api/subscribe', (req, res) => {
-    const { email } = req.body;
-
-    if (!email || !email.includes('@')) {
-        return res.status(400).json({ message: 'Please provide a valid email address.' });
+// GET all videos
+app.get('/api/videos', async (req, res) => {
+    try {
+        const videos = await readDb(videosDbPath);
+        res.json(videos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching videos' });
     }
+});
 
-    const subscriberData = `${new Date().toISOString()} - ${email}\n`;
-    const subscribersFilePath = path.join(__dirname, 'subscribers.txt');
-
-    fs.appendFile(subscribersFilePath, subscriberData, (err) => {
-        if (err) {
-            console.error('Error saving subscriber:', err);
-            return res.status(500).json({ message: 'Could not subscribe at this time. Please try again later.' });
+// GET a single video by ID
+app.get('/api/videos/:id', async (req, res) => {
+    try {
+        const videos = await readDb(videosDbPath);
+        const video = videos.find(v => v.id === req.params.id);
+        if (video) {
+            res.json(video);
+        } else {
+            res.status(404).json({ message: 'Video not found' });
         }
-        console.log(`New subscriber: ${email}`);
-        res.status(200).json({ message: 'Thank you for subscribing!' });
-    });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching video' });
+    }
 });
 
-// Catch-all for any other /api routes that are not found
-app.all('/api/*', (req, res) => {
-    res.status(404).json({ message: 'API endpoint not found.' });
+// GET comments for a video
+app.get('/api/videos/:id/comments', async (req, res) => {
+    try {
+        const comments = await readDb(commentsDbPath);
+        const videoComments = Object.values(comments).filter(c => c.videoId === req.params.id);
+        res.json(videoComments);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching comments' });
+    }
 });
 
-// --- Serve Frontend ---
-// This serves all the static files (HTML, CSS, JS) from the 'frontend' directory
-// It will also automatically serve index.html for the root '/' route.
-app.use(express.static(path.join(__dirname, '..'))); // Serve from the project root
+// POST a new comment
+app.post('/api/videos/:id/comments', async (req, res) => {
+    try {
+        const { text, author } = req.body;
+        if (!text || !author) return res.status(400).json({ message: 'Author and text are required.' });
+
+        const comments = await readDb(commentsDbPath);
+        const videos = await readDb(videosDbPath);
+
+        const newCommentId = `c${Date.now()}`;
+        const newComment = {
+            id: newCommentId,
+            videoId: req.params.id,
+            author,
+            text,
+            timestamp: new Date().toISOString(),
+            likes: 0
+        };
+        comments[newCommentId] = newComment;
+
+        // Update comment count on the video
+        const video = videos.find(v => v.id === req.params.id);
+        if (video) video.comments++;
+
+        await writeDb(commentsDbPath, comments);
+        await writeDb(videosDbPath, videos);
+
+        res.status(201).json(newComment);
+    } catch (error) {
+        res.status(500).json({ message: 'Error posting comment' });
+    }
+});
+
+// POST to like/love a video
+app.post('/api/videos/:id/react', async (req, res) => {
+    try {
+        const { reaction } = req.body; // 'like' or 'love'
+        if (!['likes', 'loves'].includes(reaction)) {
+            return res.status(400).json({ message: 'Invalid reaction.' });
+        }
+
+        const videos = await readDb(videosDbPath);
+        const video = videos.find(v => v.id === req.params.id);
+
+        if (!video) return res.status(404).json({ message: 'Video not found.' });
+
+        video[reaction]++;
+        await writeDb(videosDbPath, videos);
+        res.json({ [reaction]: video[reaction] });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating reaction' });
+    }
+});
+
+// POST to like a comment
+app.post('/api/comments/:id/like', async (req, res) => {
+    try {
+        const comments = await readDb(commentsDbPath);
+        const comment = comments[req.params.id];
+
+        if (!comment) return res.status(404).json({ message: 'Comment not found.' });
+
+        comment.likes++;
+        await writeDb(commentsDbPath, comments);
+        res.json({ likes: comment.likes });
+    } catch (error) {
+        res.status(500).json({ message: 'Error liking comment' });
+    }
+});
+
+// POST a reply to a comment
+app.post('/api/comments/:id/reply', async (req, res) => {
+    try {
+        const { text, author } = req.body;
+        const parentId = req.params.id;
+        if (!text || !author) return res.status(400).json({ message: 'Author and text are required.' });
+
+        const comments = await readDb(commentsDbPath);
+        if (!comments[parentId]) return res.status(404).json({ message: 'Parent comment not found.' });
+
+        const newReplyId = `c${Date.now()}`;
+        const newReply = {
+            id: newReplyId,
+            videoId: comments[parentId].videoId,
+            parentId: parentId,
+            author,
+            text,
+            timestamp: new Date().toISOString(),
+            likes: 0
+        };
+        comments[newReplyId] = newReply;
+        await writeDb(commentsDbPath, comments);
+        res.status(201).json(newReply);
+    } catch (error) {
+        res.status(500).json({ message: 'Error posting reply' });
+    }
+});
+
+// Fallback to serve index.html for any other route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });

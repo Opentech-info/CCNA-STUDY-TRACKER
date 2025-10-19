@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Tutorials - Opentech-info</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Poppins', 'sans-serif'] } } }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="tutorials-page-bg text-gray-100 font-sans">
+
+    <!-- Header with Search -->
+    <header class="tutorials-header fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 h-16">
+        <div class="flex items-center gap-4">
+            <button id="sidebar-toggle" class="p-2 rounded-full hover:bg-white/10">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <a href="index.html" class="flex-shrink-0">
+                <img class="h-8 w-8 rounded-sm" src="images/opentech.png" alt="Opentech Logo">
+            </a>
+        </div>
+        <div class="flex-1 max-w-2xl mx-4">
+            <div class="relative">
+                <input id="video-search-input" type="text" placeholder="Search tutorials..." class="w-full bg-gray-900/70 border border-gray-700 rounded-full py-2 pl-4 pr-12 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none">
+                <button class="absolute inset-y-0 right-0 flex items-center justify-center px-4 bg-gray-700/50 rounded-r-full hover:bg-gray-600">
+                    <svg class="h-5 w-5 text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div class="flex items-center">
+            <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="p-2 rounded-full hover:bg-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="flex h-screen pt-16">
+        <!-- Collapsible Sidebar -->
+        <aside id="tutorials-sidebar" class="fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-gray-900/95 backdrop-blur-sm transition-transform duration-300 ease-in-out z-20 md:translate-x-0 md:relative md:bg-transparent md:backdrop-blur-none flex-shrink-0">
+            <nav class="p-4 space-y-2 overflow-y-auto sidebar-scroll">
+                <a href="index.html" class="sidebar-link">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <span>Home</span>
+                </a>
+                <a href="about.html" class="sidebar-link">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>About Us</span>
+                </a>
+                <a href="contact.html" class="sidebar-link">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span>Contact</span>
+                </a>
+                <hr class="border-gray-700">
+                <h3 class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Categories</h3>
+                <div id="category-filters" class="space-y-1">
+                    <button class="sidebar-link w-full text-left" data-filter="all">All Videos</button>
+                    <button class="sidebar-link w-full text-left" data-filter="basics">Basics</button>
+                    <button class="sidebar-link w-full text-left" data-filter="switching">Switching</button>
+                    <button class="sidebar-link w-full text-left" data-filter="routing">Routing</button>
+                    <button class="sidebar-link w-full text-left" data-filter="security">Security</button>
+                    <button class="sidebar-link w-full text-left" data-filter="wan">WAN</button>
+                    <button class="sidebar-link w-full text-left" data-filter="wireless">Wireless</button>
+                    <button class="sidebar-link w-full text-left" data-filter="automation">Automation</button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Video Grid -->
+        <main id="video-grid-container" class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+            <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+                <!-- Video cards will be rendered here by JavaScript -->
+            </div>
+            <div id="no-results" class="hidden text-center py-16 text-gray-400">
+                <h3 class="text-xl font-semibold">No tutorials found</h3>
+                <p>Try adjusting your search or filter.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Sidebar Mobile Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay hidden md:hidden"></div>
+
+    <!-- Integrated Player Modal -->
+    <div id="player-modal-overlay" class="player-modal-overlay fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <button id="close-player-modal" class="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-white/20 z-50">
+            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+
+        <div class="w-full h-full max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 overflow-y-auto pt-16 pb-8">
+            <!-- Main Content: Player and Comments -->
+            <main class="lg:col-span-2 space-y-4">
+                <div id="video-container" class="relative w-full aspect-video bg-black group rounded-xl overflow-hidden" tabindex="0">
+                    <video id="main-video" class="w-full h-full">
+                        <!-- Source will be set by JavaScript -->
+                    </video>
+                    <button id="big-play-btn" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-black/50 flex items-center justify-center text-white transition-all duration-300 hover:bg-red-600 hover:scale-110">
+                        <svg class="w-12 h-12 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
+                        <div class="timeline-container h-3 cursor-pointer">
+                            <div class="timeline h-1 bg-white/30 rounded-full"><div id="timeline-progress" class="h-full bg-red-600 rounded-full pointer-events-none"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="flex items-center gap-4">
+                                <button id="play-pause-btn"><svg id="play-icon" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><svg id="pause-icon" class="w-7 h-7 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                                <div class="flex items-center gap-2 volume-container">
+                                    <button id="mute-btn"><svg id="volume-high-icon" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg id="volume-muted-icon" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button>
+                                    <input id="volume-slider" type="range" min="0" max="1" step="0.01" class="w-24 h-1 accent-white">
+                                </div>
+                                <div class="text-xs"><span id="current-time">0:00</span> / <span id="total-time">0:00</span></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button id="fullscreen-btn"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5V14h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h1 id="video-title" class="text-xl font-bold">Loading...</h1>
+                    <p id="video-channel" class="text-sm text-gray-400"></p>
+                </div>
+                <div id="comment-section" class="mt-4 bg-[#1e1e1e] rounded-lg">
+                    <div class="p-4 border-b border-gray-700"><form id="comment-form" class="flex items-start gap-3"><img class="h-9 w-9 rounded-full" src="images/opentech.png" alt="Your Avatar"><div class="flex-1"><div class="comment-input-form pb-1"><input type="text" id="comment-text-input" placeholder="Add a comment..." required class="comment-input text-sm"></div><div class="comment-actions justify-end mt-2 gap-2"><button type="submit" class="px-4 py-2 text-sm rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600">Comment</button></div></div></form></div>
+                    <div id="comment-list" class="p-4 space-y-6"></div>
+                </div>
+            </main>
+            <aside id="up-next-container" class="lg:col-span-1 space-y-4">
+                <!-- "Up Next" videos will be rendered here -->
+            </aside>
+        </div>
+    </div>
+
+    <script src="tutorials.js"></script>
+</body>
+</html>
+            </div>
+            <footer class="p-4 border-t border-gray-700 flex-shrink-0 bg-[#121212]">
+                <form id="comment-form" class="flex items-start gap-3">
+                    <img class="h-9 w-9 rounded-full" src="images/opentech.png" alt="Your Avatar">
+                    <div class="flex-1">
+                        <div class="comment-input-form pb-1">
+                            <input type="text" id="comment-text-input" placeholder="Add a comment..." required class="comment-input text-sm">
+                        </div>
+                        <div class="comment-actions justify-end mt-2 gap-2">
+                            <button type="submit" class="px-4 py-2 text-sm rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600">Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </footer>
+        </div>
+    </div>
+
+    <script src="tutorials.js"></script>
+</body>
+</html>
+            </div>
+        </div>
+    </div>
+
+    <script src="tutorials.js"></script>
+</body>
+</html>
