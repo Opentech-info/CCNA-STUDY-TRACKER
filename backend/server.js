@@ -86,12 +86,8 @@ app.all('/api/*', (req, res) => {
 
 // --- Serve Frontend ---
 // This serves all the static files (HTML, CSS, JS) from the 'frontend' directory
+// It will also automatically serve index.html for the root '/' route.
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
-
-// Specific route for contact.html to prevent SPA fallback issues
-app.get('/contact.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'contact.html'));
-});
 
 app.listen(PORT, () => {
     console.log(`🚀 Server is running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`);

@@ -1,0 +1,187 @@
+{
+    "b1": {
+        "title": "Navigating User Levels",
+        "description": "Understanding and moving between different command modes in Cisco IOS.",
+        "related": ["b2", "b4"],
+        "commands": [
+            { "step": "Enter Privileged EXEC Mode", "prompt": "Router>", "command": "enable", "explanation": "Moves from User EXEC mode to Privileged EXEC mode." },
+            { "step": "Enter Global Configuration Mode", "prompt": "Router#", "command": "configure terminal", "explanation": "Moves from Privileged EXEC mode to Global Configuration mode." },
+            { "step": "Return to Privileged EXEC Mode", "prompt": "Router(config)#", "command": "exit", "explanation": "Moves back one level in the command hierarchy." },
+            { "step": "Return to Privileged EXEC Mode from any sub-config mode", "prompt": "Router(config-if)#", "command": "end", "explanation": "Returns directly to Privileged EXEC mode." }
+        ]
+    },
+    "b2": {
+        "title": "Hostname",
+        "description": "Setting a unique name for the network device.",
+        "related": ["b1", "b10"],
+        "commands": [
+            { "step": "Enter Global Configuration Mode", "prompt": "Router#", "command": "configure terminal", "explanation": "You must be in global config mode to change the hostname." },
+            { "step": "Set the Hostname", "prompt": "Router(config)#", "command": "hostname R1", "explanation": "Changes the device's name to 'R1'. The prompt will update immediately." }
+        ]
+    },
+    "b3": {
+        "title": "Banner motd/message",
+        "description": "Configure a Message of the Day (MOTD) banner that displays to anyone logging into the device.",
+        "related": ["b5", "b6"],
+        "commands": [
+            { "step": "Enter Global Configuration Mode", "prompt": "Router#", "command": "configure terminal", "explanation": "Access global configuration mode." },
+            { "step": "Set the MOTD Banner", "prompt": "Router(config)#", "command": "banner motd #\nEnter your banner message here. End with the '#' character.\n#", "explanation": "Sets a banner. The '#' is a delimiting character; you can use any character not in your message." }
+        ]
+    },
+    "b4": {
+        "title": "Enable Password",
+        "description": "Setting a password to protect access to Privileged EXEC mode.",
+        "related": ["b1", "b12"],
+        "commands": [
+            { "step": "Set the Enable Password", "prompt": "Router(config)#", "command": "enable password cisco", "explanation": "Sets a clear-text password. Use 'enable secret' for better security." },
+            { "step": "Set the Encrypted Enable Secret", "prompt": "Router(config)#", "command": "enable secret class", "explanation": "Sets a strongly encrypted password for privileged mode. This overrides the 'enable password' if both are set." }
+        ]
+    },
+    "b5": {
+        "title": "Line console password",
+        "description": "Securing the physical console port with a password.",
+        "related": ["b6", "b7"],
+        "commands": [
+            { "step": "Enter Line Console Configuration", "prompt": "Router(config)#", "command": "line console 0", "explanation": "Enters configuration mode for the console port." },
+            { "step": "Set the Password", "prompt": "Router(config-line)#", "command": "password cisco", "explanation": "Sets the password for console access." },
+            { "step": "Enable Login Check", "prompt": "Router(config-line)#", "command": "login", "explanation": "Prompts for the password upon console connection." }
+        ]
+    },
+    "b6": {
+        "title": "Line VTY password",
+        "description": "Securing virtual terminal lines used for remote access (Telnet/SSH).",
+        "related": ["b5", "s5", "s6"],
+        "commands": [
+            { "step": "Enter Line VTY Configuration", "prompt": "Router(config)#", "command": "line vty 0 4", "explanation": "Enters configuration mode for the first 5 virtual terminal lines." },
+            { "step": "Set the Password", "prompt": "Router(config-line)#", "command": "password cisco", "explanation": "Sets the password for VTY access." },
+            { "step": "Enable Login Check", "prompt": "Router(config-line)#", "command": "login", "explanation": "Prompts for the password on remote connections. For SSH, use 'login local'." }
+        ]
+    },
+    "b7": {
+        "title": "Exec timeout",
+        "description": "Configuring the idle timeout for console and VTY lines.",
+        "related": ["b5", "b6"],
+        "commands": [
+            { "step": "Enter Line Console Configuration", "prompt": "Router(config)#", "command": "line console 0", "explanation": "Enters configuration mode for the console port." },
+            { "step": "Set Console Timeout", "prompt": "Router(config-line)#", "command": "exec-timeout 5 30", "explanation": "Sets the timeout to 5 minutes and 30 seconds. 'exec-timeout 0 0' disables timeout." }
+        ]
+    },
+    "b8": {
+        "title": "Logging Synchronous",
+        "description": "Prevents console messages from interrupting your command typing.",
+        "related": ["b5"],
+        "commands": [
+            { "step": "Enter Line Console Configuration", "prompt": "Router(config)#", "command": "line console 0", "explanation": "Enters configuration mode for the console port." },
+            { "step": "Enable Synchronous Logging", "prompt": "Router(config-line)#", "command": "logging synchronous", "explanation": "Ensures console messages don't split your typed commands." }
+        ]
+    },
+    "b9": {
+        "title": "Disabling IP domain lookup",
+        "description": "Prevents the router from trying to resolve mistyped commands as hostnames.",
+        "related": ["b10"],
+        "commands": [
+            { "step": "Disable Domain Lookup", "prompt": "Router(config)#", "command": "no ip domain-lookup", "explanation": "Stops the device from attempting to translate unknown commands via DNS." }
+        ]
+    },
+    "b10": {
+        "title": "IP domain name",
+        "description": "Sets the domain name for the device, required for generating RSA keys for SSH.",
+        "related": ["b9", "s6"],
+        "commands": [
+            { "step": "Set the Domain Name", "prompt": "Router(config)#", "command": "ip domain-name opentech.info", "explanation": "Assigns a domain name to the device." }
+        ]
+    },
+    "b11": {
+        "title": "Username and password",
+        "description": "Creating a local user database for authentication.",
+        "related": ["s6"],
+        "commands": [
+            { "step": "Create a Local User", "prompt": "Router(config)#", "command": "username admin secret cisco", "explanation": "Creates a user 'admin' with an encrypted password 'cisco'." }
+        ]
+    },
+    "b12": {
+        "title": "Encrypting all passwords",
+        "description": "Encrypts all clear-text passwords in the running configuration.",
+        "related": ["b4"],
+        "commands": [
+            { "step": "Enable Password Encryption", "prompt": "Router(config)#", "command": "service password-encryption", "explanation": "Applies weak encryption to all current and future clear-text passwords." }
+        ]
+    },
+    "b13": {
+        "title": "Set Current Clock Time",
+        "description": "Manually setting the system clock on a device.",
+        "related": [],
+        "commands": [
+            { "step": "Set the Clock", "prompt": "Router#", "command": "clock set 13:30:00 4 OCT 2025", "explanation": "Sets the system time. This is done in Privileged EXEC mode." }
+        ]
+    },
+    "b14": {
+        "title": "Set management IP Address - SW",
+        "description": "Configuring an IP address on a Switch Virtual Interface (SVI) for management.",
+        "related": ["s1", "s5"],
+        "commands": [
+            { "step": "Enter Interface VLAN Configuration", "prompt": "Switch(config)#", "command": "interface vlan 1", "explanation": "Enters the configuration for the default management SVI." },
+            { "step": "Assign an IP Address", "prompt": "Switch(config-if)#", "command": "ip address 192.168.1.2 255.255.255.0", "explanation": "Sets the IP address and subnet mask." },
+            { "step": "Enable the Interface", "prompt": "Switch(config-if)#", "command": "no shutdown", "explanation": "Activates the SVI." }
+        ]
+    },
+    "b15": {
+        "title": "Prevent Brute-force Attack - Router",
+        "description": "Configuring login attempt limits to mitigate brute-force attacks.",
+        "related": ["b6"],
+        "commands": [
+            { "step": "Configure Login Block", "prompt": "Router(config)#", "command": "login block-for 120 attempts 3 within 60", "explanation": "Blocks logins for 120 seconds if 3 failed attempts occur within 60 seconds." },
+            { "step": "Enable Login Failure Logging", "prompt": "Router(config)#", "command": "login on-failure log", "explanation": "Logs failed login attempts." }
+        ]
+    },
+    "s1": { "title": "VLANs", "description": "Segmenting a physical network into multiple logical networks.", "related": ["s2", "s3", "r4"], "commands": [] },
+    "s2": { "title": "VLAN Trunking Protocol (VTP)", "description": "A Cisco proprietary protocol to distribute VLAN information.", "related": ["s1", "s3"], "commands": [] },
+    "s3": { "title": "Trunk - Allowed/Denied VLANs", "description": "Controlling which VLANs are allowed to traverse a trunk link.", "related": ["s1", "s2"], "commands": [] },
+    "s4": { "title": "Configure Native VLAN", "description": "Setting the untagged VLAN on a trunk port.", "related": ["s1", "s3"], "commands": [] },
+    "s5": { "title": "Remote Access - Telnet", "description": "Configuring insecure remote access.", "related": ["b6", "b14"], "commands": [] },
+    "s6": { "title": "Remote Access - SSH", "description": "Configuring secure remote access.", "related": ["b10", "b11"], "commands": [] },
+    "s7": { "title": "L2 EtherChannel - PAGP/LACP", "description": "Bundling multiple physical links into a single logical link using dynamic protocols.", "related": ["s8"], "commands": [] },
+    "s8": { "title": "L2 EtherChannel - ON Mode", "description": "Statically bundling multiple physical links into a single logical link.", "related": ["s7"], "commands": [] },
+    "s9": { "title": "Secure All Unused Switchports", "description": "Best practices for securing switchports that are not in use.", "related": [], "commands": [] },
+    "s10": { "title": "STP Attack Prevention", "description": "Mitigating Spanning Tree Protocol manipulation attacks.", "related": [], "commands": [] },
+    "s11": { "title": "Disable CDP on the Devices", "description": "Disabling Cisco Discovery Protocol to reduce information leakage.", "related": [], "commands": [] },
+    "s12": { "title": "VLAN Hopping Attack Prevention", "description": "Techniques to prevent an attacker from hopping between VLANs.", "related": ["s1", "s4"], "commands": [] },
+    "s13": { "title": "DHCP Snooping", "description": "A security feature that filters untrusted DHCP messages.", "related": ["s14", "s15"], "commands": [] },
+    "s14": { "title": "Dynamic ARP Inspection", "description": "Validates ARP packets in a network.", "related": ["s13"], "commands": [] },
+    "s15": { "title": "IP Source Guard", "description": "Prevents IP spoofing attacks.", "related": ["s13"], "commands": [] },
+    "r1": { "title": "Multilayer Switch + L3 EtherChannel", "description": "Configuring routed ports and Layer 3 EtherChannel on a multilayer switch.", "related": ["s7"], "commands": [] },
+    "r2": { "title": "Connecting Multiple Networks", "description": "Basic routing between two or more distinct networks.", "related": ["r9"], "commands": [] },
+    "r3": { "title": "Remote Access - Telnet & SSH", "description": "Configuring remote access on a router.", "related": ["s5", "s6"], "commands": [] },
+    "r4": { "title": "Inter-VLAN Routing - Router & L3 Switch", "description": "Enabling communication between different VLANs.", "related": ["s1"], "commands": [] },
+    "r5": { "title": "DHCP Server - Router & L3 Switch", "description": "Configuring a Cisco device to act as a DHCP server.", "related": ["r8"], "commands": [] },
+    "r6": { "title": "Inter-VLAN + DHCP - Router & L3 Switch", "description": "Combining Inter-VLAN routing with DHCP services.", "related": ["r4", "r5"], "commands": [] },
+    "r7": { "title": "DHCP, DNS, Web, Email, FTP Servers", "description": "Integrating various network services in a topology.", "related": [], "commands": [] },
+    "r8": { "title": "DHCP Relay Agent - Router & L3 Switch", "description": "Forwarding DHCP requests to a server in a different broadcast domain.", "related": ["r5"], "commands": [] },
+    "r9": { "title": "Static, Floating & Default Routing", "description": "Manually configuring routes in a network.", "related": ["r10"], "commands": [] },
+    "r10": { "title": "RIP, EIGRP, OSPF & BGP Routing", "description": "Configuring various dynamic routing protocols.", "related": ["r9"], "commands": [] },
+    "r11": { "title": "ACLs - Standard & Extended", "description": "Filtering traffic using Access Control Lists.", "related": ["r12"], "commands": [] },
+    "r12": { "title": "ACLs for VTY - Remote Access", "description": "Applying ACLs to VTY lines to restrict remote access.", "related": ["r11", "b6"], "commands": [] },
+    "r13": { "title": "NAT - Static, Dynamic & PAT", "description": "Translating private IP addresses to public IP addresses.", "related": [], "commands": [] },
+    "r14": { "title": "Normal HSRP, HSRP with VLANs", "description": "Providing first-hop redundancy for IP hosts.", "related": [], "commands": [] },
+    "r15": { "title": "IPv6 Configs + SLAAC", "description": "Basic IPv6 addressing and Stateless Address Autoconfiguration.", "related": ["r16"], "commands": [] },
+    "r16": { "title": "Static Routing for IPv6", "description": "Manually configuring IPv6 routes.", "related": ["r15", "r17"], "commands": [] },
+    "r17": { "title": "RIPng for IPv6 Routing", "description": "Configuring RIP Next Generation for IPv6.", "related": ["r16", "r18"], "commands": [] },
+    "r18": { "title": "EIGRP for IPv6 Routing", "description": "Configuring EIGRP for IPv6.", "related": ["r17", "r19"], "commands": [] },
+    "r19": { "title": "OSPF for IPv6 Routing", "description": "Configuring OSPFv3 for IPv6.", "related": ["r18"], "commands": [] },
+    "r20": { "title": "WAN PPP - CHAP", "description": "Configuring Point-to-Point Protocol with CHAP authentication on WAN links.", "related": [], "commands": [] },
+    "w1": { "title": "Wireless APs Configs", "description": "Basic configuration of standalone wireless access points.", "related": ["w2"], "commands": [] },
+    "w2": { "title": "Wireless LAN Controller (WLC)", "description": "Centralized management of multiple access points.", "related": ["w1"], "commands": [] },
+    "w3": { "title": "VoIP Device Selection", "description": "Understanding and selecting devices for a Voice over IP network.", "related": ["w4"], "commands": [] },
+    "w4": { "title": "VoIP DHCP Configs", "description": "Configuring DHCP to support VoIP phones, including option 150.", "related": ["w3", "w5"], "commands": [] },
+    "w5": { "title": "VoIP Phones Configs", "description": "Configuring Cisco IP Phones and call manager express (CME).", "related": ["w4", "w6"], "commands": [] },
+    "w6": { "title": "VoIP - Data & Voice VLANs", "description": "Separating voice and data traffic using VLANs.", "related": ["w5"], "commands": [] },
+    "w7": { "title": "Routing for VoIP - Dial-Peering", "description": "Configuring dial peers for voice routing.", "related": ["w5"], "commands": [] },
+    "a1": { "title": "Basic Firewall Configs", "description": "Initial setup of a Cisco ASA firewall.", "related": ["a2"], "commands": [] },
+    "a2": { "title": "Interface Security Levels", "description": "Understanding and configuring security levels on ASA interfaces.", "related": ["a1", "a3"], "commands": [] },
+    "a3": { "title": "Firewall Policies", "description": "Creating and applying security policies on the ASA.", "related": ["a2", "a5"], "commands": [] },
+    "a4": { "title": "Firewall NAT Configs", "description": "Configuring Network Address Translation on the ASA.", "related": ["a6"], "commands": [] },
+    "a5": { "title": "Firewall ACLs", "description": "Using Access Control Lists to filter traffic on the ASA.", "related": ["a3"], "commands": [] },
+    "a6": { "title": "NAT + Network Objects", "description": "Using network objects to simplify NAT and ACL configurations.", "related": ["a4"], "commands": [] },
+    "a7": { "title": "Inspection Policies", "description": "Configuring stateful inspection using the Modular Policy Framework (MPF).", "related": ["a3"], "commands": [] },
+    "a8": { "title": "IPv6", "description": "Basic IPv6 configuration on a Cisco ASA.", "related": [], "commands": [] }
+}

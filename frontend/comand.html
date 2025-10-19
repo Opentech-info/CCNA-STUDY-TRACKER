@@ -24,28 +24,26 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-
         /* Simple syntax highlighting for commands */
         pre {
             position: relative;
         }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+<body class="min-h-screen p-4 sm:p-6 md:p-8 text-gray-900 dark:text-gray-100 font-sans">
 
     <!-- Progress Bar -->
     <div id="progress-bar-container" class="fixed top-0 left-0 w-full h-1.5 bg-gray-200 dark:bg-gray-700 z-30">
         <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300 ease-out"></div>
     </div>
 
-    <div id="command-container" class="max-w-6xl mx-auto">
+    <div id="command-container" class="max-w-7xl mx-auto">
         <header class="mb-8 pt-4">
             <a href="index.html" class="text-blue-500 dark:text-blue-400 hover:underline">&larr; Back to Tracker</a>
             <h1 id="topic-title" class="text-4xl font-bold mt-2 text-gray-800 dark:text-white">Loading...</h1>
             <p id="topic-description" class="text-lg text-gray-600 dark:text-gray-400 mt-2"></p>
-            <div class="mt-6 border-t dark:border-gray-700 pt-6">
+            <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
                 <input id="command-search-input" type="text" placeholder="Filter steps by keyword..." class="w-full max-w-sm px-4 py-2 rounded-md border bg-white dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
         </header>
@@ -55,7 +53,7 @@
                 <!-- Command steps will be rendered here by JavaScript -->
                 <div id="no-results" class="hidden text-center py-8 text-gray-500">No steps found matching your search.</div>
             </main>
-            <aside class="lg:col-span-1 space-y-6">
+            <aside class="lg:col-span-1">
                 <div class="sticky top-8">
                     <div id="tools-container" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-6">
                         <h3 class="font-semibold mb-3 text-gray-800 dark:text-gray-200">Tools</h3>
@@ -87,10 +85,10 @@
     </button>
 
     <!-- Advanced Footer -->
-    <footer class="glass-card mt-16 py-8 px-4 text-center text-white rounded-lg">
+    <footer class="mt-16 py-8 px-4 text-center text-gray-500 dark:text-gray-400 rounded-lg bg-gray-200 dark:bg-gray-800/50">
         <div class="relative z-10">
-            <p class="text-sm opacity-70">CCNA Command Reference by Opentech-info</p>
-            <p class="text-xs opacity-50 mt-2">&copy; 2024. This project is for educational purposes.</p>
+            <p class="text-sm">CCNA Command Reference by Opentech-info</p>
+            <p class="text-xs opacity-60 mt-2">&copy; 2024. This project is for educational purposes.</p>
         </div>
     </footer>
 

@@ -10,84 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'asa', title: 'Cisco ASA Firewall', color: 'bg-orange-100 dark:bg-orange-900/30' }
     ];
 
-    const SAMPLE_TASKS = {
-        basic: [
-            { id: 'b1', title: 'Navigating User Levels', notes: '', done: false },
-            { id: 'b2', title: 'Hostname', notes: '', done: false },
-            { id: 'b3', title: 'Banner motd/message', notes: '', done: false },
-            { id: 'b4', title: 'Enable Password', notes: '', done: false },
-            { id: 'b5', title: 'Line console password', notes: '', done: false },
-            { id: 'b6', title: 'Line VTY password', notes: '', done: false },
-            { id: 'b7', title: 'Exec timeout', notes: '', done: false },
-            { id: 'b8', title: 'Logging Synchronous', notes: '', done: false },
-            { id: 'b9', title: 'Disabling IP domain lookup', notes: '', done: false },
-            { id: 'b10', title: 'IP domain name', notes: '', done: false },
-            { id: 'b11', title: 'Username and password', notes: '', done: false },
-            { id: 'b12', title: 'Encrypting all passwords', notes: '', done: false },
-            { id: 'b13', title: 'Set Current Clock Time', notes: '', done: false },
-            { id: 'b14', title: 'Set management IP Address - SW', notes: '', done: false },
-            { id: 'b15', title: 'Prevent Brute-force Attack - Router', notes: '', done: false }
-        ],
-        switching: [
-            { id: 's1', title: 'VLANs', notes: '', done: false },
-            { id: 's2', title: 'VLAN Trunking Protocol (VTP)', notes: '', done: false },
-            { id: 's3', title: 'Trunk - Allowed/Denied VLANs', notes: '', done: false },
-            { id: 's4', title: 'Configure Native VLAN', notes: '', done: false },
-            { id: 's5', title: 'Remote Access - Telnet', notes: '', done: false },
-            { id: 's6', title: 'Remote Access - SSH', notes: '', done: false },
-            { id: 's7', title: 'L2 EtherChannel - PAGP/LACP', notes: '', done: false },
-            { id: 's8', title: 'L2 EtherChannel - ON Mode', notes: '', done: false },
-            { id: 's9', title: 'Secure All Unused Switchports', notes: '', done: false },
-            { id: 's10', title: 'STP Attack Prevention', notes: '', done: false },
-            { id: 's11', title: 'Disable CDP on the Devices', notes: '', done: false },
-            { id: 's12', title: 'VLAN Hopping Attack Prevention', notes: '', done: false },
-            { id: 's13', title: 'DHCP Snooping', notes: '', done: false },
-            { id: 's14', title: 'Dynamic ARP Inspection', notes: '', done: false },
-            { id: 's15', title: 'IP Source Guard', notes: '', done: false }
-        ],
-        routing: [
-            { id: 'r1', title: 'Multilayer Switch + L3 EtherChannel', notes: '', done: false },
-            { id: 'r2', title: 'Connecting Multiple Networks', notes: '', done: false },
-            { id: 'r3', title: 'Remote Access - Telnet & SSH', notes: '', done: false },
-            { id: 'r4', title: 'Inter-VLAN Routing - Router & L3 Switch', notes: '', done: false },
-            { id: 'r5', title: 'DHCP Server - Router & L3 Switch', notes: '', done: false },
-            { id: 'r6', title: 'Inter-VLAN + DHCP - Router & L3 Switch', notes: '', done: false },
-            { id: 'r7', title: 'DHCP, DNS, Web, Email, FTP Servers', notes: '', done: false },
-            { id: 'r8', title: 'DHCP Relay Agent - Router & L3 Switch', notes: '', done: false },
-            { id: 'r9', title: 'Static, Floating & Default Routing', notes: '', done: false },
-            { id: 'r10', title: 'RIP, EIGRP, OSPF & BGP Routing', notes: '', done: false },
-            { id: 'r11', title: 'ACLs - Standard & Extended', notes: '', done: false },
-            { id: 'r12', title: 'ACLs for VTY - Remote Access', notes: '', done: false },
-            { id: 'r13', title: 'NAT - Static, Dynamic & PAT', notes: '', done: false },
-            { id: 'r14', title: 'Normal HSRP, HSRP with VLANs', notes: '', done: false },
-            { id: 'r15', title: 'IPv6 Configs + SLAAC', notes: '', done: false },
-            { id: 'r16', title: 'Static Routing for IPv6', notes: '', done: false },
-            { id: 'r17', title: 'RIPng for IPv6 Routing', notes: '', done: false },
-            { id: 'r18', title: 'EIGRP for IPv6 Routing', notes: '', done: false },
-            { id: 'r19', title: 'OSPF for IPv6 Routing', notes: '', done: false },
-            { id: 'r20', title: 'WAN PPP - CHAP', notes: '', done: false }
-        ],
-        wlan: [
-            { id: 'w1', title: 'Wireless APs Configs', notes: '', done: false },
-            { id: 'w2', title: 'Wireless LAN Controller (WLC)', notes: '', done: false },
-            { id: 'w3', title: 'VoIP Device Selection', notes: '', done: false },
-            { id: 'w4', title: 'VoIP DHCP Configs', notes: '', done: false },
-            { id: 'w5', title: 'VoIP Phones Configs', notes: '', done: false },
-            { id: 'w6', title: 'VoIP - Data & Voice VLANs', notes: '', done: false },
-            { id: 'w7', title: 'Routing for VoIP - Dial-Peering', notes: '', done: false }
-        ],
-        asa: [
-            { id: 'a1', title: 'Basic Firewall Configs', notes: '', done: false },
-            { id: 'a2', title: 'Interface Security Levels', notes: '', done: false },
-            { id: 'a3', title: 'Firewall Policies', notes: '', done: false },
-            { id: 'a4', title: 'Firewall NAT Configs', notes: '', done: false },
-            { id: 'a5', title: 'Firewall ACLs', notes: '', done: false },
-            { id: 'a6', title: 'NAT + Network Objects', notes: '', done: false },
-            { id: 'a7', title: 'Inspection Policies', notes: '', done: false },
-            { id: 'a8', title: 'IPv6', notes: '', done: false }
-        ]
-    };
-
     let state = {
         columns: DEFAULT_COLUMNS,
         data: {},
@@ -142,17 +64,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1200);
     };
 
-    const loadState = () => {
+    const loadState = async () => {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
                 state.data = JSON.parse(raw);
             } else {
-                state.data = SAMPLE_TASKS;
+                // Fetch initial data from db.json
+                const response = await fetch('db.json');
+                const db = await response.json();
+                const initialData = {};
+                DEFAULT_COLUMNS.forEach(col => initialData[col.id] = []);
+
+                for (const topicId in db) {
+                    const topic = db[topicId];
+                    const colId = topicId.replace(/[0-9]/g, ''); // 'b1' -> 'b', 's1' -> 's' etc.
+                    const columnKey = Object.keys(initialData).find(key => key.startsWith(colId));
+                    if (columnKey) {
+                        initialData[columnKey].push({ id: topicId, title: topic.title, notes: '', done: false });
+                    }
+                }
+                state.data = initialData;
+                saveState(); // Save the initial state to localStorage
             }
         } catch (e) {
             console.error("Failed to load state from localStorage", e);
-            state.data = SAMPLE_TASKS;
+            state.data = {}; // Fallback to empty
         }
         // Ensure all columns exist in data
         state.columns.forEach(col => {
@@ -650,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('reset-btn').addEventListener('click', () => {
             if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
                 localStorage.removeItem(STORAGE_KEY);
-                state.data = SAMPLE_TASKS;
+                state.data = {}; // Clear data, it will be reloaded from db.json on next load
                 render();
                 alert('Reset to sample data');
             }
@@ -722,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to load settings from localStorage", e);
         }
 
-        loadState();
+        await loadState();
         render();
     };
 
