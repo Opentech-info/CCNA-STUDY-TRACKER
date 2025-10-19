@@ -109,19 +109,26 @@ app.post('/api/videos/:id/react', async (req, res) => {
     }
 });
 
-// POST to like a comment
-app.post('/api/comments/:id/like', async (req, res) => {
+// POST a reaction to a comment (like or love)
+app.post('/api/comments/:id/react', async (req, res) => {
     try {
+        const { reaction } = req.body;
+        if (!['likes', 'loves'].includes(reaction)) {
+            return res.status(400).json({ message: 'Invalid reaction type.' });
+        }
+
         const comments = await readDb(commentsDbPath);
         const comment = comments[req.params.id];
 
         if (!comment) return res.status(404).json({ message: 'Comment not found.' });
 
-        comment.likes++;
+        // Initialize reaction count if it doesn't exist
+        if (!comment[reaction]) comment[reaction] = 0;
+        comment[reaction]++;
         await writeDb(commentsDbPath, comments);
-        res.json({ likes: comment.likes });
+        res.json({ [reaction]: comment[reaction] });
     } catch (error) {
-        res.status(500).json({ message: 'Error liking comment' });
+        res.status(500).json({ message: 'Error reacting to comment' });
     }
 });
 

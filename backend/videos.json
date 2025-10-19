@@ -7,7 +7,8 @@
         "timestamp": "1 year ago",
         "duration": "15:30",
         "thumbnail": "images/contact/1.jpg",
-        "src": "videos/about.mp4",
+        "src": "videos/network.webm",
+        "description": "A comprehensive overview of network security fundamentals. In this video, we cover the core principles of the CIA triad (Confidentiality, Integrity, Availability), common threat vectors, and the essential security measures every network administrator should know. Perfect for beginners starting their journey into cybersecurity and network defense.",
         "tags": [
             "security",
             "basics"
@@ -25,12 +26,13 @@
         "duration": "22:15",
         "thumbnail": "images/contact/2.jpg",
         "src": "videos/privacy.mp4",
+        "description": "Dive deep into Virtual LANs (VLANs) and trunking. This tutorial explains how VLANs segment a network to improve performance and security. We'll configure VLANs on a Cisco switch, set up a trunk port using 802.1Q, and verify connectivity between VLANs. A must-watch for anyone studying for the CCNA.",
         "tags": [
             "switching",
             "vlan"
         ],
         "likes": 890,
-        "loves": 152,
+        "loves": 153,
         "comments": 45
     },
     {
@@ -46,7 +48,7 @@
             "routing",
             "ospf"
         ],
-        "likes": 2501,
+        "likes": 2502,
         "loves": 803,
         "comments": 210
     },
@@ -63,7 +65,7 @@
             "switching",
             "security"
         ],
-        "likes": 550,
+        "likes": 551,
         "loves": 97,
         "comments": 33
     },
@@ -82,7 +84,7 @@
         ],
         "likes": 1800,
         "loves": 420,
-        "comments": 151
+        "comments": 152
     },
     {
         "id": "v6",
@@ -130,7 +132,7 @@
         ],
         "likes": 950,
         "loves": 250,
-        "comments": 90
+        "comments": 91
     },
     {
         "id": "v9",
@@ -179,7 +181,7 @@
         ],
         "likes": 3100,
         "loves": 950,
-        "comments": 450
+        "comments": 451
     },
     {
         "id": "v12",
@@ -242,7 +244,7 @@
             "routing",
             "wan"
         ],
-        "likes": 881,
+        "likes": 882,
         "loves": 210,
         "comments": 115
     },
@@ -260,7 +262,7 @@
             "wan"
         ],
         "likes": 990,
-        "loves": 321,
+        "loves": 322,
         "comments": 130
     },
     {
@@ -319,12 +321,12 @@
         "timestamp": "2 years ago",
         "duration": "17:50",
         "thumbnail": "images/contact/4.jpg",
-        "src": "videos/privacy.mp4",
+        "src": "videos/network.webm",
         "tags": [
             "wan"
         ],
         "likes": 320,
         "loves": 60,
-        "comments": 30
+        "comments": 31
     }
 ]

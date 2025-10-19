@@ -544,6 +544,15 @@ pre:hover .copy-btn {
     color: #f87171; /* red-400 */
 }
 
+/* Styles for comment reactions */
+.comment-interaction-btn.like-btn.reacted {
+    color: #facc15; /* yellow-400 */
+}
+
+.comment-interaction-btn.love-btn.reacted {
+    color: #f87171; /* red-400 */
+}
+
 /* --- Tutorials Page: Comment Modal --- */
 .comment-modal-overlay {
     background-color: rgba(0, 0, 0, 0.7);
@@ -598,6 +607,34 @@ pre:hover .copy-btn {
     border-left: 2px solid #383838;
 }
 
+/* --- Reply Form Styles --- */
+.reply-form-container {
+    padding-left: 3.25rem; /* Aligns with parent comment text */
+    margin-top: 1rem;
+}
+.reply-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #4a4a4a;
+    outline: none;
+    color: white;
+    width: 100%;
+    padding-bottom: 0.25rem;
+    transition: border-color 0.2s;
+}
+.reply-input:focus { border-bottom-color: #ffffff; }
+
+/* --- Description "Read More" Styles --- */
+.description-read-more {
+    cursor: pointer;
+    font-weight: 600;
+    color: #a0aec0; /* gray-400 */
+    margin-left: 4px;
+}
+.description-read-more:hover {
+    color: #ffffff;
+}
+
 /* --- Tutorials Page: Sidebar Overlay --- */
 .sidebar-overlay {
     position: fixed;
@@ -622,11 +659,6 @@ pre:hover .copy-btn {
     height: var(--timeline-height);
 }
 
-/* Hide big play button when video is playing */
-.video-container.playing #big-play-btn {
-    opacity: 0;
-}
-
 /* --- Integrated Player Modal --- */
 .player-modal-overlay {
     background-color: rgba(15, 15, 15, 0.9);
@@ -648,6 +680,29 @@ pre:hover .copy-btn {
 }
 .up-next-card img {
     width: 160px;
+    flex-shrink: 0;
+    object-cover;
+    border-radius: 0.5rem;
+}
+
+/* --- Search Results Card Styles --- */
+.search-result-card {
+    display: flex;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+.search-result-card:hover {
+    border-color: rgba(59, 130, 246, 0.5); /* blue-500 */
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+.search-result-card img {
+    width: 240px;
+    height: 135px;
     flex-shrink: 0;
     object-cover;
     border-radius: 0.5rem;

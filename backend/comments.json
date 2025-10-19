@@ -22,5 +22,121 @@
         "text": "juma",
         "timestamp": "2025-10-19T19:00:59.953Z",
         "likes": 0
+    },
+    "c1760902164343": {
+        "id": "c1760902164343",
+        "videoId": "v1",
+        "author": "@CurrentUser",
+        "text": "juma",
+        "timestamp": "2025-10-19T19:29:24.343Z",
+        "likes": 0
+    },
+    "c1760902173344": {
+        "id": "c1760902173344",
+        "videoId": "v1",
+        "author": "@CurrentUser",
+        "text": "juma mac",
+        "timestamp": "2025-10-19T19:29:33.344Z",
+        "likes": 0
+    },
+    "c1760908240098": {
+        "id": "c1760908240098",
+        "videoId": "v1",
+        "parentId": "c1760902173344",
+        "author": "@CurrentUser",
+        "text": "dah so pw boi ni insane",
+        "timestamp": "2025-10-19T21:10:40.098Z",
+        "likes": 0
+    },
+    "c1760908916076": {
+        "id": "c1760908916076",
+        "videoId": "v11",
+        "author": "@CurrentUser",
+        "text": "hi guys",
+        "timestamp": "2025-10-19T21:21:56.088Z",
+        "likes": 0
+    },
+    "c1760908945238": {
+        "id": "c1760908945238",
+        "videoId": "v1",
+        "parentId": "c1760908240098",
+        "author": "@CurrentUser",
+        "text": "juma joy anitah",
+        "timestamp": "2025-10-19T21:22:25.238Z",
+        "likes": 0
+    },
+    "c1760909895438": {
+        "id": "c1760909895438",
+        "videoId": "v8",
+        "author": "@CurrentUser",
+        "text": "juma anna",
+        "timestamp": "2025-10-19T21:38:15.438Z",
+        "likes": 0
+    },
+    "c1760909895471": {
+        "id": "c1760909895471",
+        "videoId": "v8",
+        "author": "@CurrentUser",
+        "text": "juma anna",
+        "timestamp": "2025-10-19T21:38:15.471Z",
+        "likes": 0
+    },
+    "c1760909895492": {
+        "id": "c1760909895492",
+        "videoId": "v8",
+        "author": "@CurrentUser",
+        "text": "juma anna",
+        "timestamp": "2025-10-19T21:38:15.492Z",
+        "likes": 0
+    },
+    "c1760910354931": {
+        "id": "c1760910354931",
+        "videoId": "v20",
+        "author": "@CurrentUser",
+        "text": "unajua bhana wee",
+        "timestamp": "2025-10-19T21:45:54.931Z",
+        "likes": 0
+    },
+    "c1760910369685": {
+        "id": "c1760910369685",
+        "videoId": "v20",
+        "parentId": "c1760910354931",
+        "author": "@CurrentUser",
+        "text": "mmh kwelii",
+        "timestamp": "2025-10-19T21:46:09.685Z",
+        "likes": 0
+    },
+    "c1760910956506": {
+        "id": "c1760910956506",
+        "videoId": "v1",
+        "parentId": "c1760902173344",
+        "author": "@CurrentUser",
+        "text": "😇🤣",
+        "timestamp": "2025-10-19T21:55:56.506Z",
+        "likes": 0
+    },
+    "c1760912354264": {
+        "id": "c1760912354264",
+        "videoId": "v5",
+        "author": "@CurrentUser",
+        "text": "hi guys",
+        "timestamp": "2025-10-19T22:19:14.269Z",
+        "likes": 0
+    },
+    "c1760912354285": {
+        "id": "c1760912354285",
+        "videoId": "v5",
+        "author": "@CurrentUser",
+        "text": "hi guys",
+        "timestamp": "2025-10-19T22:19:14.286Z",
+        "likes": 0
+    },
+    "c1760912354708": {
+        "id": "c1760912354708",
+        "videoId": "v5",
+        "author": "@CurrentUser",
+        "text": "hi guys",
+        "timestamp": "2025-10-19T22:19:14.708Z",
+        "likes": 0
     }
 }
