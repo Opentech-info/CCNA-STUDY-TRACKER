@@ -76,11 +76,11 @@
                             <a href="mailto:opentech.info@protonmail.com" class="social-link group"><svg viewBox="0 0 24 24" class="social-icon"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg><span class="group-hover:text-white transition-colors">Email</span></a>
                         </div>
 
-                        <form id="subscribe-form">
+                        <form id="subscribe-form" action="https://formspree.io/f/xldpvjka" method="POST">
                             <label for="email-input" class="block text-sm font-medium mb-2 text-gray-200">Subscribe for Updates</label>
                             <div class="flex flex-col sm:flex-row gap-2 relative">
-                                <input type="email" id="email-input" placeholder="your.email@example.com" required class="flex-1 px-3 py-2 rounded-md border bg-gray-100/10 text-white placeholder-gray-400 border-gray-500/50 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">
-                                <button id="subscribe-btn" type="submit" class="px-5 py-2 rounded-md border-transparent bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 shadow-lg hover:shadow-blue-500/50 w-full sm:w-auto">Subscribe</button>
+                                <input type="email" id="email-input" name="email" placeholder="your.email@example.com" required class="flex-1 px-3 py-2 rounded-md border bg-gray-100/10 text-white placeholder-gray-400 border-gray-500/50 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">
+                                <button type="submit" class="px-5 py-2 rounded-md border-transparent bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 shadow-lg hover:shadow-blue-500/50 w-full sm:w-auto">Subscribe</button>
                             </div>
                             <p id="subscribe-feedback" class="text-sm mt-2 h-5"></p>
                         </form>
@@ -153,47 +153,7 @@
             openBtn.addEventListener('click', openSidebar);
             closeBtn.addEventListener('click', closeSidebar);
             overlay.addEventListener('click', closeSidebar);
-            const subscribeForm = document.getElementById('subscribe-form');
-            const emailInput = document.getElementById('email-input');
-            const subscribeBtn = document.getElementById('subscribe-btn');
-            const feedbackEl = document.getElementById('subscribe-feedback');
-
-            subscribeForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = emailInput.value;
-
-                if (!email) return;
-
-                // Provide instant feedback
-                subscribeBtn.disabled = true;
-                subscribeBtn.textContent = 'Subscribing...';
-                feedbackEl.textContent = '';
-                feedbackEl.classList.remove('text-green-400', 'text-red-400');
-
-                try {
-                    const response = await fetch('/api/subscribe', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: email })
-                    });
-
-                    const result = await response.json();
-
-                    if (!response.ok) {
-                        throw new Error(result.message || 'An unknown error occurred.');
-                    }
-
-                    feedbackEl.textContent = result.message;
-                    feedbackEl.classList.add('text-green-400');
-                    emailInput.value = '';
-                } catch (error) {
-                    feedbackEl.textContent = error.message;
-                    feedbackEl.classList.add('text-red-400');
-                } finally {
-                    subscribeBtn.disabled = false;
-                    subscribeBtn.textContent = 'Subscribe';
-                }
-            });
+            // The custom subscription script is no longer needed as Formspree handles it.
         });
     </script>
     <script>
