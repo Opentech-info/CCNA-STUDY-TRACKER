@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextVideoBtn = document.getElementById('next-video-btn');
     const prevVideoBtn = document.getElementById('prev-video-btn');
     const pipBtn = document.getElementById('pip-btn');
+    const ccBtn = document.getElementById('cc-btn');
     const volumeSlider = document.getElementById('volume-slider');
     const currentTimeEl = document.getElementById('current-time');
     const totalTimeEl = document.getElementById('total-time');
@@ -248,6 +249,21 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDescription(videoData.description);
             commentForm.dataset.videoId = videoId;
 
+            // Handle subtitles
+            // Clear previous tracks
+            video.innerHTML = ''; 
+            if (videoData.subtitles) {
+                const track = document.createElement('track');
+                track.kind = 'subtitles';
+                track.label = 'English';
+                track.srclang = 'en';
+                track.src = videoData.subtitles;
+                video.appendChild(track);
+                ccBtn.classList.remove('hidden');
+            } else {
+                ccBtn.classList.add('hidden');
+            }
+
             // Populate Up Next and Comments
             renderUpNext(allVideos, videoId);
             renderComments(comments);
@@ -366,6 +382,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error("PiP Error:", error);
         }
+    };
+
+    const toggleSubtitles = () => {
+        const track = video.textTracks[0];
+        if (!track) return;
+
+        const isShowing = track.mode === 'showing';
+        track.mode = isShowing ? 'hidden' : 'showing';
+        ccBtn.classList.toggle('active', !isShowing);
     };
 
     const playNextVideo = () => {
@@ -667,6 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === playerModalOverlay) closePlayerModal();
     });
     nextVideoBtn.addEventListener('click', playNextVideo);
+    ccBtn.addEventListener('click', toggleSubtitles);
     prevVideoBtn.addEventListener('click', playPrevVideo);
     document.addEventListener('keydown', e => {
         if (playerModalOverlay.classList.contains('hidden')) return; // Only act if modal is open

@@ -152,6 +152,38 @@ body {
 .reset-modal-btn-confirm:hover:not(:disabled) { background-color: #fbbf24; box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
 .reset-modal-btn-confirm:disabled { background-color: #4b5563; color: #9ca3af; cursor: not-allowed; }
 
+/* --- Task Adder Input Styles --- */
+.task-adder {
+    position: relative;
+}
+.task-adder-icon {
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem; /* Move icon to the right */
+    left: auto; /* Override previous left */
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.3); /* More subtle initial color */
+    transition: color 0.2s;
+    pointer-events: none; /* Allows clicking through to the input */
+}
+.task-adder-input {
+    background-color: rgba(255, 255, 255, 0.05); /* More transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 1rem; /* Standard left padding */
+    padding-right: 2.5rem; /* Space for the icon on the right */
+    transition: all 0.3s ease;
+}
+.task-adder-input:focus {
+    background-color: rgba(59, 130, 246, 0.1); /* Subtle blue transparent background on focus */
+    border-color: #3b82f6; /* Tailwind blue-500 */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Blue glow effect */
+}
+.task-adder:hover .task-adder-icon {
+    color: rgba(255, 255, 255, 0.5); /* Slightly brighter on hover */
+}
+
 .social-link {
     display: flex;
     align-items: center;
@@ -706,4 +738,14 @@ pre:hover .copy-btn {
     flex-shrink: 0;
     object-cover;
     border-radius: 0.5rem;
+}
+
+/* --- Subtitle Button Active State --- */
+#cc-btn.active {
+    color: #3b82f6; /* blue-500 */
+}
+
+/* Hide autoplay toggle on mobile where layout is different */
+@media (max-width: 1023px) {
+    #autoplay-toggle-container { display: none; }
 }

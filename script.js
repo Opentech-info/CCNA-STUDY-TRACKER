@@ -132,9 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="text-sm font-medium ${progressColorClass}">${progress}%</div>
             </div>
             <div class="mb-2 flex gap-2 flex-wrap">
-                <form class="task-adder flex-1 flex gap-2" data-col-id="${col.id}">
-                    <input type="text" placeholder="${t('add_new_task_placeholder')}" class="px-3 py-2 text-sm rounded-md border w-full bg-white/50 dark:bg-gray-800/50 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button type="submit" class="px-4 py-2 text-sm rounded-md border dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">${t('add_button')}</button>
+                <form class="task-adder flex-1 relative" data-col-id="${col.id}">
+                    <input type="text" placeholder="Search or add task..." class="task-adder-input px-3 py-2 text-sm rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <svg class="task-adder-icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                    <!-- The submit button is now hidden; submission is handled by pressing Enter -->
                 </form>
             </div>
             <div class="mb-2 flex gap-2 flex-wrap no-print">
