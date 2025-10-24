@@ -156,6 +156,55 @@
             closeBtn.addEventListener('click', closeSidebar);
             overlay.addEventListener('click', closeSidebar);
             // The custom subscription script is no longer needed as Formspree handles it.
+
+            // --- Advanced Subscription Form Logic ---
+            const subscribeForm = document.getElementById('subscribe-form');
+            const feedbackEl = document.getElementById('subscribe-feedback');
+            const emailInput = document.getElementById('email-input');
+            const submitBtn = subscribeForm.querySelector('button[type="submit"]');
+
+            // Check if user is already subscribed
+            if (localStorage.getItem('opentech_subscribed') === 'true') {
+                subscribeForm.innerHTML = `<p class="text-center text-green-400 font-semibold">You're already subscribed. Thank you! 🎉</p>`;
+                return;
+            }
+
+            subscribeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(subscribeForm);
+                
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Subscribing...';
+                feedbackEl.textContent = '';
+                feedbackEl.classList.remove('text-green-400', 'text-red-400');
+
+                try {
+                    const response = await fetch(subscribeForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        feedbackEl.textContent = 'Thank you for subscribing! 🎉';
+                        feedbackEl.classList.add('text-green-400');
+                        emailInput.value = ''; // Clear the input
+                        localStorage.setItem('opentech_subscribed', 'true'); // Remember subscription
+                        submitBtn.textContent = 'Subscribed!';
+                        // Optionally, hide the form after a delay
+                        setTimeout(() => {
+                             subscribeForm.innerHTML = `<p class="text-center text-green-400 font-semibold">You're now subscribed. Thank you! 🎉</p>`;
+                        }, 3000);
+                    } else {
+                        throw new Error('Submission failed. Please try again.');
+                    }
+                } catch (error) {
+                    feedbackEl.textContent = error.message || 'An error occurred. Please try again.';
+                    feedbackEl.classList.add('text-red-400');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Subscribe';
+                }
+            });
         });
     </script>
     <script>

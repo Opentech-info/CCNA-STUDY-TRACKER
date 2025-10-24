@@ -175,13 +175,46 @@ body {
     padding-right: 2.5rem; /* Space for the icon on the right */
     transition: all 0.3s ease;
 }
+.task-adder::before {
+    content: '';
+    position: absolute;
+    inset: -1px; /* Creates the border effect */
+    border-radius: inherit; /* Inherits from .task-adder */
+    background: conic-gradient(from 90deg at 50% 50%, #facc15, #a855f7, #facc15); /* Yellow -> Purple -> Yellow */
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    animation: rotate-gradient 4s linear infinite paused;
+}
 .task-adder-input:focus {
-    background-color: rgba(59, 130, 246, 0.1); /* Subtle blue transparent background on focus */
-    border-color: #3b82f6; /* Tailwind blue-500 */
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Blue glow effect */
+    background-color: rgba(30, 20, 50, 0.2); /* Darker, purplish background on focus */
+    border-color: transparent; /* Hide the static border to reveal the gradient */
+    box-shadow: none; /* Remove the old glow effect */
+}
+.task-adder:focus-within::before {
+    opacity: 1;
+    animation-play-state: running;
 }
 .task-adder:hover .task-adder-icon {
     color: rgba(255, 255, 255, 0.5); /* Slightly brighter on hover */
+}
+.task-adder-input:focus + .task-adder-icon {
+    color: #3b82f6; /* blue-500 */
+    animation: search-pulse 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes search-pulse {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.15);
+    }
+}
+
+@keyframes rotate-gradient {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .social-link {

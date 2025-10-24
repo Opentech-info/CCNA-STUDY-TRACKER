@@ -143,12 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button data-action="bulk-undo" class="px-2 py-1 rounded-md border text-xs dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Undo</button>
                 <button data-action="clear-completed" class="px-2 py-1 rounded-md border text-xs dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Clear</button>
             </div>
-            <div class="task-list space-y-2 max-h-[60vh] overflow-y-auto p-1 -m-1">
-                <!-- Tasks will be rendered here -->
+            <div class="task-list relative space-y-2 max-h-[60vh] overflow-y-auto p-1 -m-1">
+                <div class="column-no-results hidden text-center p-6 text-sm opacity-70">
+                    <span class="text-4xl">🤔</span>
+                    <p class="mt-2 font-semibold">No tasks found</p>
+                    <p class="text-xs">Try a different search term.</p>
+                </div>
+                <!-- Task elements will be appended here -->
             </div>
         `;
 
         const taskList = section.querySelector('.task-list');
+        const noResultsMessage = section.querySelector('.column-no-results');
         const filteredTasks = getFilteredData(col.id);
 
         if (filteredTasks.length === 0) {
@@ -170,6 +176,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         section.querySelector('[data-action="bulk-done"]').addEventListener('click', () => bulkToggle(col.id, true));
+
+        // Add real-time filtering for the column's task adder input
+        const taskAdderInput = section.querySelector('.task-adder-input');
+        taskAdderInput.addEventListener('input', (e) => {
+            // This is a local filter, it doesn't change the global state
+            const searchTerm = e.target.value.toLowerCase();
+            const tasksInList = taskList.querySelectorAll('.task');
+            let visibleCount = 0;
+
+            tasksInList.forEach(taskEl => {
+                const title = taskEl.querySelector('.editable-title')?.textContent.toLowerCase() || '';
+                const notes = taskEl.querySelector('.text-xs.opacity-60')?.textContent.toLowerCase() || '';
+                
+                if (title.includes(searchTerm) || notes.includes(searchTerm)) {
+                    taskEl.style.display = '';
+                    visibleCount++;
+                } else {
+                    taskEl.style.display = 'none';
+                }
+            });
+
+            // Show or hide the "no results" message
+            if (visibleCount === 0 && searchTerm) {
+                noResultsMessage.classList.remove('hidden');
+            } else {
+                noResultsMessage.classList.add('hidden');
+            }
+        });
         section.querySelector('[data-action="bulk-undo"]').addEventListener('click', () => bulkToggle(col.id, false));
         section.querySelector('[data-action="clear-completed"]').addEventListener('click', () => clearCompleted(col.id));
 

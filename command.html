@@ -25,14 +25,23 @@
         pre { position: relative; }
     </style>
 </head>
-<body class="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="command-page-bg min-h-screen p-4 sm:p-6 md:p-8 text-gray-100 font-sans">
+
+    <!-- Video Background -->
+    <div class="fixed top-0 left-0 w-full h-full -z-20 overflow-hidden">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="videos/command.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="fixed top-0 left-0 w-full h-full -z-10 bg-black/70"></div>
 
     <!-- Progress Bar -->
     <div id="progress-bar-container" class="fixed top-0 left-0 w-full h-1.5 bg-gray-200 dark:bg-gray-700 z-30">
         <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300 ease-out"></div>
     </div>
 
-    <div id="command-container" class="max-w-7xl mx-auto">
+    <div id="command-container" class="max-w-7xl mx-auto relative z-10">
         <header class="mb-8 pt-4">
             <a href="index.html" class="text-blue-500 hover:underline">&larr; Back to Tracker</a>
             <h1 id="topic-title" class="text-3xl font-bold mt-2">Loading...</h1>
@@ -48,14 +57,18 @@
             </div>
         </header>
         
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <main id="command-list" class="space-y-6 lg:col-span-2">
                 <!-- Command steps will be rendered here by JavaScript -->
-                <div id="no-results" class="hidden text-center py-8 text-gray-500">No steps found matching your search.</div>
+                <div id="no-results" class="hidden text-center py-12 px-6 bg-gray-800/30 rounded-lg border border-gray-700/50">
+                    <span class="text-5xl">🤔</span>
+                    <p class="mt-4 font-semibold text-lg text-gray-300">No steps found</p>
+                    <p class="text-gray-400">Try a different keyword to filter the steps.</p>
+                </div>
             </main>
-            <aside id="related-topics-container" class="lg:col-span-2">
-                <div class="sticky top-8 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-                    <h3 class="font-semibold mb-3">Related Topics</h3>
+            <aside id="related-topics-container" class="lg:col-span-1">
+                <div class="sticky top-8 related-topics-card">
+                    <h3 class="font-semibold mb-3 text-gray-200">Related Topics</h3>
                     <ul id="related-topics-list" class="space-y-2">
                         <!-- Related topics will be rendered here -->
                     </ul>
